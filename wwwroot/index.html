@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="en">
-<!--trang index này sửa ròi nè-->
 
 <head>
     <meta charset="utf-8">
@@ -9,42 +8,46 @@
     <meta content="" name="keywords">
     <meta content="" name="description">
 
-    <!-- Google Web Fonts -->
+    <!-- Font chữ web của Google -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600&family=Raleway:wght@600;800&display=swap" rel="stylesheet">
 
-    <!-- Icon Font Stylesheet -->
+    <!-- Biểu tượng kiểu font chữ -->
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css" />
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet">
 
-    <!-- Libraries Stylesheet -->
+    <!-- Thư viện bảng định dạng -->
     <link href="lib/lightbox/css/lightbox.min.css" rel="stylesheet">
     <link href="lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
 
 
-    <!-- Customized Bootstrap Stylesheet -->
+    <!-- Bảng định dạng bootstrap tuỳ chỉnh -->
     <link href="css/bootstrap.min.css" rel="stylesheet">
 
-    <!-- Template Stylesheet -->
+    <!-- Các mẫu bảng định dạng -->
     <link href="css/style.css" rel="stylesheet">
 </head>
 
 <body>
 
-    <!-- Spinner Start -->
+    <!-- Bắt đầu Spinner -->
     <div id="spinner" class="show w-100 vh-100 bg-white position-fixed translate-middle top-50 start-50  d-flex align-items-center justify-content-center">
         <div class="spinner-grow text-primary" role="status"></div>
     </div>
-    <!-- Spinner End -->
-    <!-- Navbar start -->
+    <!-- Kết thúc Spinner -->
+    <!-- Bắt đầu Navbar -->
     <div class="container-fluid fixed-top">
+    <!-- Bắt đầu phần container cho topbar, hiển thị khi ở màn hình lớn (d-lg-block) -->
         <div class="container topbar bg-primary d-none d-lg-block">
             <div class="d-flex justify-content-between">
+     <!-- Bắt đầu phần thông tin bên trái của topbar -->
+
                 <div class="top-info ps-2">
                     <small class="me-3"><i class="fas fa-map-marker-alt me-2 text-secondary"></i> <a href="#" class="text-white">123 Street, New York</a></small>
                     <small class="me-3"><i class="fas fa-envelope me-2 text-secondary"></i><a href="#" class="text-white">Email@Example.com</a></small>
                 </div>
+    <!-- Bắt đầu phần liên kết bên phải của topbar -->
                 <div class="top-link pe-2">
                     <a href="#" class="text-white"><small class="text-white mx-2">Privacy Policy</small>/</a>
                     <a href="#" class="text-white"><small class="text-white mx-2">Terms of Use</small>/</a>
@@ -52,12 +55,17 @@
                 </div>
             </div>
         </div>
+    <!-- Bắt đầu container chính -->
         <div class="container px-0">
+              <!-- Phần navigation bar -->
             <nav class="navbar navbar-light bg-white navbar-expand-xl">
+                    <!-- Logo và tiêu đề trang -->
                 <a href="index.html" class="navbar-brand"><h1 class="text-primary display-6">Fruitables</h1></a>
+             <!-- Nút toggle cho menu trên màn hình nhỏ -->
                 <button class="navbar-toggler py-2 px-3" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
                     <span class="fa fa-bars text-primary"></span>
                 </button>
+            <!-- Phần nội dung collapse khi thu gọn menu -->
                 <div class="collapse navbar-collapse bg-white" id="navbarCollapse">
                     <div class="navbar-nav mx-auto">
                         <a href="index.html" class="nav-item nav-link active">Home</a>
@@ -65,6 +73,7 @@
                         <a href="shop-detail.html" class="nav-item nav-link">Shop Detail</a>
                         <div class="nav-item dropdown">
                             <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Pages</a>
+                            <!-- Các liên kết trong dropdown -->
                             <div class="dropdown-menu m-0 bg-secondary rounded-0">
                                 <a href="cart.html" class="dropdown-item">Cart</a>
                                 <a href="chackout.html" class="dropdown-item">Chackout</a>
@@ -74,6 +83,8 @@
                         </div>
                         <a href="contact.html" class="nav-item nav-link">Contact</a>
                     </div>
+                     <!-- Các liên kết trong dropdown -->
+
                     <div class="d-flex m-3 me-0">
                         <button class="btn-search btn border border-secondary btn-md-square rounded-circle bg-white me-4" data-bs-toggle="modal" data-bs-target="#searchModal"><i class="fas fa-search text-primary"></i></button>
                         <a href="#" class="position-relative me-4 my-auto">
@@ -88,13 +99,13 @@
             </nav>
         </div>
     </div>
-    <!-- Navbar End -->
-    <!-- Modal Search Start -->
+    <!-- Kết thúc Navbar -->
+    <!-- Bắt đầu Modal tìm kiếm  -->
     <div class="modal fade" id="searchModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-fullscreen">
             <div class="modal-content rounded-0">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Search by keyword</h5>
+                    <h5 class="modal-title" id="exampleModalLabel">Tìm kiếm từ khoá</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body d-flex align-items-center">
@@ -106,152 +117,172 @@
             </div>
         </div>
     </div>
-    <!-- Modal Search End -->
-    <!-- Hero Start -->
+    <!-- Kết thúc Modal tìm kiếm -->
+    <!-- Bắt đầu Hero -->
     <div class="container-fluid py-5 mb-5 hero-header">
         <div class="container py-5">
             <div class="row g-5 align-items-center">
                 <div class="col-md-12 col-lg-7">
-                    <h4 class="mb-3 text-secondary">100% Organic Foods</h4>
-                    <h1 class="mb-5 display-3 text-primary">Organic Veggies & Fruits Foods</h1>
+                    <h4 class="mb-3 text-secondary">100% thực phẩm hữu cơ</h4>
+                    <h1 class="mb-5 display-3 text-primary">Thực phẩm hữu cơ và trái cây tươi sạch </h1>
                     <div class="position-relative mx-auto">
                         <input class="form-control border-2 border-secondary w-75 py-3 px-4 rounded-pill" type="number" placeholder="Search">
                         <button type="submit" class="btn btn-primary border-2 border-secondary py-3 px-4 position-absolute rounded-pill text-white h-100" style="top: 0; right: 25%;">Submit Now</button>
                     </div>
                 </div>
-                <div class="col-md-12 col-lg-5">
-                    <div id="carouselId" class="carousel slide position-relative" data-bs-ride="carousel">
-                        <div class="carousel-inner" role="listbox">
-                            <div class="carousel-item active rounded">
-                                <img src="img/hero-img-1.png" class="img-fluid w-100 h-100 bg-secondary rounded" alt="First slide">
-                                <a href="#" class="btn px-4 py-2 text-white rounded">Fruites</a>
+                
                             </div>
+                      <!-- Bắt đầu carousel cho hình ảnh -->
                             <div class="carousel-item rounded">
                                 <img src="img/hero-img-2.jpg" class="img-fluid w-100 h-100 rounded" alt="Second slide">
-                                <a href="#" class="btn px-4 py-2 text-white rounded">Vesitables</a>
+                                <a href="#" class="btn px-4 py-2 text-white rounded">Rau sạch</a>
                             </div>
                         </div>
+                     <!-- Nút điều khiển carousel để quay về slide trước -->
+
                         <button class="carousel-control-prev" type="button" data-bs-target="#carouselId" data-bs-slide="prev">
                             <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                            <span class="visually-hidden">Previous</span>
+                            <span class="visually-hidden">Trước đó</span>
                         </button>
+                       <!-- Nút điều khiển carousel để tiến tới slide tiếp theo -->
                         <button class="carousel-control-next" type="button" data-bs-target="#carouselId" data-bs-slide="next">
                             <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                            <span class="visually-hidden">Next</span>
+                            <span class="visually-hidden"> Tiếp theo </span>
                         </button>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-    <!-- Hero End -->
-    <!-- Featurs Section Start -->
+    <!-- Kết thúc Hero -->
+    <!-- Bắt đầu phần Feature -->
     <div class="container-fluid featurs py-5">
         <div class="container py-5">
             <div class="row g-4">
+                <!-- Đặc trưng 1: Miễn phí vận chuyển -->
+
                 <div class="col-md-6 col-lg-3">
                     <div class="featurs-item text-center rounded bg-light p-4">
                         <div class="featurs-icon btn-square rounded-circle bg-secondary mb-5 mx-auto">
                             <i class="fas fa-car-side fa-3x text-white"></i>
                         </div>
                         <div class="featurs-content text-center">
-                            <h5>Free Shipping</h5>
-                            <p class="mb-0">Free on order over $300</p>
+                            <h5> Miễn phí vận chuyển </h5>
+                            <p class="mb-0"> Áp dụng với đơn hàng trên 200.000 VND </p>
                         </div>
                     </div>
                 </div>
+             <!-- Đặc trưng 2: Bảo mật thanh toán -->
                 <div class="col-md-6 col-lg-3">
                     <div class="featurs-item text-center rounded bg-light p-4">
                         <div class="featurs-icon btn-square rounded-circle bg-secondary mb-5 mx-auto">
                             <i class="fas fa-user-shield fa-3x text-white"></i>
                         </div>
                         <div class="featurs-content text-center">
-                            <h5>Security Payment</h5>
-                            <p class="mb-0">100% security payment</p>
+                            <h5> Bảo mật thanh toán</h5>
+                            <p class="mb-0">100% bảo mật thanh toán được đảm bảo </p>
                         </div>
                     </div>
                 </div>
+                        <!-- Đặc trưng 3: 30 ngày đổi trả hàng -->
+
                 <div class="col-md-6 col-lg-3">
                     <div class="featurs-item text-center rounded bg-light p-4">
                         <div class="featurs-icon btn-square rounded-circle bg-secondary mb-5 mx-auto">
                             <i class="fas fa-exchange-alt fa-3x text-white"></i>
                         </div>
                         <div class="featurs-content text-center">
-                            <h5>30 Day Return</h5>
-                            <p class="mb-0">30 day money guarantee</p>
+                            <h5> 30 ngày đổi trả hàng </h5>
+                            <p class="mb-0"> Đảm bảo hoàn trả tiền trong 30 ngày </p>
                         </div>
                     </div>
                 </div>
+             <!-- Đặc trưng 4: Hỗ trợ 24/7 -->
                 <div class="col-md-6 col-lg-3">
                     <div class="featurs-item text-center rounded bg-light p-4">
                         <div class="featurs-icon btn-square rounded-circle bg-secondary mb-5 mx-auto">
                             <i class="fa fa-phone-alt fa-3x text-white"></i>
                         </div>
                         <div class="featurs-content text-center">
-                            <h5>24/7 Support</h5>
-                            <p class="mb-0">Support every time fast</p>
+                            <h5> Hỗ trợ 24/7 </h5>
+                            <p class="mb-0"> Hỗ trợ mọi lúc khi cần </p>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-    <!-- Featurs Section End -->
-    <!-- Fruits Shop Start-->
+    <!-- Kết thúc phần Feature -->
+    <!-- Bắt đầu cửa hàng Fruits-->
     <div class="container-fluid fruite py-5">
+     <!-- Bắt đầu phần nội dung chính của sản phẩm hữu cơ -->
         <div class="container py-5">
+                <!-- Bắt đầu phần tiêu đề và điều hướng tab sản phẩm -->
             <div class="tab-class text-center">
                 <div class="row g-4">
                     <div class="col-lg-4 text-start">
-                        <h1>Our Organic Products</h1>
+                        <h1> Các sản phẩm hữu cơ của chúng tôi </h1>
                     </div>
                     <div class="col-lg-8 text-end">
+                <!-- Danh sách các tab để điều hướng giữa các loại sản phẩm -->
                         <ul class="nav nav-pills d-inline-flex text-center mb-5">
                             <li class="nav-item">
+                              <!-- Tab: Tất cả sản phẩm -->
                                 <a class="d-flex m-2 py-2 bg-light rounded-pill active" data-bs-toggle="pill" href="#tab-1">
-                                    <span class="text-dark" style="width: 130px;">All Products</span>
+                                    <span class="text-dark" style="width: 130px;"> Tất cả sản phẩm </span>
                                 </a>
                             </li>
+                              <!-- Tab: Rau củ quả -->
                             <li class="nav-item">
                                 <a class="d-flex py-2 m-2 bg-light rounded-pill" data-bs-toggle="pill" href="#tab-2">
-                                    <span class="text-dark" style="width: 130px;">Vegetables</span>
+                                    <span class="text-dark" style="width: 130px;"> Rau củ quả </span>
                                 </a>
                             </li>
+                            <!-- Tab: Trái cây -->
                             <li class="nav-item">
                                 <a class="d-flex m-2 py-2 bg-light rounded-pill" data-bs-toggle="pill" href="#tab-3">
-                                    <span class="text-dark" style="width: 130px;">Fruits</span>
+                                    <span class="text-dark" style="width: 130px;"> Trái cây </span>
                                 </a>
                             </li>
+                            <!-- Tab: Bánh mỳ -->
                             <li class="nav-item">
                                 <a class="d-flex m-2 py-2 bg-light rounded-pill" data-bs-toggle="pill" href="#tab-4">
-                                    <span class="text-dark" style="width: 130px;">Bread</span>
+                                    <span class="text-dark" style="width: 130px;"> Bánh mỳ </span>
                                 </a>
                             </li>
+                              <!-- Tab: Thịt -->
                             <li class="nav-item">
                                 <a class="d-flex m-2 py-2 bg-light rounded-pill" data-bs-toggle="pill" href="#tab-5">
-                                    <span class="text-dark" style="width: 130px;">Meat</span>
+                                    <span class="text-dark" style="width: 130px;"> Thịt </span>
                                 </a>
                             </li>
                         </ul>
                     </div>
                 </div>
+                 <!-- Kết thúc phần điều hướng tab -->
+                 <!-- Bắt đầu phần nội dung tab sản phẩm -->
                 <div class="tab-content">
+                    <!-- Nội dung cho tab Tất cả sản phẩm -->
                     <div id="tab-1" class="tab-pane fade show p-0 active">
                         <div class="row g-4">
+                         <!-- Cột chứa thông tin sản phẩm đầu tiên -->
                             <div class="col-lg-12">
                                 <div class="row g-4">
                                     <div class="col-md-6 col-lg-4 col-xl-3">
+                                     <!-- Bắt đầu phần sản phẩm với ảnh và thông tin -->
                                         <div class="rounded position-relative fruite-item">
+                                             <!-- Hình ảnh sản phẩm -->
                                             <div class="fruite-img">
                                                 <img src="img/fruite-item-5.jpg" class="img-fluid w-100 rounded-top" alt="">
                                             </div>
+                                        <!-- Nhãn sản phẩm hiển thị trên ảnh -->
                                             <div class="text-white bg-secondary px-3 py-1 rounded position-absolute" style="top: 10px; left: 10px;">Fruits</div>
                                             <div class="p-4 border border-secondary border-top-0 rounded-bottom">
-                                                <h4>Grapes</h4>
-                                                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit sed do eiusmod te incididunt</p>
+                                                <h4> Trái Nho </h4>
+                                                <p> Sản phẩm tươi sạch, 100% từ thiên nhiên </p>
                                                 <div class="d-flex justify-content-between flex-lg-wrap">
-                                                    <p class="text-dark fs-5 fw-bold mb-0">$4.99 / kg</p>
-                                                    <a href="#" class="btn border border-secondary rounded-pill px-3 text-primary"><i class="fa fa-shopping-bag me-2 text-primary"></i> Add to cart</a>
+                                                    <p class="text-dark fs-5 fw-bold mb-0"> 20.000 VND/kg </p>
+                                                    <a href="#" class="btn border border-secondary rounded-pill px-3 text-primary"><i class="fa fa-shopping-bag me-2 text-primary"></i> Thêm vào giỏ hàng </a>
                                                 </div>
                                             </div>
                                         </div>
@@ -262,16 +293,20 @@
                                                 <img src="img/fruite-item-5.jpg" class="img-fluid w-100 rounded-top" alt="">
                                             </div>
                                             <div class="text-white bg-secondary px-3 py-1 rounded position-absolute" style="top: 10px; left: 10px;">Fruits</div>
+                                            <!-- Phần chi tiết sản phẩm -->
                                             <div class="p-4 border border-secondary border-top-0 rounded-bottom">
-                                                <h4>Grapes</h4>
-                                                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit sed do eiusmod te incididunt</p>
+                                                <h4> Trái Nho </h4>
+                                                <p>Sản phẩm tươi sạch, 100% từ thiên nhiên</p>
+                                                 <!-- Giá và nút thêm vào giỏ hàng -->
                                                 <div class="d-flex justify-content-between flex-lg-wrap">
-                                                    <p class="text-dark fs-5 fw-bold mb-0">$4.99 / kg</p>
-                                                    <a href="#" class="btn border border-secondary rounded-pill px-3 text-primary"><i class="fa fa-shopping-bag me-2 text-primary"></i> Add to cart</a>
+                                                    <p class="text-dark fs-5 fw-bold mb-0"> 20.000 VND/kg</p>
+                                                    <a href="#" class="btn border border-secondary rounded-pill px-3 text-primary"><i class="fa fa-shopping-bag me-2 text-primary"></i> Thêm vào giỏ hàng </a>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
+                              <!-- Sản phẩm tiếp theo tương tự -->
+
                                     <div class="col-md-6 col-lg-4 col-xl-3">
                                         <div class="rounded position-relative fruite-item">
                                             <div class="fruite-img">
@@ -279,15 +314,16 @@
                                             </div>
                                             <div class="text-white bg-secondary px-3 py-1 rounded position-absolute" style="top: 10px; left: 10px;">Fruits</div>
                                             <div class="p-4 border border-secondary border-top-0 rounded-bottom">
-                                                <h4>Raspberries</h4>
-                                                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit sed do eiusmod te incididunt</p>
+                                                <h4> Trái xôi mâm </h4>
+                                                <p> Sản phẩm tươi sạch, 100% từ thiên nhiên </p>
                                                 <div class="d-flex justify-content-between flex-lg-wrap">
-                                                    <p class="text-dark fs-5 fw-bold mb-0">$4.99 / kg</p>
-                                                    <a href="#" class="btn border border-secondary rounded-pill px-3 text-primary"><i class="fa fa-shopping-bag me-2 text-primary"></i> Add to cart</a>
+                                                    <p class="text-dark fs-5 fw-bold mb-0"> 20.000 VND/kg </p>
+                                                    <a href="#" class="btn border border-secondary rounded-pill px-3 text-primary"><i class="fa fa-shopping-bag me-2 text-primary"></i> Thêm vào giỏ hàng </a>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
+                                    <!-- Sản phẩm tiếp theo tương tự -->
                                     <div class="col-md-6 col-lg-4 col-xl-3">
                                         <div class="rounded position-relative fruite-item">
                                             <div class="fruite-img">
@@ -295,15 +331,16 @@
                                             </div>
                                             <div class="text-white bg-secondary px-3 py-1 rounded position-absolute" style="top: 10px; left: 10px;">Fruits</div>
                                             <div class="p-4 border border-secondary border-top-0 rounded-bottom">
-                                                <h4>Apricots</h4>
-                                                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit sed do eiusmod te incididunt</p>
+                                                <h4> Quả mơ </h4>
+                                                <p> Sản phẩm tươi sạch, 100% từ thiên nhiên </p>
                                                 <div class="d-flex justify-content-between flex-lg-wrap">
-                                                    <p class="text-dark fs-5 fw-bold mb-0">$4.99 / kg</p>
-                                                    <a href="#" class="btn border border-secondary rounded-pill px-3 text-primary"><i class="fa fa-shopping-bag me-2 text-primary"></i> Add to cart</a>
+                                                    <p class="text-dark fs-5 fw-bold mb-0"> 20.000 VND/kg </p>
+                                                    <a href="#" class="btn border border-secondary rounded-pill px-3 text-primary"><i class="fa fa-shopping-bag me-2 text-primary"></i> Thêm vào giỏ hàng </a>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
+                                 <!-- Sản phẩm tiếp theo tương tự -->
                                     <div class="col-md-6 col-lg-4 col-xl-3">
                                         <div class="rounded position-relative fruite-item">
                                             <div class="fruite-img">
@@ -311,15 +348,16 @@
                                             </div>
                                             <div class="text-white bg-secondary px-3 py-1 rounded position-absolute" style="top: 10px; left: 10px;">Fruits</div>
                                             <div class="p-4 border border-secondary border-top-0 rounded-bottom">
-                                                <h4>Banana</h4>
-                                                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit sed do eiusmod te incididunt</p>
+                                                <h4> Quả chuối </h4>
+                                                <p> Sản phẩm tươi sạch, 100% từ thiên nhiên </p>
                                                 <div class="d-flex justify-content-between flex-lg-wrap">
-                                                    <p class="text-dark fs-5 fw-bold mb-0">$4.99 / kg</p>
-                                                    <a href="#" class="btn border border-secondary rounded-pill px-3 text-primary"><i class="fa fa-shopping-bag me-2 text-primary"></i> Add to cart</a>
+                                                    <p class="text-dark fs-5 fw-bold mb-0"> 20.000 VND/kg </p>
+                                                    <a href="#" class="btn border border-secondary rounded-pill px-3 text-primary"><i class="fa fa-shopping-bag me-2 text-primary"></i> Thêm vào giỏ hàng </a>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
+                                     <!-- Sản phẩm tiếp theo tương tự -->
                                     <div class="col-md-6 col-lg-4 col-xl-3">
                                         <div class="rounded position-relative fruite-item">
                                             <div class="fruite-img">
@@ -327,15 +365,16 @@
                                             </div>
                                             <div class="text-white bg-secondary px-3 py-1 rounded position-absolute" style="top: 10px; left: 10px;">Fruits</div>
                                             <div class="p-4 border border-secondary border-top-0 rounded-bottom">
-                                                <h4>Oranges</h4>
-                                                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit sed do eiusmod te incididunt</p>
+                                                <h4> Quả Cam </h4>
+                                                <p> Sản phẩm tươi sạch, 100% từ thiên nhiên </p>
                                                 <div class="d-flex justify-content-between flex-lg-wrap">
-                                                    <p class="text-dark fs-5 fw-bold mb-0">$4.99 / kg</p>
-                                                    <a href="#" class="btn border border-secondary rounded-pill px-3 text-primary"><i class="fa fa-shopping-bag me-2 text-primary"></i> Add to cart</a>
+                                                    <p class="text-dark fs-5 fw-bold mb-0"> 20.000 VND/kg </p>
+                                                    <a href="#" class="btn border border-secondary rounded-pill px-3 text-primary"><i class="fa fa-shopping-bag me-2 text-primary"></i> AThêm vào giỏ hàng </a>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
+                                 <!-- Sản phẩm tiếp theo tương tự -->
                                     <div class="col-md-6 col-lg-4 col-xl-3">
                                         <div class="rounded position-relative fruite-item">
                                             <div class="fruite-img">
@@ -343,15 +382,16 @@
                                             </div>
                                             <div class="text-white bg-secondary px-3 py-1 rounded position-absolute" style="top: 10px; left: 10px;">Fruits</div>
                                             <div class="p-4 border border-secondary border-top-0 rounded-bottom">
-                                                <h4>Raspberries</h4>
-                                                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit sed do eiusmod te incididunt</p>
+                                                <h4> Trái Đào </h4>
+                                                <p> Sản phẩm tươi sạch, 100% từ thiên nhiên </p>
                                                 <div class="d-flex justify-content-between flex-lg-wrap">
-                                                    <p class="text-dark fs-5 fw-bold mb-0">$4.99 / kg</p>
-                                                    <a href="#" class="btn border border-secondary rounded-pill px-3 text-primary"><i class="fa fa-shopping-bag me-2 text-primary"></i> Add to cart</a>
+                                                    <p class="text-dark fs-5 fw-bold mb-0">20.000 VND/kg</p>
+                                                    <a href="#" class="btn border border-secondary rounded-pill px-3 text-primary"><i class="fa fa-shopping-bag me-2 text-primary"></i> Thêm vào giỏ hàng </a>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
+                                 <!-- Sản phẩm tiếp theo tương tự -->
                                     <div class="col-md-6 col-lg-4 col-xl-3">
                                         <div class="rounded position-relative fruite-item">
                                             <div class="fruite-img">
@@ -359,11 +399,11 @@
                                             </div>
                                             <div class="text-white bg-secondary px-3 py-1 rounded position-absolute" style="top: 10px; left: 10px;">Fruits</div>
                                             <div class="p-4 border border-secondary border-top-0 rounded-bottom">
-                                                <h4>Grapes</h4>
-                                                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit sed do eiusmod te incididunt</p>
+                                                <h4> Quả Xoài </h4>
+                                                <p> Sản phẩm tươi sạch, 100% từ thiên nhiên </p>
                                                 <div class="d-flex justify-content-between flex-lg-wrap">
-                                                    <p class="text-dark fs-5 fw-bold mb-0">$4.99 / kg</p>
-                                                    <a href="#" class="btn border border-secondary rounded-pill px-3 text-primary"><i class="fa fa-shopping-bag me-2 text-primary"></i> Add to cart</a>
+                                                    <p class="text-dark fs-5 fw-bold mb-0">20.000 VND/kg</p>
+                                                    <a href="#" class="btn border border-secondary rounded-pill px-3 text-primary"><i class="fa fa-shopping-bag me-2 text-primary"></i> Thêm vào giỏ hàng </a>
                                                 </div>
                                             </div>
                                         </div>
@@ -372,6 +412,7 @@
                             </div>
                         </div>
                     </div>
+                     <!-- Sản phẩm tiếp theo tương tự -->
                     <div id="tab-2" class="tab-pane fade show p-0">
                         <div class="row g-4">
                             <div class="col-lg-12">
@@ -383,15 +424,16 @@
                                             </div>
                                             <div class="text-white bg-secondary px-3 py-1 rounded position-absolute" style="top: 10px; left: 10px;">Fruits</div>
                                             <div class="p-4 border border-secondary border-top-0 rounded-bottom">
-                                                <h4>Grapes</h4>
-                                                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit sed do eiusmod te incididunt</p>
+                                                <h4> Quả Mãng Cầu </h4>
+                                                <p>Sản phẩm tươi sạch, 100% từ thiên nhiên</p>
                                                 <div class="d-flex justify-content-between flex-lg-wrap">
-                                                    <p class="text-dark fs-5 fw-bold mb-0">$4.99 / kg</p>
-                                                    <a href="#" class="btn border border-secondary rounded-pill px-3 text-primary"><i class="fa fa-shopping-bag me-2 text-primary"></i> Add to cart</a>
+                                                    <p class="text-dark fs-5 fw-bold mb-0">20.000 VND / kg</p>
+                                                    <a href="#" class="btn border border-secondary rounded-pill px-3 text-primary"><i class="fa fa-shopping-bag me-2 text-primary"></i> Thêm vào giỏ hàng </a>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
+                                 <!-- Sản phẩm tiếp theo tương tự -->
                                     <div class="col-md-6 col-lg-4 col-xl-3">
                                         <div class="rounded position-relative fruite-item">
                                             <div class="fruite-img">
@@ -399,11 +441,11 @@
                                             </div>
                                             <div class="text-white bg-secondary px-3 py-1 rounded position-absolute" style="top: 10px; left: 10px;">Fruits</div>
                                             <div class="p-4 border border-secondary border-top-0 rounded-bottom">
-                                                <h4>Raspberries</h4>
-                                                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit sed do eiusmod te incididunt</p>
+                                                <h4> Quả Dâu </h4>
+                                                <p>Sản phẩm tươi sạch, 100% từ thiên nhiên</p>
                                                 <div class="d-flex justify-content-between flex-lg-wrap">
-                                                    <p class="text-dark fs-5 fw-bold mb-0">$4.99 / kg</p>
-                                                    <a href="#" class="btn border border-secondary rounded-pill px-3 text-primary"><i class="fa fa-shopping-bag me-2 text-primary"></i> Add to cart</a>
+                                                    <p class="text-dark fs-5 fw-bold mb-0">20.000 VND / kg</p>
+                                                    <a href="#" class="btn border border-secondary rounded-pill px-3 text-primary"><i class="fa fa-shopping-bag me-2 text-primary"></i> Thêm vào giỏ hàng </a>
                                                 </div>
                                             </div>
                                         </div>
@@ -412,7 +454,9 @@
                             </div>
                         </div>
                     </div>
+                     <!-- Sản phẩm tiếp theo tương tự -->
                     <div id="tab-3" class="tab-pane fade show p-0">
+                            <!-- Bắt đầu nội dung cho tab Trái cây -->
                         <div class="row g-4">
                             <div class="col-lg-12">
                                 <div class="row g-4">
@@ -423,15 +467,16 @@
                                             </div>
                                             <div class="text-white bg-secondary px-3 py-1 rounded position-absolute" style="top: 10px; left: 10px;">Fruits</div>
                                             <div class="p-4 border border-secondary border-top-0 rounded-bottom">
-                                                <h4>Oranges</h4>
-                                                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit sed do eiusmod te incididunt</p>
+                                                <h4> Quả Ổi </h4>
+                                                <p> Sản phẩm tươi sạch, 100% từ thiên nhiên </p>
                                                 <div class="d-flex justify-content-between flex-lg-wrap">
-                                                    <p class="text-dark fs-5 fw-bold mb-0">$4.99 / kg</p>
-                                                    <a href="#" class="btn border border-secondary rounded-pill px-3 text-primary"><i class="fa fa-shopping-bag me-2 text-primary"></i> Add to cart</a>
+                                                    <p class="text-dark fs-5 fw-bold mb-0">20.000 VND / kg</p>
+                                                    <a href="#" class="btn border border-secondary rounded-pill px-3 text-primary"><i class="fa fa-shopping-bag me-2 text-primary"></i> Thêm vào giỏ hàng </a>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
+                                    <!-- Sản phẩm tiếp theo tương tự -->
                                     <div class="col-md-6 col-lg-4 col-xl-3">
                                         <div class="rounded position-relative fruite-item">
                                             <div class="fruite-img">
@@ -439,11 +484,11 @@
                                             </div>
                                             <div class="text-white bg-secondary px-3 py-1 rounded position-absolute" style="top: 10px; left: 10px;">Fruits</div>
                                             <div class="p-4 border border-secondary border-top-0 rounded-bottom">
-                                                <h4>Apple</h4>
-                                                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit sed do eiusmod te incididunt</p>
+                                                <h4> Trái Táo </h4>
+                                                <p>Sản phẩm tươi sạch, 100% từ thiên nhiên</p>
                                                 <div class="d-flex justify-content-between flex-lg-wrap">
-                                                    <p class="text-dark fs-5 fw-bold mb-0">$4.99 / kg</p>
-                                                    <a href="#" class="btn border border-secondary rounded-pill px-3 text-primary"><i class="fa fa-shopping-bag me-2 text-primary"></i> Add to cart</a>
+                                                    <p class="text-dark fs-5 fw-bold mb-0">20.000 VND / kg</p>
+                                                    <a href="#" class="btn border border-secondary rounded-pill px-3 text-primary"><i class="fa fa-shopping-bag me-2 text-primary"></i> Thêm vào giỏ hàng </a>
                                                 </div>
                                             </div>
                                         </div>
@@ -453,9 +498,11 @@
                         </div>
                     </div>
                     <div id="tab-4" class="tab-pane fade show p-0">
+                    <!-- Bắt đầu nội dung cho tab Bánh mỳ -->
                         <div class="row g-4">
                             <div class="col-lg-12">
                                 <div class="row g-4">
+                                <!-- Sản phẩm: Quả Đu Đủ -->
                                     <div class="col-md-6 col-lg-4 col-xl-3">
                                         <div class="rounded position-relative fruite-item">
                                             <div class="fruite-img">
@@ -463,15 +510,16 @@
                                             </div>
                                             <div class="text-white bg-secondary px-3 py-1 rounded position-absolute" style="top: 10px; left: 10px;">Fruits</div>
                                             <div class="p-4 border border-secondary border-top-0 rounded-bottom">
-                                                <h4>Grapes</h4>
-                                                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit sed do eiusmod te incididunt</p>
+                                                <h4> Quả Đu Đủ </h4>
+                                                <p>Sản phẩm tươi sạch, 100% từ thiên nhiên</p>
                                                 <div class="d-flex justify-content-between flex-lg-wrap">
-                                                    <p class="text-dark fs-5 fw-bold mb-0">$4.99 / kg</p>
-                                                    <a href="#" class="btn border border-secondary rounded-pill px-3 text-primary"><i class="fa fa-shopping-bag me-2 text-primary"></i> Add to cart</a>
+                                                    <p class="text-dark fs-5 fw-bold mb-0">20.000 VND / kg</p>
+                                                    <a href="#" class="btn border border-secondary rounded-pill px-3 text-primary"><i class="fa fa-shopping-bag me-2 text-primary"></i> Thêm vào giỏ hàng </a>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
+                                     <!-- Sản phẩm: Quả Nhãn -->
                                     <div class="col-md-6 col-lg-4 col-xl-3">
                                         <div class="rounded position-relative fruite-item">
                                             <div class="fruite-img">
@@ -479,11 +527,11 @@
                                             </div>
                                             <div class="text-white bg-secondary px-3 py-1 rounded position-absolute" style="top: 10px; left: 10px;">Fruits</div>
                                             <div class="p-4 border border-secondary border-top-0 rounded-bottom">
-                                                <h4>Apricots</h4>
-                                                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit sed do eiusmod te incididunt</p>
+                                                <h4> Quả Nhãn </h4>
+                                                <p>Sản phẩm tươi sạch, 100% từ thiên nhiên </p>
                                                 <div class="d-flex justify-content-between flex-lg-wrap">
-                                                    <p class="text-dark fs-5 fw-bold mb-0">$4.99 / kg</p>
-                                                    <a href="#" class="btn border border-secondary rounded-pill px-3 text-primary"><i class="fa fa-shopping-bag me-2 text-primary"></i> Add to cart</a>
+                                                    <p class="text-dark fs-5 fw-bold mb-0"> 20.000 VND / kg</p>
+                                                    <a href="#" class="btn border border-secondary rounded-pill px-3 text-primary"><i class="fa fa-shopping-bag me-2 text-primary"></i> Thêm vào giỏ hàng </a>
                                                 </div>
                                             </div>
                                         </div>
@@ -491,9 +539,12 @@
                                 </div>
                             </div>
                         </div>
+                          <!-- Kết thúc nội dung cho tab Bánh mỳ -->
                     </div>
                     <div id="tab-5" class="tab-pane fade show p-0">
+                         <!-- Bắt đầu nội dung cho tab Thịt -->
                         <div class="row g-4">
+                            <!-- Sản phẩm: Quả Chuối -->
                             <div class="col-lg-12">
                                 <div class="row g-4">
                                     <div class="col-md-6 col-lg-4 col-xl-3">
@@ -503,15 +554,16 @@
                                             </div>
                                             <div class="text-white bg-secondary px-3 py-1 rounded position-absolute" style="top: 10px; left: 10px;">Fruits</div>
                                             <div class="p-4 border border-secondary border-top-0 rounded-bottom">
-                                                <h4>Banana</h4>
-                                                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit sed do eiusmod te incididunt</p>
+                                                <h4> Quả Chuối </h4>
+                                                <p> Sản phẩm tươi sạch, 100% từ thiên nhiên </p>
                                                 <div class="d-flex justify-content-between flex-lg-wrap">
-                                                    <p class="text-dark fs-5 fw-bold mb-0">$4.99 / kg</p>
-                                                    <a href="#" class="btn border border-secondary rounded-pill px-3 text-primary"><i class="fa fa-shopping-bag me-2 text-primary"></i> Add to cart</a>
+                                                    <p class="text-dark fs-5 fw-bold mb-0">20.000 / kg</p>
+                                                    <a href="#" class="btn border border-secondary rounded-pill px-3 text-primary"><i class="fa fa-shopping-bag me-2 text-primary"></i> Thêm vào giỏ hàng </a>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
+                                            <!-- Sản phẩm: Quả Bơ -->
                                     <div class="col-md-6 col-lg-4 col-xl-3">
                                         <div class="rounded position-relative fruite-item">
                                             <div class="fruite-img">
@@ -519,15 +571,16 @@
                                             </div>
                                             <div class="text-white bg-secondary px-3 py-1 rounded position-absolute" style="top: 10px; left: 10px;">Fruits</div>
                                             <div class="p-4 border border-secondary border-top-0 rounded-bottom">
-                                                <h4>Raspberries</h4>
-                                                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit sed do eiusmod te incididunt</p>
+                                                <h4> Quả Bơ </h4>
+                                                <p>Sản phẩm tươi sạch, 100% từ thiên nhiên</p>
                                                 <div class="d-flex justify-content-between flex-lg-wrap">
-                                                    <p class="text-dark fs-5 fw-bold mb-0">$4.99 / kg</p>
-                                                    <a href="#" class="btn border border-secondary rounded-pill px-3 text-primary"><i class="fa fa-shopping-bag me-2 text-primary"></i> Add to cart</a>
+                                                    <p class="text-dark fs-5 fw-bold mb-0"> 20.000 VND / kg</p>
+                                                    <a href="#" class="btn border border-secondary rounded-pill px-3 text-primary"><i class="fa fa-shopping-bag me-2 text-primary"></i> Thêm vào giỏ hàng </a>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
+                                    <!-- Sản phẩm: Quả Sầu Riêng -->
                                     <div class="col-md-6 col-lg-4 col-xl-3">
                                         <div class="rounded position-relative fruite-item">
                                             <div class="fruite-img">
@@ -535,11 +588,11 @@
                                             </div>
                                             <div class="text-white bg-secondary px-3 py-1 rounded position-absolute" style="top: 10px; left: 10px;">Fruits</div>
                                             <div class="p-4 border border-secondary border-top-0 rounded-bottom">
-                                                <h4>Oranges</h4>
-                                                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit sed do eiusmod te incididunt</p>
+                                                <h4> Quả Sầu Riêng </h4>
+                                                <p>Sản phẩm tươi sạch, 100% từ thiên nhiên</p>
                                                 <div class="d-flex justify-content-between flex-lg-wrap">
-                                                    <p class="text-dark fs-5 fw-bold mb-0">$4.99 / kg</p>
-                                                    <a href="#" class="btn border border-secondary rounded-pill px-3 text-primary"><i class="fa fa-shopping-bag me-2 text-primary"></i> Add to cart</a>
+                                                    <p class="text-dark fs-5 fw-bold mb-0"> 20.000 VND / kg</p>
+                                                    <a href="#" class="btn border border-secondary rounded-pill px-3 text-primary"><i class="fa fa-shopping-bag me-2 text-primary"></i>Thêm vào giỏ hàng </a>
                                                 </div>
                                             </div>
                                         </div>
@@ -551,113 +604,159 @@
                 </div>
             </div>
         </div>
+         <!-- Kết thúc nội dung cho tab Thịt -->
     </div>
-    <!-- Fruits Shop End-->
-    <!-- Featurs Start -->
+    <!-- Kết thúc cửa hàng Fruits-->
+    <!-- Bắt đầu Features -->
     <div class="container-fluid service py-5">
         <div class="container py-5">
             <div class="row g-4 justify-content-center">
+                <!-- Bắt đầu mục dịch vụ: Táo Tươi -->
+
                 <div class="col-md-6 col-lg-4">
                     <a href="#">
                         <div class="service-item bg-secondary rounded border border-secondary">
                             <img src="img/featur-1.jpg" class="img-fluid rounded-top w-100" alt="">
                             <div class="px-4 rounded-bottom">
                                 <div class="service-content bg-primary text-center p-4 rounded">
-                                    <h5 class="text-white">Fresh Apples</h5>
-                                    <h3 class="mb-0">20% OFF</h3>
+                                    <h5 class="text-white"> Táo Tươi </h5>
+                                    <h3 class="mb-0">20% giảm giá </h3>
                                 </div>
                             </div>
                         </div>
                     </a>
                 </div>
+                <!-- Kết thúc mục dịch vụ: Táo Tươi -->
+                <!-- Bắt đầu mục dịch vụ: Dâu Đà Lạt -->
                 <div class="col-md-6 col-lg-4">
                     <a href="#">
                         <div class="service-item bg-dark rounded border border-dark">
                             <img src="img/featur-2.jpg" class="img-fluid rounded-top w-100" alt="">
                             <div class="px-4 rounded-bottom">
                                 <div class="service-content bg-light text-center p-4 rounded">
-                                    <h5 class="text-primary">Tasty Fruits</h5>
-                                    <h3 class="mb-0">Free delivery</h3>
+                                    <h5 class="text-primary"> Dâu Đà Lạt </h5>
+                                    <h3 class="mb-0"> Miễn phí giao hàng </h3>
                                 </div>
                             </div>
                         </div>
                     </a>
                 </div>
+                 <!-- Kết thúc mục dịch vụ: Dâu Đà Lạt -->
+                    <!-- Bắt đầu mục dịch vụ: Rau Sài Gòn -->
                 <div class="col-md-6 col-lg-4">
                     <a href="#">
                         <div class="service-item bg-primary rounded border border-primary">
                             <img src="img/featur-3.jpg" class="img-fluid rounded-top w-100" alt="">
                             <div class="px-4 rounded-bottom">
                                 <div class="service-content bg-secondary text-center p-4 rounded">
-                                    <h5 class="text-white">Exotic Vegitable</h5>
-                                    <h3 class="mb-0">Discount 30$</h3>
+                                    <h5 class="text-white"> Rau Sài Gòn </h5>
+                                    <h3 class="mb-0"> Giảm giá đến 50K </h3>
                                 </div>
                             </div>
                         </div>
                     </a>
                 </div>
             </div>
+                  <!-- Kết thúc mục dịch vụ: Rau Sài Gòn -->
         </div>
     </div>
-    <!-- Featurs End -->
-    <!-- Vesitable Shop Start-->
+    <!-- Kết thúc Features -->
+    <!-- Bắt đầu cửa hàng Rau Sạch -->
     <div class="container-fluid vesitable py-5">
         <div class="container py-5">
-            <h1 class="mb-0">Fresh Organic Vegetables</h1>
+                <!-- Tiêu đề chính của phần Rau Sạch Hữu Cơ -->
+            <h1 class="mb-0">Rau Sạch Hữu Cơ</h1>
+                    <!-- Carousel sản phẩm rau hữu cơ -->
             <div class="owl-carousel vegetable-carousel justify-content-center">
+                 <!-- Sản phẩm: Cà Chua -->
                 <div class="border border-primary rounded position-relative vesitable-item">
                     <div class="vesitable-img">
                         <img src="img/vegetable-item-6.jpg" class="img-fluid w-100 rounded-top" alt="">
                     </div>
-                    <div class="text-white bg-primary px-3 py-1 rounded position-absolute" style="top: 10px; right: 10px;">Vegetable</div>
+                    <div class="text-white bg-primary px-3 py-1 rounded position-absolute" style="top: 10px; right: 10px;"> Rau xanh </div>
                     <div class="p-4 rounded-bottom">
-                        <h4>Parsely</h4>
-                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit sed do eiusmod te incididunt</p>
+                        <h4>Cà Chua</h4>
+                        <p> Xuất sứ Đà Lạt, chất lượng từ thiên nhiên </p>
                         <div class="d-flex justify-content-between flex-lg-wrap">
-                            <p class="text-dark fs-5 fw-bold mb-0">$4.99 / kg</p>
-                            <a href="#" class="btn border border-secondary rounded-pill px-3 text-primary"><i class="fa fa-shopping-bag me-2 text-primary"></i> Add to cart</a>
+                            <p class="text-dark fs-5 fw-bold mb-0"> 25.000 VND / kg</p>
+                            <a href="#" class="btn border border-secondary rounded-pill px-3 text-primary"><i class="fa fa-shopping-bag me-2 text-primary"></i> Thêm vào giỏ hàng </a>
                         </div>
                     </div>
                 </div>
+                <!-- Sản phẩm: Rau Cần Tây -->
                 <div class="border border-primary rounded position-relative vesitable-item">
                     <div class="vesitable-img">
                         <img src="img/vegetable-item-1.jpg" class="img-fluid w-100 rounded-top" alt="">
                     </div>
-                    <div class="text-white bg-primary px-3 py-1 rounded position-absolute" style="top: 10px; right: 10px;">Vegetable</div>
+                    <div class="text-white bg-primary px-3 py-1 rounded position-absolute" style="top: 10px; right: 10px;"> Rau xanh</div>
                     <div class="p-4 rounded-bottom">
-                        <h4>Parsely</h4>
-                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit sed do eiusmod te incididunt</p>
+                        <h4> Rau Cần Tây </h4>
+                        <p>Xuất sứ Đà Lạt, chất lượng từ thiên nhiên</p>
                         <div class="d-flex justify-content-between flex-lg-wrap">
-                            <p class="text-dark fs-5 fw-bold mb-0">$4.99 / kg</p>
-                            <a href="#" class="btn border border-secondary rounded-pill px-3 text-primary"><i class="fa fa-shopping-bag me-2 text-primary"></i> Add to cart</a>
+                            <p class="text-dark fs-5 fw-bold mb-0"> 25.000 VND / kg</p>
+                            <a href="#" class="btn border border-secondary rounded-pill px-3 text-primary"><i class="fa fa-shopping-bag me-2 text-primary"></i> Thêm vào giỏ hàng</a>
                         </div>
                     </div>
                 </div>
+                   <!-- Sản phẩm: Quả Chuối -->
                 <div class="border border-primary rounded position-relative vesitable-item">
                     <div class="vesitable-img">
                         <img src="img/vegetable-item-3.png" class="img-fluid w-100 rounded-top bg-light" alt="">
                     </div>
-                    <div class="text-white bg-primary px-3 py-1 rounded position-absolute" style="top: 10px; right: 10px;">Vegetable</div>
+                    <div class="text-white bg-primary px-3 py-1 rounded position-absolute" style="top: 10px; right: 10px;"> Rau xanh </div>
                     <div class="p-4 rounded-bottom">
-                        <h4>Banana</h4>
-                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit sed do eiusmod te incididunt</p>
+                        <h4> Quả Chuối </h4>
+                        <p> Xuất sứ Đà Lạt, chất lượng từ thiên nhiên </p>
                         <div class="d-flex justify-content-between flex-lg-wrap">
-                            <p class="text-dark fs-5 fw-bold mb-0">$7.99 / kg</p>
-                            <a href="#" class="btn border border-secondary rounded-pill px-3 text-primary"><i class="fa fa-shopping-bag me-2 text-primary"></i> Add to cart</a>
+                            <p class="text-dark fs-5 fw-bold mb-0">25.000 VND / kg</p>
+                            <a href="#" class="btn border border-secondary rounded-pill px-3 text-primary"><i class="fa fa-shopping-bag me-2 text-primary"></i> Thêm vào giỏ hàng</a>
                         </div>
                     </div>
                 </div>
+                           
+                <!-- Các sản phẩm khác tương tự, với thay đổi về hình ảnh, tên và mô tả -->
+                 <!-- Sản phẩm: Quả Tiêu -->
                 <div class="border border-primary rounded position-relative vesitable-item">
                     <div class="vesitable-img">
                         <img src="img/vegetable-item-4.jpg" class="img-fluid w-100 rounded-top" alt="">
                     </div>
-                    <div class="text-white bg-primary px-3 py-1 rounded position-absolute" style="top: 10px; right: 10px;">Vegetable</div>
+                    <div class="text-white bg-primary px-3 py-1 rounded position-absolute" style="top: 10px; right: 10px;">Rau xanh</div>
                     <div class="p-4 rounded-bottom">
-                        <h4>Bell Papper</h4>
-                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit sed do eiusmod te incididunt</p>
+                        <h4> Quả Tiêu </h4>
+                        <p>Xuất sứ Đà Lạt, chất lượng từ thiên nhiên </p>
                         <div class="d-flex justify-content-between flex-lg-wrap">
-                            <p class="text-dark fs-5 fw-bold mb-0">$7.99 / kg</p>
-                            <a href="#" class="btn border border-secondary rounded-pill px-3 text-primary"><i class="fa fa-shopping-bag me-2 text-primary"></i> Add to cart</a>
+                            <p class="text-dark fs-5 fw-bold mb-0">25.000 VND / kg</p>
+                            <a href="#" class="btn border border-secondary rounded-pill px-3 text-primary"><i class="fa fa-shopping-bag me-2 text-primary"></i> Thêm vào giỏ hàng</a>
+                        </div>
+                    </div>
+                </div>
+                 <!-- Sản phẩm: Cải Thìa -->
+                <div class="border border-primary rounded position-relative vesitable-item">
+                    <div class="vesitable-img">
+                        <img src="img/vegetable-item-5.jpg" class="img-fluid w-100 rounded-top" alt="">
+                    </div>
+                    <div class="text-white bg-primary px-3 py-1 rounded position-absolute" style="top: 10px; right: 10px;">Rau xanh</div>
+                    <div class="p-4 rounded-bottom">
+                        <h4></h4>
+                        <p>Xuất sứ Đà Lạt, chất lượng từ thiên nhiên</p>
+                        <div class="d-flex justify-content-between flex-lg-wrap">
+                            <p class="text-dark fs-5 fw-bold mb-0">25.000 VND / kg</p>
+                            <a href="#" class="btn border border-secondary rounded-pill px-3 text-primary"><i class="fa fa-shopping-bag me-2 text-primary"></i> Thêm vào giỏ hàng</a>
+                        </div>
+                    </div>
+                </div>
+                    <!-- Sản phẩm: Khoai Tây -->
+                <div class="border border-primary rounded position-relative vesitable-item">
+                    <div class="vesitable-img">
+                        <img src="img/vegetable-item-6.jpg" class="img-fluid w-100 rounded-top" alt="">
+                    </div>
+                    <div class="text-white bg-primary px-3 py-1 rounded position-absolute" style="top: 10px; right: 10px;">Rau xanh</div>
+                    <div class="p-4 rounded-bottom">
+                        <h4> Cải thìa </h4>
+                        <p>Xuất sứ Đà Lạt, chất lượng từ thiên nhiên</p>
+                        <div class="d-flex justify-content-between flex-lg-wrap">
+                            <p class="text-dark fs-5 fw-bold mb-0">25.000 VND / kg</p>
+                            <a href="#" class="btn border border-secondary rounded-pill px-3 text-primary"><i class="fa fa-shopping-bag me-2 text-primary"></i> Thêm vào giỏ hàng</a>
                         </div>
                     </div>
                 </div>
@@ -665,13 +764,13 @@
                     <div class="vesitable-img">
                         <img src="img/vegetable-item-5.jpg" class="img-fluid w-100 rounded-top" alt="">
                     </div>
-                    <div class="text-white bg-primary px-3 py-1 rounded position-absolute" style="top: 10px; right: 10px;">Vegetable</div>
+                    <div class="text-white bg-primary px-3 py-1 rounded position-absolute" style="top: 10px; right: 10px;">Rau xanhe</div>
                     <div class="p-4 rounded-bottom">
-                        <h4>Potatoes</h4>
-                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit sed do eiusmod te incididunt</p>
+                        <h4> Cải thìa </h4>
+                        <p>Xuất sứ Đà Lạt, chất lượng từ thiên nhiên</p>
                         <div class="d-flex justify-content-between flex-lg-wrap">
-                            <p class="text-dark fs-5 fw-bold mb-0">$7.99 / kg</p>
-                            <a href="#" class="btn border border-secondary rounded-pill px-3 text-primary"><i class="fa fa-shopping-bag me-2 text-primary"></i> Add to cart</a>
+                            <p class="text-dark fs-5 fw-bold mb-0">25.000 VND</p>
+                            <a href="#" class="btn border border-secondary rounded-pill px-3 text-primary"><i class="fa fa-shopping-bag me-2 text-primary"></i> Thêm vào giỏ hàng</a>
                         </div>
                     </div>
                 </div>
@@ -679,67 +778,48 @@
                     <div class="vesitable-img">
                         <img src="img/vegetable-item-6.jpg" class="img-fluid w-100 rounded-top" alt="">
                     </div>
-                    <div class="text-white bg-primary px-3 py-1 rounded position-absolute" style="top: 10px; right: 10px;">Vegetable</div>
+                    <div class="text-white bg-primary px-3 py-1 rounded position-absolute" style="top: 10px; right: 10px;">Rau xanh</div>
                     <div class="p-4 rounded-bottom">
-                        <h4>Parsely</h4>
-                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit sed do eiusmod te incididunt</p>
+                        <h4> Khoai tây </h4>
+                        <p>Xuất sứ Đà Lạt, chất lượng từ thiên nhiên</p>
                         <div class="d-flex justify-content-between flex-lg-wrap">
-                            <p class="text-dark fs-5 fw-bold mb-0">$7.99 / kg</p>
-                            <a href="#" class="btn border border-secondary rounded-pill px-3 text-primary"><i class="fa fa-shopping-bag me-2 text-primary"></i> Add to cart</a>
-                        </div>
-                    </div>
-                </div>
-                <div class="border border-primary rounded position-relative vesitable-item">
-                    <div class="vesitable-img">
-                        <img src="img/vegetable-item-5.jpg" class="img-fluid w-100 rounded-top" alt="">
-                    </div>
-                    <div class="text-white bg-primary px-3 py-1 rounded position-absolute" style="top: 10px; right: 10px;">Vegetable</div>
-                    <div class="p-4 rounded-bottom">
-                        <h4>Potatoes</h4>
-                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit sed do eiusmod te incididunt</p>
-                        <div class="d-flex justify-content-between flex-lg-wrap">
-                            <p class="text-dark fs-5 fw-bold mb-0">$7.99 / kg</p>
-                            <a href="#" class="btn border border-secondary rounded-pill px-3 text-primary"><i class="fa fa-shopping-bag me-2 text-primary"></i> Add to cart</a>
-                        </div>
-                    </div>
-                </div>
-                <div class="border border-primary rounded position-relative vesitable-item">
-                    <div class="vesitable-img">
-                        <img src="img/vegetable-item-6.jpg" class="img-fluid w-100 rounded-top" alt="">
-                    </div>
-                    <div class="text-white bg-primary px-3 py-1 rounded position-absolute" style="top: 10px; right: 10px;">Vegetable</div>
-                    <div class="p-4 rounded-bottom">
-                        <h4>Parsely</h4>
-                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit sed do eiusmod te incididunt</p>
-                        <div class="d-flex justify-content-between flex-lg-wrap">
-                            <p class="text-dark fs-5 fw-bold mb-0">$7.99 / kg</p>
-                            <a href="#" class="btn border border-secondary rounded-pill px-3 text-primary"><i class="fa fa-shopping-bag me-2 text-primary"></i> Add to cart</a>
+                            <p class="text-dark fs-5 fw-bold mb-0">25.000 VND / kg</p>
+                            <a href="#" class="btn border border-secondary rounded-pill px-3 text-primary"><i class="fa fa-shopping-bag me-2 text-primary"></i> Thêm vào giỏ hàng</a>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-    <!-- Vesitable Shop End -->
-    <!-- Banner Section Start-->
+    <!-- Kết thúc cửa hàng Rau sạch -->
+    <!-- Bắt đầu phần Banner -->
     <div class="container-fluid banner bg-secondary my-5">
         <div class="container py-5">
             <div class="row g-4 align-items-center">
+                <!-- Cột bên trái chứa tiêu đề và mô tả -->
                 <div class="col-lg-6">
                     <div class="py-4">
-                        <h1 class="display-3 text-white">Fresh Exotic Fruits</h1>
-                        <p class="fw-normal display-3 text-dark mb-4">in Our Store</p>
-                        <p class="mb-4 text-dark">The generated Lorem Ipsum is therefore always free from repetition injected humour, or non-characteristic words etc.</p>
-                        <a href="#" class="banner-btn btn border-2 border-white rounded-pill text-dark py-3 px-5">BUY</a>
+                    <!-- Tiêu đề chính của banner -->
+                        <h1 class="display-3 text-white"> Trái cây siêu tươi </h1>
+                    <!-- Mô tả ngắn gọn -->
+                        <p class="fw-normal display-3 text-dark mb-4"> trong cửa hàng của chúng tôi</p>
+                    <!-- Thông điệp về sản phẩm -->
+                        <p class="mb-4 text-dark"> Sản phẩm tươi sạch, 100% đến từ Việt Nam </p>
+                    <!-- Nút kêu gọi hành động -->
+                        <a href="#" class="banner-btn btn border-2 border-white rounded-pill text-dark py-3 px-5"> MUA NGAY </a>
                     </div>
                 </div>
+                <!-- Cột bên phải chứa hình ảnh và thông tin thêm -->
                 <div class="col-lg-6">
                     <div class="position-relative">
+                     <!-- Hình ảnh banner -->
                         <img src="img/baner-1.png" class="img-fluid w-100 rounded" alt="">
+                        <!-- Vòng tròn chứa thông tin sản phẩm -->
                         <div class="d-flex align-items-center justify-content-center bg-white rounded-circle position-absolute" style="width: 140px; height: 140px; top: 0; left: 0;">
+                            <!-- Số lượng sản phẩm -->
                             <h1 style="font-size: 100px;">1</h1>
                             <div class="d-flex flex-column">
-                                <span class="h2 mb-0">50$</span>
+                                <span class="h2 mb-0"> 100.000 VND </span>
                                 <span class="h4 text-muted mb-0">kg</span>
                             </div>
                         </div>
@@ -748,15 +828,17 @@
             </div>
         </div>
     </div>
-    <!-- Banner Section End -->
-    <!-- Bestsaler Product Start -->
+    <!-- Kết thúc phần Banner -->
+    <!-- Bắt đầu phần sản phẩm Best Seller -->
     <div class="container-fluid py-5">
         <div class="container py-5">
+        <!-- Tiêu đề và mô tả cho phần sản phẩm bán chạy -->
             <div class="text-center mx-auto mb-5" style="max-width: 700px;">
-                <h1 class="display-4">Bestseller Products</h1>
-                <p>Latin words, combined with a handful of model sentence structures, to generate Lorem Ipsum which looks reasonable.</p>
+                <h1 class="display-4"> Các sản phẩm bán chạy</h1>
+                <p> Các sản phẩm bán chạy nhất trên Simple Green .</p>
             </div>
             <div class="row g-4">
+             <!-- Sản phẩm đầu tiên -->
                 <div class="col-lg-6 col-xl-4">
                     <div class="p-4 rounded bg-light">
                         <div class="row align-items-center">
@@ -764,20 +846,23 @@
                                 <img src="img/best-product-1.jpg" class="img-fluid rounded-circle w-100" alt="">
                             </div>
                             <div class="col-6">
-                                <a href="#" class="h5">Organic Tomato</a>
+                                <a href="#" class="h5"> Cà chua hữu cơ </a>
                                 <div class="d-flex my-3">
+                                  <!-- Đánh giá sản phẩm bằng sao -->
                                     <i class="fas fa-star text-primary"></i>
                                     <i class="fas fa-star text-primary"></i>
                                     <i class="fas fa-star text-primary"></i>
                                     <i class="fas fa-star text-primary"></i>
                                     <i class="fas fa-star"></i>
                                 </div>
-                                <h4 class="mb-3">3.12 $</h4>
-                                <a href="#" class="btn border border-secondary rounded-pill px-3 text-primary"><i class="fa fa-shopping-bag me-2 text-primary"></i> Add to cart</a>
+                                <h4 class="mb-3"> 50.000 VND </h4>
+                                <a href="#" class="btn border border-secondary rounded-pill px-3 text-primary"><i class="fa fa-shopping-bag me-2 text-primary"></i> Thêm vào giỏ hàng </a>
                             </div>
                         </div>
                     </div>
                 </div>
+                <!-- Các sản phẩm tiếp theo -->
+            <!-- Sao chép phần trên cho từng sản phẩm, chỉ thay đổi hình ảnh và tên sản phẩm -->
                 <div class="col-lg-6 col-xl-4">
                     <div class="p-4 rounded bg-light">
                         <div class="row align-items-center">
@@ -785,7 +870,7 @@
                                 <img src="img/best-product-2.jpg" class="img-fluid rounded-circle w-100" alt="">
                             </div>
                             <div class="col-6">
-                                <a href="#" class="h5">Organic Tomato</a>
+                                <a href="#" class="h5">Cà chua hữu cơ</a>
                                 <div class="d-flex my-3">
                                     <i class="fas fa-star text-primary"></i>
                                     <i class="fas fa-star text-primary"></i>
@@ -793,12 +878,14 @@
                                     <i class="fas fa-star text-primary"></i>
                                     <i class="fas fa-star"></i>
                                 </div>
-                                <h4 class="mb-3">3.12 $</h4>
-                                <a href="#" class="btn border border-secondary rounded-pill px-3 text-primary"><i class="fa fa-shopping-bag me-2 text-primary"></i> Add to cart</a>
+                                <h4 class="mb-3">50.000 VND</h4>
+                                <a href="#" class="btn border border-secondary rounded-pill px-3 text-primary"><i class="fa fa-shopping-bag me-2 text-primary"></i> Thêm vào giỏ hàng</a>
                             </div>
                         </div>
                     </div>
                 </div>
+                  <!-- Tiếp tục như vậy cho các sản phẩm khác... -->
+                   <!-- Sản phẩm thứ sáu -->
                 <div class="col-lg-6 col-xl-4">
                     <div class="p-4 rounded bg-light">
                         <div class="row align-items-center">
@@ -806,7 +893,7 @@
                                 <img src="img/best-product-3.jpg" class="img-fluid rounded-circle w-100" alt="">
                             </div>
                             <div class="col-6">
-                                <a href="#" class="h5">Organic Tomato</a>
+                                <a href="#" class="h5">Cà chua hữu cơ</a>
                                 <div class="d-flex my-3">
                                     <i class="fas fa-star text-primary"></i>
                                     <i class="fas fa-star text-primary"></i>
@@ -814,12 +901,13 @@
                                     <i class="fas fa-star text-primary"></i>
                                     <i class="fas fa-star"></i>
                                 </div>
-                                <h4 class="mb-3">3.12 $</h4>
-                                <a href="#" class="btn border border-secondary rounded-pill px-3 text-primary"><i class="fa fa-shopping-bag me-2 text-primary"></i> Add to cart</a>
+                                <h4 class="mb-3">50.000 VND</h4>
+                                <a href="#" class="btn border border-secondary rounded-pill px-3 text-primary"><i class="fa fa-shopping-bag me-2 text-primary"></i> Thêm vào giỏ hàng</a>
                             </div>
                         </div>
                     </div>
                 </div>
+                 <!-- Sản phẩm thứ bảy đến thứ mười -->
                 <div class="col-lg-6 col-xl-4">
                     <div class="p-4 rounded bg-light">
                         <div class="row align-items-center">
@@ -827,7 +915,7 @@
                                 <img src="img/best-product-4.jpg" class="img-fluid rounded-circle w-100" alt="">
                             </div>
                             <div class="col-6">
-                                <a href="#" class="h5">Organic Tomato</a>
+                                <a href="#" class="h5">Cà chua hữu cơ</a>
                                 <div class="d-flex my-3">
                                     <i class="fas fa-star text-primary"></i>
                                     <i class="fas fa-star text-primary"></i>
@@ -835,12 +923,13 @@
                                     <i class="fas fa-star text-primary"></i>
                                     <i class="fas fa-star"></i>
                                 </div>
-                                <h4 class="mb-3">3.12 $</h4>
-                                <a href="#" class="btn border border-secondary rounded-pill px-3 text-primary"><i class="fa fa-shopping-bag me-2 text-primary"></i> Add to cart</a>
+                                <h4 class="mb-3">50.000 VND</h4>
+                                <a href="#" class="btn border border-secondary rounded-pill px-3 text-primary"><i class="fa fa-shopping-bag me-2 text-primary"></i> Thêm vào giỏ hàng </a>
                             </div>
                         </div>
                     </div>
                 </div>
+                 <!-- Tương tự sản phẩm ở trên -->
                 <div class="col-lg-6 col-xl-4">
                     <div class="p-4 rounded bg-light">
                         <div class="row align-items-center">
@@ -848,7 +937,7 @@
                                 <img src="img/best-product-5.jpg" class="img-fluid rounded-circle w-100" alt="">
                             </div>
                             <div class="col-6">
-                                <a href="#" class="h5">Organic Tomato</a>
+                                <a href="#" class="h5">Cà chua hữu cơ</a>
                                 <div class="d-flex my-3">
                                     <i class="fas fa-star text-primary"></i>
                                     <i class="fas fa-star text-primary"></i>
@@ -856,12 +945,13 @@
                                     <i class="fas fa-star text-primary"></i>
                                     <i class="fas fa-star"></i>
                                 </div>
-                                <h4 class="mb-3">3.12 $</h4>
-                                <a href="#" class="btn border border-secondary rounded-pill px-3 text-primary"><i class="fa fa-shopping-bag me-2 text-primary"></i> Add to cart</a>
+                                <h4 class="mb-3">50.000 VND</h4>
+                                <a href="#" class="btn border border-secondary rounded-pill px-3 text-primary"><i class="fa fa-shopping-bag me-2 text-primary"></i> Thêm vào giỏ hàng </a>
                             </div>
                         </div>
                     </div>
                 </div>
+                <!-- Tương tự sản phẩm ở trên -->
                 <div class="col-lg-6 col-xl-4">
                     <div class="p-4 rounded bg-light">
                         <div class="row align-items-center">
@@ -869,7 +959,7 @@
                                 <img src="img/best-product-6.jpg" class="img-fluid rounded-circle w-100" alt="">
                             </div>
                             <div class="col-6">
-                                <a href="#" class="h5">Organic Tomato</a>
+                                <a href="#" class="h5">Cà chua hữu cơ</a>
                                 <div class="d-flex my-3">
                                     <i class="fas fa-star text-primary"></i>
                                     <i class="fas fa-star text-primary"></i>
@@ -877,17 +967,18 @@
                                     <i class="fas fa-star text-primary"></i>
                                     <i class="fas fa-star"></i>
                                 </div>
-                                <h4 class="mb-3">3.12 $</h4>
-                                <a href="#" class="btn border border-secondary rounded-pill px-3 text-primary"><i class="fa fa-shopping-bag me-2 text-primary"></i> Add to cart</a>
+                                <h4 class="mb-3"> 50.000 VND </h4>
+                                <a href="#" class="btn border border-secondary rounded-pill px-3 text-primary"><i class="fa fa-shopping-bag me-2 text-primary"></i> Thêm vào giỏ hàng </a>
                             </div>
                         </div>
                     </div>
                 </div>
+                <!-- Tương tự sản phẩm ở trên -->
                 <div class="col-md-6 col-lg-6 col-xl-3">
                     <div class="text-center">
                         <img src="img/fruite-item-1.jpg" class="img-fluid rounded" alt="">
                         <div class="py-4">
-                            <a href="#" class="h5">Organic Tomato</a>
+                            <a href="#" class="h5">Cà chua hữu cơ</a>
                             <div class="d-flex my-3 justify-content-center">
                                 <i class="fas fa-star text-primary"></i>
                                 <i class="fas fa-star text-primary"></i>
@@ -895,16 +986,17 @@
                                 <i class="fas fa-star text-primary"></i>
                                 <i class="fas fa-star"></i>
                             </div>
-                            <h4 class="mb-3">3.12 $</h4>
-                            <a href="#" class="btn border border-secondary rounded-pill px-3 text-primary"><i class="fa fa-shopping-bag me-2 text-primary"></i> Add to cart</a>
+                            <h4 class="mb-3">50.000 VND</h4>
+                            <a href="#" class="btn border border-secondary rounded-pill px-3 text-primary"><i class="fa fa-shopping-bag me-2 text-primary"></i> Thêm vào giỏ hàng </a>
                         </div>
                     </div>
                 </div>
+                <!-- Tương tự sản phẩm ở trên -->
                 <div class="col-md-6 col-lg-6 col-xl-3">
                     <div class="text-center">
                         <img src="img/fruite-item-2.jpg" class="img-fluid rounded" alt="">
                         <div class="py-4">
-                            <a href="#" class="h5">Organic Tomato</a>
+                            <a href="#" class="h5">Cà chua hữu cơ</a>
                             <div class="d-flex my-3 justify-content-center">
                                 <i class="fas fa-star text-primary"></i>
                                 <i class="fas fa-star text-primary"></i>
@@ -912,16 +1004,17 @@
                                 <i class="fas fa-star text-primary"></i>
                                 <i class="fas fa-star"></i>
                             </div>
-                            <h4 class="mb-3">3.12 $</h4>
-                            <a href="#" class="btn border border-secondary rounded-pill px-3 text-primary"><i class="fa fa-shopping-bag me-2 text-primary"></i> Add to cart</a>
+                            <h4 class="mb-3">50.000 VND</h4>
+                            <a href="#" class="btn border border-secondary rounded-pill px-3 text-primary"><i class="fa fa-shopping-bag me-2 text-primary"></i> Thêm vào giỏ hàng</a>
                         </div>
                     </div>
                 </div>
+                <!-- Tương tự sản phẩm ở trên -->
                 <div class="col-md-6 col-lg-6 col-xl-3">
                     <div class="text-center">
                         <img src="img/fruite-item-3.jpg" class="img-fluid rounded" alt="">
                         <div class="py-4">
-                            <a href="#" class="h5">Organic Tomato</a>
+                            <a href="#" class="h5">Cà chua hữu cơ</a>
                             <div class="d-flex my-3 justify-content-center">
                                 <i class="fas fa-star text-primary"></i>
                                 <i class="fas fa-star text-primary"></i>
@@ -929,16 +1022,17 @@
                                 <i class="fas fa-star text-primary"></i>
                                 <i class="fas fa-star"></i>
                             </div>
-                            <h4 class="mb-3">3.12 $</h4>
-                            <a href="#" class="btn border border-secondary rounded-pill px-3 text-primary"><i class="fa fa-shopping-bag me-2 text-primary"></i> Add to cart</a>
+                            <h4 class="mb-3">50.000 VND</h4>
+                            <a href="#" class="btn border border-secondary rounded-pill px-3 text-primary"><i class="fa fa-shopping-bag me-2 text-primary"></i> Thêm vào giỏ hàng </a>
                         </div>
                     </div>
                 </div>
+                <!-- Tương tự sản phẩm ở trên -->
                 <div class="col-md-6 col-lg-6 col-xl-3">
                     <div class="text-center">
                         <img src="img/fruite-item-4.jpg" class="img-fluid rounded" alt="">
                         <div class="py-2">
-                            <a href="#" class="h5">Organic Tomato</a>
+                            <a href="#" class="h5">Cà chua hữu cơ</a>
                             <div class="d-flex my-3 justify-content-center">
                                 <i class="fas fa-star text-primary"></i>
                                 <i class="fas fa-star text-primary"></i>
@@ -946,45 +1040,49 @@
                                 <i class="fas fa-star text-primary"></i>
                                 <i class="fas fa-star"></i>
                             </div>
-                            <h4 class="mb-3">3.12 $</h4>
-                            <a href="#" class="btn border border-secondary rounded-pill px-3 text-primary"><i class="fa fa-shopping-bag me-2 text-primary"></i> Add to cart</a>
+                            <h4 class="mb-3">50.000 VND</h4>
+                            <a href="#" class="btn border border-secondary rounded-pill px-3 text-primary"><i class="fa fa-shopping-bag me-2 text-primary"></i> Thêm vào giỏ hàng </a>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-    <!-- Bestsaler Product End -->
-    <!-- Fact Start -->
+    <!-- Kết thúc phần sản phẩm Bestseller -->
+    <!-- Bắt đầu phẩn những thông tin của thương hiệu  -->
     <div class="container-fluid py-5">
         <div class="container">
             <div class="bg-light p-5 rounded">
                 <div class="row g-4 justify-content-center">
+                     <!-- Thông tin về khách hàng hài lòng -->
                     <div class="col-md-6 col-lg-6 col-xl-3">
                         <div class="counter bg-white rounded p-5">
-                            <i class="fa fa-users text-secondary"></i>
-                            <h4>satisfied customers</h4>
-                            <h1>1963</h1>
+                            <i class="fa fa-users text-secondary"></i> <!-- Biểu tượng người dùng -->
+                            <h4> Khách hàng hài lòng </h4> <!-- Tiêu đề thông tin -->
+                            <h1>1963</h1> <!-- Giá trị hiển thị -->
                         </div>
                     </div>
+                     <!-- Thông tin về chất lượng dịch vụ -->
                     <div class="col-md-6 col-lg-6 col-xl-3">
                         <div class="counter bg-white rounded p-5">
                             <i class="fa fa-users text-secondary"></i>
-                            <h4>quality of service</h4>
+                            <h4>Chất lượng dịch vụ</h4>
                             <h1>99%</h1>
                         </div>
                     </div>
+                       <!-- Thông tin về chứng chỉ công nhận -->
                     <div class="col-md-6 col-lg-6 col-xl-3">
                         <div class="counter bg-white rounded p-5">
                             <i class="fa fa-users text-secondary"></i>
-                            <h4>quality certificates</h4>
+                            <h4>Chứng chỉ công nhận</h4>
                             <h1>33</h1>
                         </div>
                     </div>
+                      <!-- Thông tin về sản phẩm có sẵn -->
                     <div class="col-md-6 col-lg-6 col-xl-3">
                         <div class="counter bg-white rounded p-5">
                             <i class="fa fa-users text-secondary"></i>
-                            <h4>Available Products</h4>
+                            <h4>Sản phẩm có sẵn</h4>
                             <h1>789</h1>
                         </div>
                     </div>
@@ -992,21 +1090,24 @@
             </div>
         </div>
     </div>
-    <!-- Fact Start -->
-    <!-- Tastimonial Start -->
+    <!-- Kết thúc phần thông tin thương hiệu -->
+    <!--Bắt đầu phần chứng thực từ chuyên gia -->
     <div class="container-fluid testimonial py-5">
         <div class="container py-5">
+             <!-- Tiêu đề chứng thực -->
             <div class="testimonial-header text-center">
-                <h4 class="text-primary">Our Testimonial</h4>
-                <h1 class="display-5 mb-5 text-dark">Our Client Saying!</h1>
+                <h4 class="text-primary"> Công nhận đến từ khách hàng </h4>
+                <h1 class="display-5 mb-5 text-dark">Khách hàng nói về chúng tôi!</h1>
             </div>
+             <!-- Carousel cho chứng thực -->
             <div class="owl-carousel testimonial-carousel">
+                <!-- Mỗi mục chứng thực -->
                 <div class="testimonial-item img-border-radius bg-light rounded p-4">
                     <div class="position-relative">
                         <i class="fa fa-quote-right fa-2x text-secondary position-absolute" style="bottom: 30px; right: 0;"></i>
                         <div class="mb-4 pb-4 border-bottom border-secondary">
                             <p class="mb-0">
-                                Lorem Ipsum is simply dummy text of the printing Ipsum has been the industry's standard dummy text ever since the 1500s,
+                                Sản phẩm chất lượng, dịch vụ chăm sóc khách hàng chu đáo
                             </p>
                         </div>
                         <div class="d-flex align-items-center flex-nowrap">
@@ -1014,8 +1115,8 @@
                                 <img src="img/testimonial-1.jpg" class="img-fluid rounded" style="width: 100px; height: 100px;" alt="">
                             </div>
                             <div class="ms-4 d-block">
-                                <h4 class="text-dark">Client Name</h4>
-                                <p class="m-0 pb-3">Profession</p>
+                                <h4 class="text-dark"> Hoàng Thị Ánh </h4>
+                                <p class="m-0 pb-3"> Sinh viên UEH </p>
                                 <div class="d-flex pe-5">
                                     <i class="fas fa-star text-primary"></i>
                                     <i class="fas fa-star text-primary"></i>
@@ -1027,12 +1128,13 @@
                         </div>
                     </div>
                 </div>
+                <!-- Mục chứng thực thứ hai -->
                 <div class="testimonial-item img-border-radius bg-light rounded p-4">
                     <div class="position-relative">
                         <i class="fa fa-quote-right fa-2x text-secondary position-absolute" style="bottom: 30px; right: 0;"></i>
                         <div class="mb-4 pb-4 border-bottom border-secondary">
                             <p class="mb-0">
-                                Lorem Ipsum is simply dummy text of the printing Ipsum has been the industry's standard dummy text ever since the 1500s,
+                            Vô cùng chất lượng, vô cùng tuyệt vời
                             </p>
                         </div>
                         <div class="d-flex align-items-center flex-nowrap">
@@ -1040,8 +1142,8 @@
                                 <img src="img/testimonial-1.jpg" class="img-fluid rounded" style="width: 100px; height: 100px;" alt="">
                             </div>
                             <div class="ms-4 d-block">
-                                <h4 class="text-dark">Client Name</h4>
-                                <p class="m-0 pb-3">Profession</p>
+                                <h4 class="text-dark"> Võ Hoàng Mai Phương </h4>
+                                <p class="m-0 pb-3"> Nội trợ </p>
                                 <div class="d-flex pe-5">
                                     <i class="fas fa-star text-primary"></i>
                                     <i class="fas fa-star text-primary"></i>
@@ -1053,12 +1155,13 @@
                         </div>
                     </div>
                 </div>
+                <!-- Mục chứng thực thứ ba -->
                 <div class="testimonial-item img-border-radius bg-light rounded p-4">
                     <div class="position-relative">
                         <i class="fa fa-quote-right fa-2x text-secondary position-absolute" style="bottom: 30px; right: 0;"></i>
                         <div class="mb-4 pb-4 border-bottom border-secondary">
                             <p class="mb-0">
-                                Lorem Ipsum is simply dummy text of the printing Ipsum has been the industry's standard dummy text ever since the 1500s,
+                                Vô cùng chất lượng, vô cùng tuyệt vời
                             </p>
                         </div>
                         <div class="d-flex align-items-center flex-nowrap">
@@ -1066,8 +1169,8 @@
                                 <img src="img/testimonial-1.jpg" class="img-fluid rounded" style="width: 100px; height: 100px;" alt="">
                             </div>
                             <div class="ms-4 d-block">
-                                <h4 class="text-dark">Client Name</h4>
-                                <p class="m-0 pb-3">Profession</p>
+                                <h4 class="text-dark"> Châu Chí Kiện </h4>
+                                <p class="m-0 pb-3"> Giáo sư </p>
                                 <div class="d-flex pe-5">
                                     <i class="fas fa-star text-primary"></i>
                                     <i class="fas fa-star text-primary"></i>
@@ -1082,7 +1185,7 @@
             </div>
         </div>
     </div>
-    <!-- Tastimonial End -->
+    <!-- Kết thúc phần chứng thực từ chuyên gia -->
     <!-- Footer Start -->
     <div class="container-fluid bg-dark text-white-50 footer pt-5 mt-5">
         <div class="container py-5">
