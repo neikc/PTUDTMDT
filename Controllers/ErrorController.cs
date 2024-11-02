@@ -2,9 +2,9 @@
 
 namespace PTUDTMDT.Controllers
 {
-    public class HangHoaController : Controller
+    public class ErrorController : Controller
     {
-        public IActionResult Index()
+        public IActionResult Error()
         {
             return View();
         }

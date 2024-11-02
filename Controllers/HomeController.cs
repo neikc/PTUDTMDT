@@ -16,7 +16,7 @@ namespace PTUDTMDT.Controllers
         public IActionResult Index()
         {
             return View();
-            //Không để gì trong View() có nghĩa là đi đến View cùng tên với Action
+            //Không để gì trong View() có nghĩa là đi đến View cùng tên với Actiona
         }
 
         public IActionResult Privacy()
