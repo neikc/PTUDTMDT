@@ -9,9 +9,7 @@ public partial class DiaChi
 
     public string? TenDiaChi { get; set; }
 
-    public int? ViTriCha { get; set; }
-
-    public int? CapDo { get; set; }
+    public string? ViTriNha { get; set; }
 
     public string? ChuanHoaUrl { get; set; }
 

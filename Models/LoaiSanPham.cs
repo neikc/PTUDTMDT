@@ -11,9 +11,7 @@ public partial class LoaiSanPham
 
     public string? MoTa { get; set; }
 
-    public byte[]? Hinh { get; set; }
-
-    public string? Thumb { get; set; }
+    public string? Hinh { get; set; }
 
     public string? Alias { get; set; }
 

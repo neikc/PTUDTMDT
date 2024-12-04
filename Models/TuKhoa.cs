@@ -9,5 +9,5 @@ public partial class TuKhoa
 
     public string? TenTuKhoa { get; set; }
 
-    public virtual ICollection<ChiTietTuKhoa> ChiTietTuKhoas { get; set; } = new List<ChiTietTuKhoa>();
+    public virtual ICollection<SanPham> MaSanPhams { get; set; } = new List<SanPham>();
 }

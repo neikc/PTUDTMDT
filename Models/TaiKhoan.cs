@@ -15,7 +15,7 @@ public partial class TaiKhoan
 
     public string? Email { get; set; }
 
-    public string? MaVaiTro { get; set; }
+    public string? VaiTro { get; set; }
 
     public DateTime? NgayTaoTk { get; set; }
 
@@ -30,6 +30,4 @@ public partial class TaiKhoan
     public virtual ICollection<DonHang> DonHangs { get; set; } = new List<DonHang>();
 
     public virtual KhachHang? MaKhachHangNavigation { get; set; }
-
-    public virtual VaiTro? MaVaiTroNavigation { get; set; }
 }

@@ -13,9 +13,9 @@ public partial class SanPham
 
     public double? GiaSanPham { get; set; }
 
-    public string? Thumb { get; set; }
-
     public double? GiamGia { get; set; }
+
+    public double? GiaSauGiam { get; set; }
 
     public string? ShortDesc { get; set; }
 
@@ -29,7 +29,9 @@ public partial class SanPham
 
     public string? MoTa { get; set; }
 
-    public byte[]? Hinh { get; set; }
+    public string? Hinh1 { get; set; }
+
+    public string? Hinh2 { get; set; }
 
     public DateTime? NgaySanXuat { get; set; }
 
@@ -39,9 +41,9 @@ public partial class SanPham
 
     public virtual ICollection<ChiTietDonHang> ChiTietDonHangs { get; set; } = new List<ChiTietDonHang>();
 
-    public virtual ICollection<ChiTietTuKhoa> ChiTietTuKhoas { get; set; } = new List<ChiTietTuKhoa>();
-
     public virtual ICollection<DanhGiaSanPham> DanhGiaSanPhams { get; set; } = new List<DanhGiaSanPham>();
 
     public virtual LoaiSanPham? MaLoaiNavigation { get; set; }
+
+    public virtual ICollection<TuKhoa> MaTuKhoas { get; set; } = new List<TuKhoa>();
 }

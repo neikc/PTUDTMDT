@@ -19,7 +19,7 @@ public partial class KhachHang
 
     public DateOnly? NgaySinh { get; set; }
 
-    public byte[]? Hinh { get; set; }
+    public string? Hinh { get; set; }
 
     public bool? HieuLuc { get; set; }
 
