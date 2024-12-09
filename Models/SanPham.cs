@@ -46,4 +46,24 @@ public partial class SanPham
     public virtual LoaiSanPham? MaLoaiNavigation { get; set; }
 
     public virtual ICollection<TuKhoa> MaTuKhoas { get; set; } = new List<TuKhoa>();
+
+    public string LayDiaChiHinh(int soHinh)
+    {
+        // Chọn hình dựa trên số hình
+        string? tenSanPham = soHinh == 1 ? Hinh1 : Hinh2;
+
+        if (string.IsNullOrEmpty(tenSanPham) || string.IsNullOrEmpty(MaLoai))
+        {
+            return "~/img/Product/default.png"; // Trả về hình mặc định nếu thiếu thông tin
+        }
+
+        // Trả về đường dẫn hình ảnh mà không chỉnh sửa tên file
+        return $"~/img/Product/{MaLoai}/{tenSanPham}";
+    }
+
+    public string FormatPrice(double? price)
+    {
+        return string.Format("{0:N0}đ", price).Replace(",", ".");
+    }
+
 }
