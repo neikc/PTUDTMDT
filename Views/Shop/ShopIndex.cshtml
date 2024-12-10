@@ -19,6 +19,11 @@
                             <button type="submit" id="search-icon-1" class="input-group-text p-3">
                                 <i class="fa fa-search"></i>
                             </button>
+                            <!--Giữ lại các filter cần thiết-->
+                            <input type="hidden" name="priceRangeMin" value="@Model.Filter.PriceRangeMin" />
+                            <input type="hidden" name="priceRangeMax" value="@Model.Filter.PriceRangeMax" />
+                            <input type="hidden" name="category" value="@Model.Filter.Category" />
+                            <input type="hidden" name="sorting" value="@Model.Filter.Sorting" />
                         </form>
 
                     </div>
@@ -26,17 +31,26 @@
                     <!--Khoảng trống giữa các cột, chiếm 6 cột-->
                     <div class="col-6"></div>
                     <div class="col-xl-3">
-                        <!--Hộp chọn kiểu sắp xếp label và select droptown -->
+                        <!--CÁC TÙY CHỌN SẮP XẾP THEO YÊU CẦU CỦA THẦY-->
                         <div class="bg-light ps-3 py-3 rounded d-flex justify-content-between mb-4">
-                            <label for="fruits">Default Sorting:</label>
-                            <select id="fruits" name="fruitlist" class="border-0 form-select-sm bg-light me-3" form="fruitform">
-                                <!--Các tùy chọn sắp xếp-->
-                                <option value="volvo">Trang trông</option>
-                                <option value="saab">Phổ biến</option>
-                                <option value="opel">Hữu cơ</option>
-                                <option value="audi">Tuyệt vời</option>
-                            </select>
+                            <form method="get" action="/Shop/ShopIndex">
+                                <label for="sorting">Sắp xếp:</label>
+                                <select id="sorting" name="sorting" class="border-0 form-select-sm bg-light me-3" onchange="this.form.submit()">
+                                    <option value="">Mặc định</option>
+                                    <option value="name_asc">Tên A → Z</option>
+                                    <option value="name_desc">Tên Z → A</option>
+                                    <option value="price_asc">Giá tăng dần</option>
+                                    <option value="price_desc">Giá giảm dần</option>
+                                </select>
+                                <!-- Giữ lại các giá trị lọc đã chọn (nếu có) -->
+                                <input type="hidden" name="searchTerm" value="@Model.Filter.SearchTerm" />
+                                <input type="hidden" name="priceRangeMin" value="@Model.Filter.PriceRangeMin" />
+                                <input type="hidden" name="priceRangeMax" value="@Model.Filter.PriceRangeMax" />
+                                <input type="hidden" name="category" value="@Model.Filter.Category" />
+                            </form>
                         </div>
+
+
                     </div>
                 </div>
                 <div class="row g-4">
@@ -47,23 +61,38 @@
                             <div class="col-lg-12">
                                 <div class="mb-3">
                                     <h4>Danh mục</h4>
+                                    <!--Toàn bộ sản phẩm-->
                                     <ul class="list-unstyled fruite-categorie">
-                                        @foreach (var loai in Model.Categories)  // khai báo rõ type
+                                        <li>
+                                            <div class="d-flex justify-content-between fruite-name">
+                                                <a asp-action="ShopIndex">
+                                                    <i class="fas fa-apple-alt me-2"></i>Tất cả sản phẩm
+                                                </a>
+                                            </div>
+                                        </li>
+                                        <!--Các danh mục sản phẩm-->
+                                        @foreach (LoaiSanPham loai in Model.Categories)
                                         {
                                             <li>
                                                 <div class="d-flex justify-content-between fruite-name">
-                                                    <a href="#"><i class="fas fa-apple-alt me-2"></i>@loai.TenLoai</a>
+                                                    <a asp-action="ShopIndex"
+                                                       asp-route-Category="@loai.MaLoai"
+                                                       asp-route-priceRangeMin="@Model.Filter.PriceRangeMin"
+                                                       asp-route-priceRangeMax="@Model.Filter.PriceRangeMax">
+                                                        <i class="fas fa-apple-alt me-2"></i>@loai.TenLoai
+                                                    </a>
                                                     <span>(@loai.SanPhams.Count)</span>
                                                 </div>
                                             </li>
                                         }
                                     </ul>
+
                                 </div>
                                 <!--KẾT THÚC PHẦN DANH SÁCH DANH MỤC SẢN PHẨM-->
                             </div>
 
                             <!--PHẦN BỘ LỌC GIÁ CỦA SẢN PHẨM-->
-                            <form asp-action="ShopIndex" method="get">
+                            <form asp-action="ShopIndex" method="get" class="d-flex flex-column">
                                 <h4 class="mb-2">Gía sản phẩm</h4>
 
                                 <h6>Giá từ:</h6>
@@ -79,7 +108,9 @@
                                 <output id="amountMax" name="amountMax" for="rangeInputMax">0</output>
 
                                 <button type="submit" class="btn btn-primary">Lọc sản phẩm</button>
-
+                                <input type="hidden" name="searchTerm" value="@Model.Filter.SearchTerm" />
+                                <input type="hidden" name="category" value="@Model.Filter.Category" />
+                                <input type="hidden" name="sorting" value="@Model.Filter.Sorting" />
                                 <!--Script format định dạng tiền cho thanh trượt-->
                                 <script>
                                     function formatCurrency(value) {
@@ -109,117 +140,57 @@
                             </form>
                             <!--KẾT THÚC PHẦN BỘ LỌC GIÁ CỦA SẢN PHẨM-->
 
-                            <!--PHẦN LỌC THEO CÁC NHÃN THẦY YÊU CẦU-->
                             <div class="col-lg-12">
-                                <div class="mb-3">
-                                    <!--Tiêu đề trang bổ sung-->
-                                    <h4>Bổ sung</h4>
-                                    <div class="mb-2">
-                                        <!--Tùy chọn radio cho các nhãn với loại sản phẩm bổ sung khác nhau-->
-                                        <input type="radio" class="me-2" id="Categories-1" name="Categories-1" value="Beverages">
-                                        <label for="Categories-1"> Hữu cơ</label>
-                                    </div>
-                                    <div class="mb-2">
-                                        <input type="radio" class="me-2" id="Categories-2" name="Categories-1" value="Beverages">
-                                        <label for="Categories-2"> Tươi mát</label>
-                                    </div>
-                                    <div class="mb-2">
-                                        <input type="radio" class="me-2" id="Categories-3" name="Categories-1" value="Beverages">
-                                        <label for="Categories-3"> Giảm giá</label>
-                                    </div>
-                                    <div class="mb-2">
-                                        <input type="radio" class="me-2" id="Categories-4" name="Categories-1" value="Beverages">
-                                        <label for="Categories-4"> Khuyến mãi</label>
-                                    </div>
-                                    <div class="mb-2">
-                                        <input type="radio" class="me-2" id="Categories-5" name="Categories-1" value="Beverages">
-                                        <label for="Categories-5"> Hết hạn</label>
-                                    </div>
-                                </div>
-                            </div>
-                            <!--PHẦN LỌC THEO CÁC NHÃN THẦY YÊU CẦU-->
-
-                            <!--PHẦN SẢN PHẨM NỔI BẬT-->
-                            <div class="col-lg-12">
-                                <!--Sản phẩm nổi bật-->
+                                <!-- Sản phẩm nổi bật / Sản phẩm BestSeller -->
                                 <h4 class="mb-3">Sản phẩm nổi bật</h4>
-                                <!--Hình ảnh sản phẩm 1-->
-                                <div class="d-flex align-items-center justify-content-start">
-                                    <div class="rounded me-4" style="width: 100px; height: 100px;">
-                                        <img src="~/img/featur-1.jpg" class="img-fluid rounded" alt="">
-                                    </div>
-                                    <div>
-                                        <!--Tên sản phẩm 1: Chuối khổng lồ-->'
-                                        <h6 class="mb-2">Chuối khổng lồ</h6>
-                                        <!--Đánh giá của sản phẩm 1 (4 sao)-->
-                                        <div class="d-flex mb-2">
-                                            <i class="fa fa-star text-secondary"></i>
-                                            <i class="fa fa-star text-secondary"></i>
-                                            <i class="fa fa-star text-secondary"></i>
-                                            <i class="fa fa-star text-secondary"></i>
-                                            <i class="fa fa-star"></i>
-                                        </div>
-                                        <!--Gía của sản phẩm 1: Bao gồm giá hiện tại và giá gốc-->
-                                        <div class="d-flex mb-2">
-                                            <h5 class="fw-bold me-2">2.99 $</h5>
-                                            <h5 class="text-danger text-decoration-line-through">4.11 $</h5>
-                                        </div>
-                                    </div>
-                                </div>
 
-                                
-                                <!--Hình ảnh sản phẩm 2: Dâu tây-->
-                                <div class="d-flex align-items-center justify-content-start">
-                                    <div class="rounded me-4" style="width: 100px; height: 100px;">
-                                        <img src="~/img/featur-2.jpg" class="img-fluid rounded" alt="">
-                                    </div>
-                                    <div>
-                                        <!--Tên sản phẩm 2-->
-                                        <h6 class="mb-2">Chuối khổng lồ</h6>
-                                        <!--Đánh giá của sản phẩm 2-->
-                                        <div class="d-flex mb-2">
-                                            <i class="fa fa-star text-secondary"></i>
-                                            <i class="fa fa-star text-secondary"></i>
-                                            <i class="fa fa-star text-secondary"></i>
-                                            <i class="fa fa-star text-secondary"></i>
-                                            <i class="fa fa-star"></i>
+                                @if (Model.BestSellers != null && Model.BestSellers.Any())
+                                {
+                                    foreach (var product in Model.BestSellers)
+                                    {
+                                        <div class="d-flex align-items-center justify-content-start mb-3">
+                                            <!-- Hình ảnh sản phẩm -->
+                                            <div class="rounded me-4" style="width: 100px; height: 100px;">
+                                                <img src="@Url.Content(product.LayDiaChiHinh(1))" class="img-fluid rounded" style="max-height:100px; object-fit: contain" alt="@product.ShortDesc">
+                                            </div>
+
+                                            <div>
+                                                <!-- Tên sản phẩm -->
+                                                <h6 class="mb-2">@product.TenSanPham</h6>
+
+                                                <!-- Đánh giá sản phẩm -->
+                                                <div class="d-flex mb-2">
+                                                    @for (int i = 1; i <= 5; i++)
+                                                    {
+                                                        if (i <= Math.Floor(product.AverageRating))
+                                                        {
+                                                            <i class="fa fa-star text-secondary"></i> <!-- Sao đầy -->
+                                                        }
+                                                        else
+                                                        {
+                                                            <i class="fa fa-star"></i> <!-- Sao trống -->
+                                                        }
+                                                    }
+                                                </div>
+
+                                                <!-- Giá sản phẩm -->
+                                                <div class="d-flex mb-2">
+                                                    <h5 class="fw-bold me-2">@product.FormatPrice(product.GiaSauGiam)</h5>
+                                                    @if (product.GiaSanPham > product.GiaSauGiam)
+                                                    {
+                                                        <h5 class="text-danger text-decoration-line-through">@product.FormatPrice(product.GiaSanPham)</h5>
+                                                    }
+                                                </div>
+                                            </div>
                                         </div>
-                                        <!--Gía của sản phẩm 2: Bao gồm giá hiện tại và giá gốc-->
-                                        <div class="d-flex mb-2">
-                                            <h5 class="fw-bold me-2">2.99 $</h5>
-                                            <h5 class="text-danger text-decoration-line-through">4.11 $</h5>
-                                        </div>
-                                    </div>
-                                </div>
-                                <!--Hình ảnh sản phẩm 3: Bí ngô vui vẻ-->
-                                <div class="d-flex align-items-center justify-content-start">
-                                    <div class="rounded me-4" style="width: 100px; height: 100px;">
-                                        <img src="~/img/featur-3.jpg" class="img-fluid rounded" alt="">
-                                    </div>
-                                    <div>
-                                        <!--Tên sản phẩm 3-->
-                                        <h6 class="mb-2">Bí ngô vui vẻ</h6>
-                                        <!--Đánh giá sản phẩm 3-->
-                                        <div class="d-flex mb-2">
-                                            <i class="fa fa-star text-secondary"></i>
-                                            <i class="fa fa-star text-secondary"></i>
-                                            <i class="fa fa-star text-secondary"></i>
-                                            <i class="fa fa-star text-secondary"></i>
-                                            <i class="fa fa-star"></i>
-                                        </div>
-                                        <!--Gía sản phẩm 3: Bao gồm giá hiện tại và giá gốc-->
-                                        <div class="d-flex mb-2">
-                                            <h5 class="fw-bold me-2">2.99 $</h5>
-                                            <h5 class="text-danger text-decoration-line-through">4.11 $</h5>
-                                        </div>
-                                    </div>
-                                </div>
-                                <!--Hiển thị nút xem thêm -->
-                                <div class="d-flex justify-content-center my-4">
-                                    <a href="#" class="btn border border-secondary px-4 py-3 rounded-pill text-primary w-100">Xem thêm</a>
-                                </div>
+                                    }
+                                }
+                                else
+                                {
+                                    <p>Không có sản phẩm nổi bật nào.</p>
+                                }
                             </div>
-                            <!--KẾT THÚC PHẦN SẢN PHẨM NỔI BẬT-->
+
 
                             <!--PHẦN BANNER PHỤ-->
                             <div class="col-lg-12">
@@ -262,13 +233,14 @@
                                                 </p>
                                                 <div class="d-flex justify-content-between align-items-end flex-lg-wrap">
                                                     <!--FormatPrice chuyển từ số sang định dạng tiền tệ, hàm này viết thêm trong Model Sanpham-->
-                                                    <p class="text-dark fs-5 fw-bold mb-0">@product.FormatPrice(product.GiaSauGiam)</p>
-                                                    @if (product.GiamGia != 0)
+                                                    <!-- Giá sản phẩm -->
+                                                    <h5 class="fw-bold me-2">@product.FormatPrice(product.GiaSauGiam)</h5>
+                                                    @if (product.GiaSanPham > product.GiaSauGiam)
                                                     {
-                                                        <div>
-                                                            <p class="text-danger mb-0">Giảm giá: @product.GiamGia<span>%</span></p>
-                                                            <p class="text-danger text-decoration-line-through mb-0">@product.FormatPrice(product.GiaSanPham)</p>
-                                                        </div>
+                                                        <h5 class="text-danger">
+                                                            <span class="text-decoration-line-through">@product.FormatPrice(product.GiaSanPham)</span>
+                                                            (-@product.GiamGia%)
+                                                        </h5> 
                                                     }
                                                 </div>
                                                 <a href="#" class="btn border border-secondary rounded-pill px-3 text-primary" style="margin-top: 5px"><i class="fa fa-shopping-bag me-2 text-primary"></i>Thêm vào giỏ hàng</a>

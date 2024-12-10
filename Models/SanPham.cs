@@ -47,6 +47,18 @@ public partial class SanPham
 
     public virtual ICollection<TuKhoa> MaTuKhoas { get; set; } = new List<TuKhoa>();
 
+    public double AverageRating
+    {
+        get
+        {
+            if (DanhGiaSanPhams != null && DanhGiaSanPhams.Any())
+            {
+                return DanhGiaSanPhams.Average(dg => dg.SaoDanhGia ?? 0); // Tính trung bình sao đánh giá
+            }
+            return 0; // Nếu không có đánh giá nào, trả về 0
+        }
+    }
+
     public string LayDiaChiHinh(int soHinh)
     {
         // Chọn hình dựa trên số hình

@@ -6,9 +6,22 @@ using X.PagedList;
 using X.PagedList.Mvc.Core;
 using X.PagedList.Extensions;
 using static Microsoft.EntityFrameworkCore.DbLoggerCategory;
+using System.Linq;
 
 namespace PTUDTMDT.Controllers
 {
+    //Tổng hợp toàn bộ Filter, phân trang vào 1 class cho dễ quản lý
+    public class ShopFilterModel
+    {
+        public string? SearchTerm { get; set; }
+        public int? PriceRangeMin { get; set; } = 1000;
+        public int? PriceRangeMax { get; set; } = 1000000000;
+        public string? Category { get; set; }
+        public string? Sorting { get; set; }
+        public int Page { get; set; } = 1;
+        public int PageSize { get; set; } = 12;
+    }
+
     public class ShopController : Controller
     {
         private readonly PtudtmdtContext _context;
@@ -18,70 +31,126 @@ namespace PTUDTMDT.Controllers
             _context = context;
         }
 
-        public IActionResult ShopIndex(int? page, string? searchTerm, int? priceRangeMin, int? priceRangeMax)
+        public IActionResult ShopIndex(ShopFilterModel filter)
         {
-            // Số mục hiển thị trên mỗi trang
-            int pageSize = 12;
-            // Trang hiện tại (mặc định là trang 1 nếu không được truyền vào)
-            int pageNumber = page ?? 1;
+            //Khởi tạo filter mới nếu filter truyền vào là null
+            filter ??= new ShopFilterModel();
+            
+            //Chuẩn hóa bộ lọc giá (các trường hợp có thể người dùng kéo sai)
+            ValidatePriceRange(filter);
 
-            // Lấy danh sách sản phẩm từ database cho mục thể hiện danh sách sản phẩm
-            IPagedList<SanPham> products;
-            IEnumerable<SanPham> products_tmp;
+            //Khởi tạo danh sách sản phẩm ban đầu dựa trên thanh tìm kiếm
+            var query = BuildBaseQuery(filter);
 
-            //Nếu không có từ khóa tìm kiếm thì lấy tất cả sản phẩm
-           
-            if (searchTerm == null)
-            {
-                products_tmp = _context.SanPhams
-                                   .Include(s => s.MaLoaiNavigation)
-                                   .OrderBy(p => p.MaSanPham)
-                                   .ToList();
-            }
-            //Nếu có từ khóa tìm kiếm thì lọc sản phẩm theo từ khóa
-            else
-            {
-                products_tmp = _context.SanPhams
-                   .Include(s => s.MaTuKhoas)
-                   .Where(p => p.MaTuKhoas.Any(k => k.TenTuKhoa.ToLower().Contains(searchTerm.ToLower())) ||  // Từ nhập vào có trùng với keyword nào của sản phẩm không
-                               p.TenSanPham.ToLower().Contains(searchTerm.ToLower()) ||  // Từ nhập vào có trong tên sản phẩm không?
-                               p.MoTa.ToLower().Contains(searchTerm.ToLower())) // Từ nhập vào có trong description của sản phẩm không
-                   .OrderBy(p => p.MaSanPham)
-                   .ToList();
-            }
+            //Áp dụng các bộ lọc
+            query = ApplyFilters(query, filter);
 
-            //Nếu có filter giá sàn thì lọc sản phẩm theo giá
-            if (priceRangeMin == null) priceRangeMin = 1000;
-            if (priceRangeMax == null) priceRangeMax = 1000000000;
-            if (priceRangeMin > priceRangeMax) priceRangeMin = priceRangeMax;
-            if (priceRangeMax== 1000) priceRangeMax = 1000000000;
-            if (priceRangeMax.HasValue && priceRangeMin.HasValue)
-            {
-                products_tmp = products_tmp.Where(p => p.GiaSauGiam >= priceRangeMin && p.GiaSauGiam <= priceRangeMax).ToList();
-            }
+            //Áp dụng sắp xếp
+            query = ApplySorting(query, filter.Sorting);
 
-            //Phân trang sản phẩm
-            products = products_tmp.ToPagedList(pageNumber, pageSize);
+            //Phân trang
+            var products = query.ToList().ToPagedList(filter.Page, filter.PageSize);
 
-
-            //Tạo danh sách sản phẩm bán chạy nhất
-            IEnumerable<SanPham> BestSellers;
-            BestSellers = _context.SanPhams
-                .Where(p => p.BestSellers == true)
-                .OrderBy(p => p.MaSanPham)
-                .ToList();
-
-            // Tạo ViewModel
+            //Tạo view model để truyền về view ShopIndex
             var viewModel = new ShopViewModel
             {
-                Categories = _context.LoaiSanPhams
-                                     .Include(l => l.SanPhams)
-                                     .ToList(),
-                Products = products, // Đưa danh sách sản phẩm đã phân trang vào ViewModel
-                BestSellers = BestSellers // Đưa danh sách sản phẩm bán chạy vào ViewModel
+                Products = products,
+                BestSellers = GetBestSellers(3),
+                Categories = GetCategories(),
+                Filter = filter
             };
 
             return View(viewModel);
+        }
+
+        public IActionResult ShopDetail(ShopFilterModel filter)
+        {
+            return View();
+        }
+        private IQueryable<SanPham> BuildBaseQuery(ShopFilterModel filter)
+        {
+            if (string.IsNullOrEmpty(filter.SearchTerm))
+            {
+                return _context.SanPhams
+                              .Include(s => s.MaLoaiNavigation)
+                              .OrderBy(p => p.MaSanPham);
+            }
+
+            return _context.SanPhams
+                .Include(s => s.MaTuKhoas)
+                .Where(p => p.MaTuKhoas.Any(k => k.TenTuKhoa.ToLower().Contains(filter.SearchTerm.ToLower())) ||
+                           p.TenSanPham.ToLower().Contains(filter.SearchTerm.ToLower()) ||
+                           p.MoTa.ToLower().Contains(filter.SearchTerm.ToLower()))
+                .OrderBy(p => p.MaSanPham);
+        }
+
+        private IQueryable<SanPham> ApplyFilters(IQueryable<SanPham> query, ShopFilterModel filter)
+        {
+            //Filter theo giá
+            if (filter.PriceRangeMin.HasValue && filter.PriceRangeMax.HasValue)
+            {
+                query = query.Where(p => p.GiaSauGiam >= filter.PriceRangeMin &&
+                                       p.GiaSauGiam <= filter.PriceRangeMax);
+            }
+
+            //Filter theo loại sản phẩm
+            if (filter.Category != null)
+            {
+                query = query.Where(p => p.MaLoai == filter.Category);
+            }
+
+            return query;
+        }
+
+        private void ValidatePriceRange(ShopFilterModel filter)
+        {
+            //Xử lý các trường hợp người dùng kéo sai thanh giá
+            if (filter.PriceRangeMin > filter.PriceRangeMax)
+            {
+                filter.PriceRangeMin = filter.PriceRangeMax;
+            }
+            if (filter.PriceRangeMax == 1000)
+            {
+                filter.PriceRangeMax = 1000000000;
+            }
+        }
+
+        private IEnumerable<SanPham> GetBestSellers(int count)
+        {
+            return _context.SanPhams
+                .Where(p => p.BestSellers.HasValue && p.BestSellers.Value)
+                .OrderBy(x => Guid.NewGuid())
+                .Take(count)
+                .ToList();
+        }
+
+        private IEnumerable<LoaiSanPham> GetCategories()
+        {
+            return _context.LoaiSanPhams
+                .Include(l => l.SanPhams)
+                .ToList();
+        }
+
+        private IQueryable<SanPham> ApplySorting(IQueryable<SanPham> query, string? sorting)
+        {
+            switch (sorting)
+            {
+                case "name_asc":
+                    query = query.OrderBy(p => p.TenSanPham);
+                    break;
+                case "name_desc":
+                    query = query.OrderByDescending(p => p.TenSanPham);
+                    break;
+                case "price_asc":
+                    query = query.OrderBy(p => p.GiaSauGiam);
+                    break;
+                case "price_desc":
+                    query = query.OrderByDescending(p => p.GiaSauGiam);
+                    break;
+                default:
+                    break; // Mặc định không thay đổi thứ tự
+            }
+            return query;
         }
 
     }
