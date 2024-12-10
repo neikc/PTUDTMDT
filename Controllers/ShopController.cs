@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using PTUDTMDT.Models;
-using PTUDTMDT.ViewModels;
+using PTUDTMDT.ViewModels.ShopViewModel;
 using X.PagedList;
 using X.PagedList.Mvc.Core;
 using X.PagedList.Extensions;
@@ -52,7 +52,7 @@ namespace PTUDTMDT.Controllers
             var products = query.ToList().ToPagedList(filter.Page, filter.PageSize);
 
             //Tạo view model để truyền về view ShopIndex
-            var viewModel = new ShopViewModel
+            var viewModel = new ShopIndexViewModel
             {
                 Products = products,
                 BestSellers = GetBestSellers(3),
@@ -63,10 +63,37 @@ namespace PTUDTMDT.Controllers
             return View(viewModel);
         }
 
-        public IActionResult ShopDetail(ShopFilterModel filter)
+        public IActionResult ShopDetail(string MaSanPham)
         {
-            return View();
+            var product = _context.SanPhams
+                .Include(p => p.MaLoaiNavigation) // Bao gồm thông tin về loại sản phẩm nếu cần
+                .FirstOrDefault(p => p.MaSanPham == MaSanPham);
+
+            // Kiểm tra xem sản phẩm có tồn tại không
+            if (product == null)
+            {
+                return NotFound(); // Hoặc có thể điều hướng tới trang khác
+            }
+
+            var viewModel = new ShopDetailViewModel
+            {
+                Product = product,
+                BestSellers = GetBestSellers(5),
+                Categories = GetCategories(),
+                RelatedProducts = GetRelatedProducts(product)
+            };
+
+            return View(viewModel);
         }
+
+        private IEnumerable<SanPham> GetRelatedProducts(SanPham product)
+        {
+            return _context.SanPhams
+                .Where(p => p.MaLoai == product.MaLoai) // Lọc sản phẩm cùng loại
+                .ToList();
+        }
+
+
         private IQueryable<SanPham> BuildBaseQuery(ShopFilterModel filter)
         {
             if (string.IsNullOrEmpty(filter.SearchTerm))

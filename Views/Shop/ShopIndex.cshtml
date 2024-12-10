@@ -1,7 +1,7 @@
 ﻿@{
     ViewData["Title"] = "Cửa hàng";
 }
-@model PTUDTMDT.ViewModels.ShopViewModel
+@model PTUDTMDT.ViewModels.ShopViewModel.ShopIndexViewModel
 
 <div class="container-fluid fruite py-5">
     <div class="container py-5">
@@ -53,160 +53,13 @@
 
                     </div>
                 </div>
+                
                 <div class="row g-4">
-                    <div class="col-lg-3">
-                        <div class="row g-4">
-
-                            <!--PHẦN DANH SÁCH DANH MỤC SẢN PHẨM-->
-                            <div class="col-lg-12">
-                                <div class="mb-3">
-                                    <h4>Danh mục</h4>
-                                    <!--Toàn bộ sản phẩm-->
-                                    <ul class="list-unstyled fruite-categorie">
-                                        <li>
-                                            <div class="d-flex justify-content-between fruite-name">
-                                                <a asp-action="ShopIndex">
-                                                    <i class="fas fa-apple-alt me-2"></i>Tất cả sản phẩm
-                                                </a>
-                                            </div>
-                                        </li>
-                                        <!--Các danh mục sản phẩm-->
-                                        @foreach (LoaiSanPham loai in Model.Categories)
-                                        {
-                                            <li>
-                                                <div class="d-flex justify-content-between fruite-name">
-                                                    <a asp-action="ShopIndex"
-                                                       asp-route-Category="@loai.MaLoai"
-                                                       asp-route-priceRangeMin="@Model.Filter.PriceRangeMin"
-                                                       asp-route-priceRangeMax="@Model.Filter.PriceRangeMax">
-                                                        <i class="fas fa-apple-alt me-2"></i>@loai.TenLoai
-                                                    </a>
-                                                    <span>(@loai.SanPhams.Count)</span>
-                                                </div>
-                                            </li>
-                                        }
-                                    </ul>
-
-                                </div>
-                                <!--KẾT THÚC PHẦN DANH SÁCH DANH MỤC SẢN PHẨM-->
-                            </div>
-
-                            <!--PHẦN BỘ LỌC GIÁ CỦA SẢN PHẨM-->
-                            <form asp-action="ShopIndex" method="get" class="d-flex flex-column">
-                                <h4 class="mb-2">Gía sản phẩm</h4>
-
-                                <h6>Giá từ:</h6>
-
-                                <input type="range" class="form-range w-100" id="rangeInputMin" name="priceRangeMin" min="1000" max="1000000" value="0" step="500" oninput="updatePriceRange('Min')">
-
-                                <output id="amountMin" name="amountMin" for="rangeInputMin">0</output>
-
-                                <h6>Giá đến:</h6>
-
-                                <input type="range" class="form-range w-100" id="rangeInputMax" name="priceRangeMax" min="1000" max="1000000" value="0" step="500" oninput="updatePriceRange('Max')">
-
-                                <output id="amountMax" name="amountMax" for="rangeInputMax">0</output>
-
-                                <button type="submit" class="btn btn-primary">Lọc sản phẩm</button>
-                                <input type="hidden" name="searchTerm" value="@Model.Filter.SearchTerm" />
-                                <input type="hidden" name="category" value="@Model.Filter.Category" />
-                                <input type="hidden" name="sorting" value="@Model.Filter.Sorting" />
-                                <!--Script format định dạng tiền cho thanh trượt-->
-                                <script>
-                                    function formatCurrency(value) {
-                                        return value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, '.');
-                                    }
-
-                                    function updatePriceRange(type) {
-                                        var minRange = document.getElementById('rangeInputMin');
-                                        var maxRange = document.getElementById('rangeInputMax');
-
-                                        var minValue = minRange.value;
-                                        var maxValue = maxRange.value;
-
-                                        if (type === 'Min') {
-                                            document.getElementById('amountMin').textContent = formatCurrency(minValue);
-                                        } else {
-                                            document.getElementById('amountMax').textContent = formatCurrency(maxValue);
-                                        }
-                                    }
-
-                                    document.addEventListener('DOMContentLoaded', function () {
-                                        updatePriceRange('Min');
-                                        updatePriceRange('Max');
-                                    });
-                                </script>
-
-                            </form>
-                            <!--KẾT THÚC PHẦN BỘ LỌC GIÁ CỦA SẢN PHẨM-->
-
-                            <div class="col-lg-12">
-                                <!-- Sản phẩm nổi bật / Sản phẩm BestSeller -->
-                                <h4 class="mb-3">Sản phẩm nổi bật</h4>
-
-                                @if (Model.BestSellers != null && Model.BestSellers.Any())
-                                {
-                                    foreach (var product in Model.BestSellers)
-                                    {
-                                        <div class="d-flex align-items-center justify-content-start mb-3">
-                                            <!-- Hình ảnh sản phẩm -->
-                                            <div class="rounded me-4" style="width: 100px; height: 100px;">
-                                                <img src="@Url.Content(product.LayDiaChiHinh(1))" class="img-fluid rounded" style="max-height:100px; object-fit: contain" alt="@product.ShortDesc">
-                                            </div>
-
-                                            <div>
-                                                <!-- Tên sản phẩm -->
-                                                <h6 class="mb-2">@product.TenSanPham</h6>
-
-                                                <!-- Đánh giá sản phẩm -->
-                                                <div class="d-flex mb-2">
-                                                    @for (int i = 1; i <= 5; i++)
-                                                    {
-                                                        if (i <= Math.Floor(product.AverageRating))
-                                                        {
-                                                            <i class="fa fa-star text-secondary"></i> <!-- Sao đầy -->
-                                                        }
-                                                        else
-                                                        {
-                                                            <i class="fa fa-star"></i> <!-- Sao trống -->
-                                                        }
-                                                    }
-                                                </div>
-
-                                                <!-- Giá sản phẩm -->
-                                                <div class="d-flex mb-2">
-                                                    <h5 class="fw-bold me-2">@product.FormatPrice(product.GiaSauGiam)</h5>
-                                                    @if (product.GiaSanPham > product.GiaSauGiam)
-                                                    {
-                                                        <h5 class="text-danger text-decoration-line-through">@product.FormatPrice(product.GiaSanPham)</h5>
-                                                    }
-                                                </div>
-                                            </div>
-                                        </div>
-                                    }
-                                }
-                                else
-                                {
-                                    <p>Không có sản phẩm nổi bật nào.</p>
-                                }
-                            </div>
-
-
-                            <!--PHẦN BANNER PHỤ-->
-                            <div class="col-lg-12">
-                                <div class="position-relative">
-                                    <img src="~/img/banner-fruits.jpg" class="img-fluid w-100 rounded" alt="">
-                                    <div class="position-absolute" style="top: 50%; right: 10px; transform: translateY(-50%);">
-                                        <h3 class="text-secondary fw-bold">Fresh <br> Fruits <br> Banner</h3>
-                                    </div>
-                                </div>
-                            </div>
-                            <!--KẾT THÚC PHẦN BANNER PHỤ-->
-
-                        </div>
-                    </div>
-
-                    <!--PHẦN DANH MỤC CÁC SẢN PHẨM CỦA CỬA HÀNG-->
+                    <!--THANH SIDEBAR-->
+                    @await Html.PartialAsync("Components/Sidebar")
+                    <!--KẾT THÚC THANH SIDEBAR-->
+                    
+                    <!--PHẦN HIỂN THỊ SẢN PHẨM CHÍNH-->
                     <div class="col-lg-9">
                         <div class="row g-4 justify-content-center">
                             @if (!Model.Products.Any())
@@ -222,6 +75,7 @@
                                         <!--Dùng Flex để đẩy hình lên trên, phần mô tả xuống dưới để ô sản phẩm nhìn đẹp hơn-->
                                         <div class="rounded position-relative fruite-item border border-secondary d-flex flex-column justify-content-between">
                                             <div class="fruite-img">
+                                                <a href="@Url.Action("ShopDetail", "Shop", new { MaSanPham = product.MaSanPham })">
                                                 <img src="@Url.Content(product.LayDiaChiHinh(1))" class="img-fluid w-100 rounded-top" style="max-height:305px; object-fit: contain" alt="@product.ShortDesc">
                                             </div>
                                             <div class="text-white bg-secondary px-3 py-1 rounded position-absolute" style="top: 10px; left: 10px;">@product.MaLoaiNavigation.TenLoai</div>
@@ -303,9 +157,9 @@
                         <!--KẾT THÚC PHẦN PHÂN TRANG CỦA DANH MỤC SẢN PHẨM-->
                     
                     </div>
-                    <!--KẾT THÚC PHẦN DANH MỤC CÁC SẢN PHẨM CỦA CỬA HÀNG-->
-                
+                    <!--KẾT THÚC PHẦN HIỂN THỊ SẢN PHẨM CHÍNH-->
                 </div>
+
             </div>
         </div>
     </div>

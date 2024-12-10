@@ -3,9 +3,9 @@ using PTUDTMDT.Models;
 using X.PagedList;
 using X.PagedList.Mvc.Core;
 
-namespace PTUDTMDT.ViewModels
+namespace PTUDTMDT.ViewModels.ShopViewModel
 {
-    public class ShopViewModel
+    public class ShopIndexViewModel
     {
         public IPagedList<SanPham> Products { get; set; }
         public IEnumerable<SanPham> BestSellers { get; set; }
