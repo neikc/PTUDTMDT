@@ -27,19 +27,17 @@
                         <!-- Danh mục sản phẩm -->
                         <p class="mb-3">Danh mục: @Model.Product.MaLoaiNavigation.TenLoai</p>
                         <!-- Giá sản phẩm -->
-                        <h5 class="fw-bold mb-3">@Model.Product.FormatPrice(Model.Product.GiaSauGiam)</h5>
+                        <h5 class="fw-bold mb-3 text-danger">Giảm @Model.Product.GiamGia%!</h5>
+                        <h5 class="fw-bold mb-3"><span class="text-danger">@Model.Product.FormatPrice(Model.Product.GiaSauGiam)</span>     <span class="text-decoration-line-through">@Model.Product.FormatPrice(Model.Product.GiaSanPham)</span></h5>
                         <!-- Đánh giá sản phẩm -->
                         <div class="d-flex mb-2">
-                            @for (int i = 1; i <= 5; i++)
+                            @for (int i = 1; i <= Model.Product.AverageRating; i++)
                             {
-                                if (i <= Math.Floor(Model.Product.AverageRating))
-                                {
-                                    <i class="fa fa-star text-secondary"></i> <!-- Sao đầy -->
-                                }
-                                else
-                                {
-                                    <i class="fa fa-star"></i> <!-- Sao trống -->
-                                }
+                                <i class="fa fa-star text-secondary"></i> <!-- Sao đầy -->
+                            }
+                            @for (int i = Model.Product.AverageRating + 1; i <= 5; i++)
+                            {
+                                <i class="fa fa-star"></i> <!-- Sao trống -->
                             }
                         </div>
                         <!-- Mô tả ngắn về sản phẩm -->
@@ -85,106 +83,52 @@
                         <div class="tab-content mb-5">
                             <!-- Nội dung tab mô tả -->
                             <div class="tab-pane active" id="nav-about" role="tabpanel" aria-labelledby="nav-about-tab">
-                                <p>Rất giàu vitamin (C, K, A), khoáng chất (canxi, sắt), chất xơ và chất chống oxy hóa. </p>
-                                <p>Giúp tăng cường hệ miễn dịch, hỗ trợ tiêu hóa, tốt cho tim mạch, xương khớp, phòng chống ung thư và làm chậm quá trình lão hóa.</p>
-                                <div class="px-2">
-                                    <div class="row g-4">
-                                        <div class="col-6">
-                                            <!-- Thông tin chi tiết về sản phẩm -->
-                                            <div class="row bg-light align-items-center text-center justify-content-center py-2">
-                                                <div class="col-6">
-                                                    <p class="mb-0">Trọng lượng</p>
-                                                </div>
-                                                <div class="col-6">
-                                                    <p class="mb-0">1 kg</p>
-                                                </div>
-                                            </div>
-                                            <div class="row text-center align-items-center justify-content-center py-2">
-                                                <div class="col-6">
-                                                    <p class="mb-0">Xuất xứ</p>
-                                                </div>
-                                                <div class="col-6">
-                                                    <p class="mb-0">Nông trại Agro</p>
-                                                </div>
-                                            </div>
-                                            <div class="row bg-light text-center align-items-center justify-content-center py-2">
-                                                <div class="col-6">
-                                                    <p class="mb-0">Chất lượng</p>
-                                                </div>
-                                                <div class="col-6">
-                                                    <p class="mb-0">Hữu cơ</p>
-                                                </div>
-                                            </div>
-                                            <div class="row text-center align-items-center justify-content-center py-2">
-                                                <div class="col-6">
-                                                    <p class="mb-0">Kiểm tra</p>
-                                                </div>
-                                                <div class="col-6">
-                                                    <p class="mb-0">An toàn</p>
-                                                </div>
-                                            </div>
-                                            <div class="row bg-light text-center align-items-center justify-content-center py-2">
-                                                <div class="col-6">
-                                                    <p class="mb-0">Trọng lượng tối thiểu</p>
-                                                </div>
-                                                <div class="col-6">
-                                                    <p class="mb-0">500g</p>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
+                                @Model.Product.MoTa
                             </div>
                             <!-- Nội dung tab đánh giá -->
                             <div class="tab-pane" id="nav-mission" role="tabpanel" aria-labelledby="nav-mission-tab">
-                                <div class="d-flex">
-                                    <!-- Hình ảnh người đánh giá -->
-                                    <img src="~/img/avatar.jpg" class="img-fluid rounded-circle p-3" style="width: 100px; height: 100px;" alt="">
-                                    <div class="">
-                                        <p class="mb-2" style="font-size: 14px;">12 tháng 4, 2024</p>
-                                        <div class="d-flex justify-content-between">
-                                            <!-- Tên người đánh giá -->
-                                            <h5>Mai Phương</h5>
-                                            <!-- Đánh giá sao -->
-                                            <div class="d-flex mb-3">
-                                                <i class="fa fa-star text-secondary"></i>
-                                                <i class="fa fa-star text-secondary"></i>
-                                                <i class="fa fa-star text-secondary"></i>
-                                                <i class="fa fa-star text-secondary"></i>
-                                                <i class="fa fa-star"></i>
-                                            </div>
-                                        </div>
-                                        <!-- Nội dung đánh giá -->
-                                        <p> Sản phẩm tươi ngon, an toàn </p>
+                                @if (Model.Product.DanhGiaSanPhams == null || !Model.Product.DanhGiaSanPhams.Any())
+                                {
+                                    <div class="text-center">
+                                        <p>Không có đánh giá nào TvT</p>
                                     </div>
-                                </div>
-                                <div class="d-flex">
-                                    <!-- Hình ảnh đại diện của người dùng -->
-                                    <img src="~/img/avatar.jpg" class="img-fluid rounded-circle p-3" style="width: 100px; height: 100px;" alt="">
-                                    <div class="">
-                                        <!-- Ngày bình luận -->
-                                        <p class="mb-2" style="font-size: 14px;">12 tháng 4, 2024</p>
-                                        <div class="d-flex justify-content-between">
-                                            <!-- Tên người bình luận -->
-                                            <h5>Thị Ánh</h5>
-                                            <div class="d-flex mb-3">
-                                                <!-- Đánh giá sao -->
-                                                <i class="fa fa-star text-secondary"></i>
-                                                <i class="fa fa-star text-secondary"></i>
-                                                <i class="fa fa-star text-secondary"></i>
-                                                <i class="fa fa-star"></i>
-                                                <i class="fa fa-star"></i>
-                                            </div>
+                                }
+                                else
+                                {
+                                    foreach (var review in Model.Product.DanhGiaSanPhams)
+                                    {
+                                        <div class="d-flex">
+                                            @if (review.MaTaiKhoanNavigation?.MaKhachHangNavigation != null)
+                                            {
+                                                <img src="@Url.Content(@review.MaTaiKhoanNavigation.MaKhachHangNavigation.LayDiaChiHinh())"
+                                                     class="img-fluid rounded-circle p-3"
+                                                     style="width: 100px; height: 100px; object-fit: contain"
+                                                     alt="@review.LoiDanhGia">
+                                                <div class="">
+                                                    <p class="mb-2" style="font-size: 14px;">12/11/2024</p>
+                                                    <div class="d-flex justify-content-between">
+                                                        <h5>@review.MaTaiKhoanNavigation.MaKhachHangNavigation.HoTen</h5>
+                                                        <div class="d-flex mb-3">
+                                                            @for (int i = 1; i <= (review.SaoDanhGia ?? 0); i++)
+                                                            {
+                                                                <i class="fa fa-star text-secondary"></i>
+                                                            }
+                                                            @for (int i = (review.SaoDanhGia ?? 0) + 1; i <= 5; i++)
+                                                            {
+                                                                <i class="fa fa-star"></i>
+                                                            }
+                                                        </div>
+                                                    </div>
+                                                    <p>@review.LoiDanhGia</p>
+                                                </div>
+                                            }
                                         </div>
-                                        <!-- Nội dung bình luận -->
-                                        <p class="text-dark">Giao hàng nhanh, mặt hàng tươi ngon, an toàn vệ sinh sản phẩm</p>
-                                    </div>
-                                </div>
+                                    }
+                                }
                             </div>
                             <div class="tab-pane" id="nav-vision" role="tabpanel">
                                 <!-- Thông tin bổ sung về sản phẩm -->
-                                <p class="text-dark">Cung cấp nhiều chất dinh dưỡng cần thiết cho cơ thể.</p>
-                                <p class="mb-0">Có thể chế biến thành nhiều món ăn ngon miệng.</p>
+                                <p class="text-dark">@Model.Product.ShortDesc</p>
                             </div>
                         </div>
                     </div>
@@ -315,16 +259,13 @@
 
                                         <!-- Đánh giá sản phẩm -->
                                         <div class="d-flex mb-2">
-                                            @for (int i = 1; i <= 5; i++)
+                                            @for (int i = 1; i <= Model.Product.AverageRating; i++)
                                             {
-                                                if (i <= Math.Floor(product.AverageRating))
-                                                {
-                                                    <i class="fa fa-star text-secondary"></i> <!-- Sao đầy -->
-                                                }
-                                                else
-                                                {
-                                                    <i class="fa fa-star"></i> <!-- Sao trống -->
-                                                }
+                                                <i class="fa fa-star text-secondary"></i> <!-- Sao đầy -->
+                                            }
+                                            @for (int i = Model.Product.AverageRating + 1; i <= 5; i++)
+                                            {
+                                                <i class="fa fa-star"></i> <!-- Sao trống -->
                                             }
                                         </div>
 
@@ -401,5 +342,4 @@
         <!--KẾT THÚC PHẦN CÁC SẢN PHẨM LIÊN QUAN-->
     </div>
 </div>
-<!-- Kết thúc sản phẩm đơn -->
 

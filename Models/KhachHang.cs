@@ -30,4 +30,16 @@ public partial class KhachHang
     public virtual DiaChi? MaDiaChiNavigation { get; set; }
 
     public virtual ICollection<TaiKhoan> TaiKhoans { get; set; } = new List<TaiKhoan>();
+
+    public string LayDiaChiHinh()
+    {
+        // Chọn hình dựa trên số hình
+        if (string.IsNullOrEmpty(Hinh))
+        {
+            return "~/img/avatar.jpg"; // Trả về hình mặc định nếu thiếu thông tin
+        }
+
+        // Trả về đường dẫn hình ảnh mà không chỉnh sửa tên file
+        return $"~/img/Customer/{Hinh}";
+    }
 }

@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.EntityFrameworkCore;
 using PTUDTMDT.Models;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -8,6 +9,25 @@ builder.Services.AddControllersWithViews();
 builder.Services.AddDbContext<PtudtmdtContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 
+builder.Services.AddSession(options =>
+{
+    options.IdleTimeout = TimeSpan.FromMinutes(60);
+    options.Cookie.HttpOnly = true;
+    options.Cookie.IsEssential = true;
+});
+
+builder.Services.AddAuthentication(options =>
+{
+    options.DefaultAuthenticateScheme = CookieAuthenticationDefaults.AuthenticationScheme;
+    options.DefaultSignInScheme = CookieAuthenticationDefaults.AuthenticationScheme;
+    options.DefaultChallengeScheme = CookieAuthenticationDefaults.AuthenticationScheme;
+})
+.AddCookie(options =>
+{
+    options.LoginPath = "/Account/Login";
+    options.AccessDeniedPath = "/Account/AccessDenied";
+    options.ExpireTimeSpan = TimeSpan.FromMinutes(60);
+});
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -20,10 +40,10 @@ if (!app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 app.UseStaticFiles();
-
 app.UseRouting();
-
+app.UseAuthentication();
 app.UseAuthorization();
+app.UseSession();
 
 app.MapControllerRoute(
     name: "default",

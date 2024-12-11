@@ -1,0 +1,93 @@
+﻿@{
+    ViewData["Title"] = "Register";
+}
+@model PTUDTMDT.ViewModels.Account.RegisterViewModel
+
+<h1>Register</h1>
+
+<form asp-action="Register" method="post" enctype="multipart/form-data">
+
+    <!-- Tên tài khoản -->
+    <div>
+        <label for="TenTaiKhoan">Tên tài khoản:</label>
+        <input type="text" id="TenTaiKhoan" asp-for="TenTaiKhoan" required placeholder="Nhập tên tài khoản">
+        <span asp-validation-for="TenTaiKhoan"></span>
+    </div>
+
+    <!-- Mật khẩu -->
+    <div>
+        <label for="MatKhau">Mật khẩu:</label>
+        <input type="password" id="MatKhau" asp-for="MatKhau" required placeholder="Nhập mật khẩu">
+        <span asp-validation-for="MatKhau"></span>
+    </div>
+
+    <!-- Họ tên -->
+    <div>
+        <label for="HoTen">Họ tên:</label>
+        <input type="text" id="HoTen" asp-for="HoTen" required placeholder="Nhập họ tên">
+        <span asp-validation-for="HoTen"></span>
+    </div>
+
+    <!-- Giới tính -->
+    <div>
+        <label>Giới tính:</label>
+        <div>
+            <label for="GioiTinhNam">
+                <input type="radio" id="GioiTinhNam" asp-for="GioiTinh" value="true"> Nam
+            </label>
+            <label for="GioiTinhNu">
+                <input type="radio" id="GioiTinhNu" asp-for="GioiTinh" value="false"> Nữ
+            </label>
+        </div>
+        <span asp-validation-for="GioiTinh"></span>
+    </div>
+
+
+    <!-- Số điện thoại -->
+    <div>
+        <label for="SoDienThoai">Số điện thoại:</label>
+        <input type="tel" id="SoDienThoai" asp-for="SoDienThoai" placeholder="Nhập số điện thoại">
+        <span asp-validation-for="SoDienThoai"></span>
+    </div>
+
+    <!-- Email -->
+    <div>
+        <label for="Email">Email:</label>
+        <input type="email" id="Email" asp-for="Email" placeholder="Nhập email">
+        <span asp-validation-for="Email"></span>
+    </div>
+
+    <!-- Ngày sinh -->
+    <div>
+        <label for="NgaySinh">Ngày sinh:</label>
+        <input type="date" id="NgaySinh" asp-for="NgaySinh">
+        <span asp-validation-for="NgaySinh"></span>
+    </div>
+
+    <!-- Quận - Huyện -->
+    <div>
+        <label for="QuanHuyen">Quận - Huyện:</label>
+        <input type="text" id="QuanHuyen" asp-for="QuanHuyen" placeholder="Nhập quận, huyện">
+        <span asp-validation-for="QuanHuyen"></span>
+    </div>
+
+    <!-- Phường - Xã -->
+    <div>
+        <label for="PhuongXa">Phường - Xã:</label>
+        <input type="text" id="PhuongXa" asp-for="PhuongXa" placeholder="Nhập phường, xã">
+        <span asp-validation-for="PhuongXa"></span>
+    </div>
+
+    <!-- Ảnh đại diện -->
+    <div>
+        <label for="Hinh">Ảnh đại diện:</label>
+        <input type="file" id="Hinh" asp-for="Hinh" accept="image/*">
+        <span asp-validation-for="Hinh"></span>
+    </div>
+
+    <div>
+        <button type="submit">Đăng ký</button>
+    </div>
+
+</form>
+

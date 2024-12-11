@@ -112,16 +112,13 @@
 
                             <!-- Đánh giá sản phẩm -->
                             <div class="d-flex mb-2">
-                                @for (int i = 1; i <= 5; i++)
+                                @for (int i = 1; i <= product.AverageRating; i++)
                                 {
-                                    if (i <= Math.Floor(product.AverageRating))
-                                    {
-                                        <i class="fa fa-star text-secondary"></i> <!-- Sao đầy -->
-                                    }
-                                    else
-                                    {
-                                        <i class="fa fa-star"></i> <!-- Sao trống -->
-                                    }
+                                    <i class="fa fa-star text-secondary"></i> <!-- Sao đầy -->
+                                }
+                                @for (int i = product.AverageRating + 1; i <= 5; i++)
+                                {
+                                    <i class="fa fa-star"></i> <!-- Sao trống -->
                                 }
                             </div>
 

@@ -47,15 +47,18 @@ public partial class SanPham
 
     public virtual ICollection<TuKhoa> MaTuKhoas { get; set; } = new List<TuKhoa>();
 
-    public double AverageRating
+    public int AverageRating
     {
         get
         {
-            if (DanhGiaSanPhams != null && DanhGiaSanPhams.Any())
+            if (DanhGiaSanPhams == null || DanhGiaSanPhams.Count == 0)
             {
-                return DanhGiaSanPhams.Average(dg => dg.SaoDanhGia ?? 0); // Tính trung bình sao đánh giá
+                return 0; // Nếu không có đánh giá, trả về 0
             }
-            return 0; // Nếu không có đánh giá nào, trả về 0
+
+            // Tính trung bình sao và làm tròn về kiểu int
+            var totalSao = DanhGiaSanPhams.Where(dg => dg.SaoDanhGia.HasValue).Sum(dg => dg.SaoDanhGia.Value);
+            return (int)Math.Round(totalSao / (double)DanhGiaSanPhams.Count(dg => dg.SaoDanhGia.HasValue));
         }
     }
 

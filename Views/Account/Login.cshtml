@@ -1,0 +1,30 @@
+﻿@{
+    ViewData["Title"] = "Login";
+}
+@model PTUDTMDT.ViewModels.Account.LoginViewModel
+
+<h1>Login</h1>
+<form asp-action="Login" asp-route-returnurl="@ViewBag.ReturnURL" method="post" enctype="multipart/form-data">
+
+    <!-- Tên tài khoản -->
+    <div>
+        <label for="TenTaiKhoan">Tên tài khoản:</label>
+        <input type="text" id="TenTaiKhoan" asp-for="TenTaiKhoan" required placeholder="Nhập tên tài khoản">
+        <span asp-validation-for="TenTaiKhoan"></span>
+    </div>
+
+    <!-- Mật khẩu -->
+    <div>
+        <label for="MatKhau">Mật khẩu:</label>
+        <input type="password" id="MatKhau" asp-for="MatKhau" required placeholder="Nhập mật khẩu">
+        <span asp-validation-for="MatKhau"></span>
+    </div>
+
+    <!--Nút đăng nhập-->
+    <div>
+        <button type="submit">Đăng nhập</button>
+    </div>
+
+
+</form>
+

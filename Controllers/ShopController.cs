@@ -49,7 +49,7 @@ namespace PTUDTMDT.Controllers
             query = ApplySorting(query, filter.Sorting);
 
             //Phân trang
-            var products = query.ToList().ToPagedList(filter.Page, filter.PageSize);
+            var products = query.ToPagedList(filter.Page, filter.PageSize);
 
             //Tạo view model để truyền về view ShopIndex
             var viewModel = new ShopIndexViewModel
@@ -66,13 +66,15 @@ namespace PTUDTMDT.Controllers
         public IActionResult ShopDetail(string MaSanPham)
         {
             var product = _context.SanPhams
-                .Include(p => p.MaLoaiNavigation) // Bao gồm thông tin về loại sản phẩm nếu cần
+                .Include(p => p.MaLoaiNavigation)
+                .Include(p => p.DanhGiaSanPhams)
+                    .ThenInclude(d => d.MaTaiKhoanNavigation)
+                        .ThenInclude(t => t.MaKhachHangNavigation)
                 .FirstOrDefault(p => p.MaSanPham == MaSanPham);
 
-            // Kiểm tra xem sản phẩm có tồn tại không
             if (product == null)
             {
-                return NotFound(); // Hoặc có thể điều hướng tới trang khác
+                return NotFound();
             }
 
             var viewModel = new ShopDetailViewModel
@@ -80,16 +82,17 @@ namespace PTUDTMDT.Controllers
                 Product = product,
                 BestSellers = GetBestSellers(5),
                 Categories = GetCategories(),
-                RelatedProducts = GetRelatedProducts(product)
+                RelatedProducts = GetRelatedProducts(product.MaLoai)
             };
 
             return View(viewModel);
         }
 
-        private IEnumerable<SanPham> GetRelatedProducts(SanPham product)
+
+        private IEnumerable<SanPham> GetRelatedProducts(string MaLoai)
         {
             return _context.SanPhams
-                .Where(p => p.MaLoai == product.MaLoai) // Lọc sản phẩm cùng loại
+                .Where(p => p.MaLoai == MaLoai) // Lọc sản phẩm cùng loại
                 .ToList();
         }
 
