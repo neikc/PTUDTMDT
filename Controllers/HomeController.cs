@@ -1,21 +1,31 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using PTUDTMDT.Models;
+using PTUDTMDT.ViewModels.HomeViewModel;
+using PTUDTMDT.ViewModels.ShopViewModel;
 using System.Diagnostics;
 
 namespace PTUDTMDT.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly ILogger<HomeController> _logger;
+        private readonly PtudtmdtContext _context;
 
-        public HomeController(ILogger<HomeController> logger)
+        public HomeController(PtudtmdtContext context)
         {
-            _logger = logger;
+            _context = context;
         }
 
         public IActionResult Index()
         {
-            return View();
+            var viewModel = new IndexViewModel
+            {
+                Products = GetProduct(),
+                BestSellers = GetBestSellers(10),
+                Categories = GetCategories(),
+                Reviews = GetReviews(3)
+            };
+            return View(viewModel);
         }
 
         public IActionResult Privacy()
@@ -28,5 +38,40 @@ namespace PTUDTMDT.Controllers
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
+
+        #region Supporting Methods
+        private IEnumerable<DanhGiaSanPham> GetReviews(int count)
+        {
+            return _context.DanhGiaSanPhams
+                .Include(r => r.MaTaiKhoanNavigation)
+                    .ThenInclude(o => o.MaKhachHangNavigation)
+                .OrderBy(x => Guid.NewGuid())
+                .Take(count)
+                .ToList();
+        }
+        private IEnumerable<LoaiSanPham> GetCategories()
+        {
+            return _context.LoaiSanPhams
+                .Include(l => l.SanPhams)
+                .ToList();
+        }
+
+        private IEnumerable<SanPham> GetBestSellers(int count)
+        {
+            return _context.SanPhams
+                .Where(p => p.BestSellers.HasValue && p.BestSellers.Value)
+                .OrderBy(x => Guid.NewGuid())
+                .Take(count)
+                .ToList();
+        }
+
+        private IEnumerable<SanPham> GetProduct()
+        {
+            return _context.SanPhams
+                .OrderBy(x => Guid.NewGuid())
+                .ToList();
+        }
+
+        #endregion
     }
 }

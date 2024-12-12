@@ -7,9 +7,12 @@ using X.PagedList.Mvc.Core;
 using X.PagedList.Extensions;
 using static Microsoft.EntityFrameworkCore.DbLoggerCategory;
 using System.Linq;
+using Microsoft.AspNetCore.Authorization;
+using System.Security.Claims;
 
 namespace PTUDTMDT.Controllers
 {
+    #region Supporting Classes
     //Tổng hợp toàn bộ Filter, phân trang vào 1 class cho dễ quản lý
     public class ShopFilterModel
     {
@@ -21,7 +24,7 @@ namespace PTUDTMDT.Controllers
         public int Page { get; set; } = 1;
         public int PageSize { get; set; } = 12;
     }
-
+    #endregion
     public class ShopController : Controller
     {
         private readonly PtudtmdtContext _context;
@@ -87,8 +90,33 @@ namespace PTUDTMDT.Controllers
 
             return View(viewModel);
         }
+        
+        [HttpPost]
+        [Authorize]
+        public IActionResult AddReview(string MaSanPham, int SaoDanhGia, string LoiDanhGia)
+        {
+            var userId = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+            if (userId == null)
+            {
+                return RedirectToAction("Login", "Account");
+            }
 
+            var review = new DanhGiaSanPham
+            {
+                MaSanPham = MaSanPham,
+                MaTaiKhoan = userId,
+                SaoDanhGia = SaoDanhGia,
+                LoiDanhGia = LoiDanhGia
+            };
 
+            _context.DanhGiaSanPhams.Add(review);
+            _context.SaveChanges();
+
+            // Redirect back to product detail
+            return RedirectToAction("ShopDetail", new { MaSanPham = MaSanPham });
+        }
+
+        #region Supporting Methods
         private IEnumerable<SanPham> GetRelatedProducts(string MaLoai)
         {
             return _context.SanPhams
@@ -182,6 +210,6 @@ namespace PTUDTMDT.Controllers
             }
             return query;
         }
-
+        #endregion
     }
 }

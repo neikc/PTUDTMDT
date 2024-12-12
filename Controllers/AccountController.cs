@@ -4,7 +4,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using PTUDTMDT.Models;
-using PTUDTMDT.ViewModels.Account;
+using PTUDTMDT.ViewModels.AccountViewModel;
 using System;
 using System.Linq;
 using System.Security.Claims;
