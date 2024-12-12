@@ -1,48 +1,30 @@
 ﻿@{
     ViewData["Title"] = "Login";
-    Layout = "_LayoutAccount";
 }
 @model PTUDTMDT.ViewModels.AccountViewModel.LoginViewModel
 
-<div class="container">
-    <div class="row justify-content-center">
-        <div class="col-md-6 text-center mb-5">
-            <h2 class="heading-section">Đăng Nhập</h2>
-        </div>
+<h1>Login</h1>
+<form asp-action="Login" asp-route-returnurl="@ViewBag.ReturnURL" method="post" enctype="multipart/form-data">
+
+    <!-- Tên tài khoản -->
+    <div>
+        <label for="TenTaiKhoan">Tên tài khoản:</label>
+        <input type="text" id="TenTaiKhoan" asp-for="TenTaiKhoan" required placeholder="Nhập tên tài khoản">
+        <span asp-validation-for="TenTaiKhoan"></span>
     </div>
-    <div class="row justify-content-center">
-        <div class="col-md-6 col-lg-4">
-            <div class="login-wrap p-4 bg-light rounded">
-                <h3 class="mb-4 text-center">Bạn đã có tài khoản?</h3>
-                <form asp-action="Login" asp-route-returnurl="@ViewBag.ReturnURL" method="post" enctype="multipart/form-data" class="w-100">
-                    <!-- Tên tài khoản -->
-                    <div class="form-group mb-4">
-                        <label for="TenTaiKhoan" class="form-label">Tên tài khoản:</label>
-                        <input type="text" id="TenTaiKhoan" asp-for="TenTaiKhoan" class="form-control border-0 py-3" required placeholder="Nhập tên tài khoản">
-                        <span asp-validation-for="TenTaiKhoan" class="text-danger"></span>
-                    </div>
 
-                    <!-- Mật khẩu -->
-                    <div class="form-group mb-4">
-                        <label for="MatKhau" class="form-label">Mật khẩu:</label>
-                        <input type="password" id="MatKhau" asp-for="MatKhau" class="form-control border-0 py-3" required placeholder="Nhập mật khẩu">
-                        <span asp-validation-for="MatKhau" class="text-danger"></span>
-                    </div>
-
-                    <!--Nếu chưa có tài khoản-->
-                    <div class=" form-group text-center mt-3 mb-2">
-                        <a asp-action="Register" class="text-primary">Chưa có tài khoản? Đăng ký ngay</a>
-                    </div>
-
-                    <!-- Nút đăng nhập -->
-                    <div class="form-group">
-                        <button type="submit" class="form-control btn btn-primary py-3">Đăng nhập</button>
-                    </div>
-                </form>
-            </div>
-        </div>
+    <!-- Mật khẩu -->
+    <div>
+        <label for="MatKhau">Mật khẩu:</label>
+        <input type="password" id="MatKhau" asp-for="MatKhau" required placeholder="Nhập mật khẩu">
+        <span asp-validation-for="MatKhau"></span>
     </div>
-</div>
+
+    <!--Nút đăng nhập-->
+    <div>
+        <button type="submit">Đăng nhập</button>
+    </div>
 
 
+</form>
 

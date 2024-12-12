@@ -2,42 +2,34 @@
 <!--BẮT ĐẦU PHẦN HEADER-->
 <!-- Navbar start -->
 <div class="container-fluid fixed-top">
-    <!-- Thanh thông tin phía trên, hiển thị địa chỉ và email -->
     <div class="container topbar bg-primary d-none d-lg-block">
         <div class="d-flex justify-content-between">
             <div class="top-info ps-2">
-                <small class="me-3"><i class="fas fa-map-marker-alt me-2 text-secondary"></i> <a href="#" class="text-white">279 Nguyễn Tri Phương, phường 4, Quận 10</a></small>
-                <small class="me-3"><i class="fas fa-envelope me-2 text-secondary"></i><a href="#" class="text-white">Nhom4@ueh.edu.vn</a></small>
+                <small class="me-3"><i class="fas fa-map-marker-alt me-2 text-secondary"></i> <a href="#" class="text-white">123 Street, New York</a></small>
+                <small class="me-3"><i class="fas fa-envelope me-2 text-secondary"></i><a href="#" class="text-white">Email@Example.com</a></small>
             </div>
             <div class="top-link pe-2">
-                <a href="#" class="text-white"><small class="text-white mx-2">Chính sách bảo mật</small>/</a>
-                <a href="#" class="text-white"><small class="text-white mx-2">Điều khoản sử dụng</small>/</a>
-                <a href="#" class="text-white"><small class="text-white ms-2">Bán hàng và hoàn trả</small></a>
+                <a href="@Url.Action("Privacy", "Home")" class="text-white"><small class="text-white mx-2">Privacy Policy</small>/</a>
+                <a href="#" class="text-white"><small class="text-white mx-2">Terms of Use</small>/</a>
+                <a href="#" class="text-white"><small class="text-white ms-2">Sales and Refunds</small></a>
             </div>
         </div>
     </div>
-    <!-- Kết thúc Thanh thông tin phía trên -->
     <div class="container px-0">
         <nav class="navbar navbar-light bg-white navbar-expand-xl">
             <!--Button đến trang chủ-->
-            <a href="@Url.Action("Index", "Home")" class="navbar-brand"><h1 class="text-primary display-6">Simple Green</h1></a>
+            <a href="@Url.Action("Index", "Home")" class="navbar-brand"><h1 class="text-primary display-6">Fruitables</h1></a>
             <button class="navbar-toggler py-2 px-3" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
                 <span class="fa fa-bars text-primary"></span>
             </button>
             <div class="collapse navbar-collapse bg-white" id="navbarCollapse">
                 <div class="navbar-nav mx-auto">
                     <!--Button đến Trang chủ-->
-                    <a href="@Url.Action("Index", "Home")" class="nav-item nav-link">Trang chủ</a>
-                    
+                    <a href="@Url.Action("Index", "Home")" class="nav-item nav-link">Home</a>
                     <!--Button đến Trang Cửa hàng-->
-                    <a href="@Url.Action("ShopIndex", "Shop")" class="nav-item nav-link">Cửa hàng</a>
-                    
-                    <!--Button đến Trang Liên hệ-->
-                    <a href="@Url.Action("Contact", "Contact")" class="nav-item nav-link">Liên hệ</a>
-                    
-                    <!--Button đến Bài viết-->
-                    <a href="@Url.Action("BlogIndex","Blog")" class="nav-item nav-link">Bài viết</a>
-                    
+                    <a href="@Url.Action("ShopIndex", "Shop")" class="nav-item nav-link">Shop</a>
+                    <!--Button đến Trang chi tiết đơn hàng-->
+                    <a href="@Url.Action("ShopDetail", "Shop")" class="nav-item nav-link">Shop Detail</a>
                     <div class="nav-item dropdown">
                         <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Pages</a>
                         <div class="dropdown-menu m-0 bg-secondary rounded-0">
@@ -51,35 +43,21 @@
                             <a href="@Url.Action("Error", "Error")" class="dropdown-item">404 Page</a>
                         </div>
                     </div>
+                    <!--Button đến trang Liên hệ-->
+                    <a href="@Url.Action("Contact", "Contact")" class="nav-item nav-link">Contact</a>
                 </div>
-                
-                <!--Khu vực trên phải-->
                 <div class="d-flex m-3 me-0">
+                    <button class="btn-search btn border border-secondary btn-md-square rounded-circle bg-white me-4" data-bs-toggle="modal" data-bs-target="#searchModal">
+                        <i class="fas fa-search text-primary"></i>
+                    </button>
                     <!--Button đến trang Giỏ hàng-->
-                    <a href="#" class="position-relative me-4 my-auto">
+                    <a href="@Url.Action("Contact", "Cart")" class="position-relative me-4 my-auto">
                         <i class="fa fa-shopping-bag fa-2x"></i>
-                        <span class="position-absolute bg-secondary rounded-circle d-flex align-items-center justify-content-center text-dark px-1" style="top: -5px; left: 15px; height: 20px; min-width: 20px;"></span>
+                        <span class="position-absolute bg-secondary rounded-circle d-flex align-items-center justify-content-center text-dark px-1" style="top: -5px; left: 15px; height: 20px; min-width: 20px;">3</span>
                     </a>
-                    <a href="@Url.Action(User.Identity.IsAuthenticated ? "Profile" : "Login", "Account")" class="my-auto">
-                        @if (User.Identity.IsAuthenticated)
-                        {
-                            // Lấy đường dẫn avatar từ claim
-                            var avatarUrl = User.Claims.FirstOrDefault(c => c.Type == "avatar")?.Value;
-                            if (!string.IsNullOrEmpty(avatarUrl))
-                            {
-                                <img src="~/img/Customer/@avatarUrl" alt="Avatar" class="img-fluid rounded-circle" style="width: 30px; height: 30px;" />
-                            }
-                            else
-                            {
-                                <i class="fas fa-user fa-2x"></i>
-                            }
-                        }
-                        else
-                        {
-                            <i class="fas fa-user fa-2x"></i>
-                        }
+                    <a href="#" class="my-auto">
+                        <i class="fas fa-user fa-2x"></i>
                     </a>
-
                 </div>
             </div>
         </nav>
@@ -87,5 +65,5 @@
 </div>
 <!-- Navbar End -->
 <div class="container-fluid py-5">
-</div>
+    </div>
 <!--KẾT THÚC PHẦN HEADER-->
