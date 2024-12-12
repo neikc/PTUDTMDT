@@ -106,7 +106,7 @@
                 <div class="col-lg-8 text-end">
                     <ul class="nav nav-pills d-inline-flex text-center mb-5">
                         <li class="nav-item">
-                            <a class="d-flex py-2 m-2 bg-light rounded-pill" data-bs-toggle="pill" href="#tab-all">
+                            <a class="d-flex py-2 m-2 bg-light rounded-pill active" data-bs-toggle="pill" href="#tab-all">
                                 <span class="text-dark px-3" style="width: 130px;">Toàn bộ</span>
                             </a>
                         </li>
@@ -168,7 +168,16 @@
                                                 </h5>
                                             }
                                         </div>
-                                        <a href="#" class="btn border border-secondary rounded-pill px-3 text-primary" style="margin-top: 5px"><i class="fa fa-shopping-bag me-2 text-primary"></i>Thêm vào giỏ hàng</a>
+                                        <a href="javascript:void(0);"
+                                           onclick="document.getElementById('addToCartForm_Index1').submit();"
+                                           class="btn border border-secondary rounded-pill px-3 text-primary">
+                                            <i class="fa fa-shopping-bag me-2 text-primary"></i>Thêm vào giỏ hàng
+                                        </a>
+
+                                        <form id="addToCartForm_Index1" action="@Url.Action("AddToCart", "Cart")" method="post" style="display:none;">
+                                            <input type="hidden" name="MaSanPham" value="@product.MaSanPham" />
+                                        </form>
+
                                     </div>
                                 </div>
                             </div>
@@ -227,7 +236,16 @@
                                                     </h5>
                                                 }
                                             </div>
-                                            <a href="#" class="btn border border-secondary rounded-pill px-3 text-primary" style="margin-top: 5px"><i class="fa fa-shopping-bag me-2 text-primary"></i>Thêm vào giỏ hàng</a>
+                                            <!--Thêm vào giỏ hàng-->
+                                            <a href="javascript:void(0);"
+                                               onclick="document.getElementById('addToCartForm_Index2').submit();"
+                                               class="btn border border-secondary rounded-pill px-3 text-primary">
+                                                <i class="fa fa-shopping-bag me-2 text-primary"></i>Thêm vào giỏ hàng
+                                            </a>
+
+                                            <form id="addToCartForm_Index2" action="@Url.Action("AddToCart", "Cart")" method="post" style="display:none;">
+                                                <input type="hidden" name="MaSanPham" value="@product.MaSanPham" />
+                                            </form>
                                         </div>
                                     </div>
                                 </div>
@@ -309,7 +327,16 @@
                                     {
                                         <h5 class="fw-bold mb-3 text-danger">@product.FormatPrice(product.GiaSauGiam)</h5>
                                     }
-                                    <a href="#" class="btn border border-secondary rounded-pill px-3 text-primary"><i class="fa fa-shopping-bag me-2 text-primary"></i>Mua</a>
+                                    <!--Thêm vào giỏ hàng-->
+                                    <a href="javascript:void(0);"
+                                       onclick="document.getElementById('addToCartForm_Index3').submit();"
+                                       class="btn border border-secondary rounded-pill px-3 text-primary">
+                                        <i class="fa fa-shopping-bag me-2 text-primary"></i>Mua
+                                    </a>
+
+                                    <form id="addToCartForm_Index3" action="@Url.Action("AddToCart", "Cart")" method="post" style="display:none;">
+                                        <input type="hidden" name="MaSanPham" value="@product.MaSanPham" />
+                                    </form>
                                 </div>
                             </div>
                         </div>
@@ -358,8 +385,9 @@
         </div>
     </div>
 </div>
-<!-- Doanh nghiệp tự hào -->
-<!-- Testimonial Start -->
+<!-- Kết thúc Doanh nghiệp tự hào -->
+
+<!-- Phần đánh giá khách hàng -->
 <div class="container-fluid testimonial py-5">
     <div class="container py-5">
         <div class="testimonial-header text-center">
@@ -395,6 +423,7 @@
                                         <span>Chị </span>
                                     }
                                     @review.MaTaiKhoanNavigation.MaKhachHangNavigation.HoTen
+
                                 </h4>
                                 <p class="m-0 pb-3">@review.MaTaiKhoanNavigation.MaKhachHangNavigation.QuanHuyen</p>
                                 <div class="d-flex pe-5">
@@ -418,4 +447,5 @@
         </div>
     </div>
 </div>
-<!-- Testimonial End -->
+<!--Kết thúc phần đánh giá khách hàng-->
+
