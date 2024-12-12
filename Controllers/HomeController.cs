@@ -28,6 +28,15 @@ namespace PTUDTMDT.Controllers
             return View(viewModel);
         }
 
+        public IActionResult TermsOfUse()
+        {
+            return View();
+        }
+
+        public IActionResult Refunds()
+        {
+            return View();
+        }
         public IActionResult Privacy()
         {
             return View();
