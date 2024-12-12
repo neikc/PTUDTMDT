@@ -13,5 +13,13 @@ namespace PTUDTMDT.Controllers
         {
             return View();
         }
+        public IActionResult BlogDetail1()
+        {
+            return View();
+        }
+        public IActionResult BlogDetail2()
+        {
+            return View();
+        }
     }
 }
