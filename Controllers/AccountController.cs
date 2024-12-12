@@ -54,7 +54,6 @@ namespace PTUDTMDT.Controllers
                     NgaySinh = model.NgaySinh,  // Đảm bảo sử dụng kiểu DateOnly
                     QuanHuyen = model.QuanHuyen,
                     PhuongXa = model.PhuongXa,
-                    Hinh = model.Hinh,
                     HieuLuc = true  // Nếu bạn muốn khách hàng luôn hợp lệ khi đăng ký
                 };
 
@@ -113,7 +112,8 @@ namespace PTUDTMDT.Controllers
                                 new Claim(ClaimTypes.Name, taikhoan.TenTaiKhoan),
 
                                 // Lưu vai trò của người dùng (admin, user, ...) vào claim
-                                new Claim(ClaimTypes.Role, taikhoan.VaiTro)
+                                new Claim(ClaimTypes.Role, taikhoan.VaiTro),
+                                new Claim("avatar", (taikhoan.MaKhachHangNavigation?.Hinh) ?? "avatar.jpg"),
                             };
 
                             // Tạo một danh tính người dùng (identity) dựa trên danh sách claims và dùng cách xác thực bằng cookie
