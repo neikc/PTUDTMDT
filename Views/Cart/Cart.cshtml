@@ -1,183 +1,223 @@
 ﻿@{
     ViewData["Title"] = "Giỏ Hàng";
 }
-@model IEnumerable<PTUDTMDT.ViewModels.CartViewModel.CartItemViewModel>
+@model PTUDTMDT.ViewModels.CartViewModel.CartIndexViewModel
 
-@{
-        /**
-
-    
-<!-- Cart Page Start -->
-<div class="container-fluid py-5">
-    <div class="container py-5">
-        <div class="table-responsive">
-            <table class="table">
-                <thead>
-                    <tr>
-                        <!--Cột hình-->
-                        <th scope="col"></th>
-                        <th scope="col">Tên Sản phẩm</th>
-                        <th scope="col">Đơn giá</th>
-                        <th scope="col">Số lượng</th>
-                        <th scope="col">Thành tiền</th>
-                        <!--Cột nút xóa sản phẩm ra khỏi giỏ hàng-->
-                        <th scope="col"></th>
-                    </tr>
-                </thead>
-                <tbody>
-                    @foreach (var item in Model)
-                    {
-                        <tr>
-                            <!--Cột hình-->
-                            <th scope="row">
-                                <div class="d-flex align-items-center">
-                                    <img src="@Url.Content(item.Product.LayDiaChiHinh(1))" class="img-fluid me-5 rounded-circle" style="width: 80px; height: 80px;" alt="@item.Product.ShortDesc">
-                                </div>
-                            </th>
-                            <!--Cột tên sản phẩm-->
-                            <td>
-                                <p class="mb-0 mt-4">@item.Product.TenSanPham</p>
-                            </td>
-                            <!--Cột giá tiền-->
-                            <td>
-                                @if (item.Product.GiaSauGiam == null) {
-                                    <p class="mb-0 mt-4">@item.Product.FormatPrice(item.Product.GiaSanPham)</p>
-                                }
-                                else {
-                                    <p class="mb-0 mt-4">
-                                        @item.Product.FormatPrice(item.Product.GiaSauGiam)
-                                        <span class="fst-italic" style="text-decoration:line-through">  @item.Product.FormatPrice(item.Product.GiaSanPham)</span>
-                                        <span class="fst-italic">(-@item.Product.GiamGia)%</span>
-                                        </p>
-                                }
-                            </td>
-                            <!--Cột điều chỉnh số lượng-->
-                            <td>
-                                <div class="input-group quantity mt-4" style="width: 100px;">
-                                    <div class="input-group-btn">
-                                        <button class="btn btn-sm btn-minus rounded-circle bg-light border">
-                                            <i class="fa fa-minus"></i>
-                                        </button>
-                                    </div>
-                                    <input type="text" class="form-control form-control-sm text-center border-0" value="@item.Quantity">
-                                    <div class="input-group-btn">
-                                        <button class="btn btn-sm btn-plus rounded-circle bg-light border">
-                                            <i class="fa fa-plus"></i>
-                                        </button>
-                                    </div>
-                                </div>
-                            </td>
-                            <!--Cột thành tiền-->
-                            <td>
-                                <p class="mb-0 mt-4">@item.Total</p>
-                            </td>
-                            <!--Nút xóa sản phẩm ra khỏi giỏ hàng-->
-                            <td>
-                                <button class="btn btn-md rounded-circle bg-light border mt-4">
-                                    <i class="fa fa-times text-danger"></i>
-                                </button>
-                            </td>
-
-                        </tr>
-                    }
-                    
-                </tbody>
-            </table>
-        </div>
-        <div class="mt-5">
-            <input type="text" class="border-0 border-bottom rounded me-5 py-3 mb-4" placeholder="Coupon Code">
-            <button class="btn border-secondary rounded-pill px-4 py-3 text-primary" type="button">Apply Coupon</button>
-        </div>
-        <div class="row g-4 justify-content-end">
-            <div class="col-8"></div>
-            <div class="col-sm-8 col-md-7 col-lg-6 col-xl-4">
-                <div class="bg-light rounded">
-                    <div class="p-4">
-                        <h1 class="display-6 mb-4">Cart <span class="fw-normal">Total</span></h1>
-                        <div class="d-flex justify-content-between mb-4">
-                            <h5 class="mb-0 me-4">Subtotal:</h5>
-                            <p class="mb-0">$96.00</p>
-                        </div>
-                        <div class="d-flex justify-content-between">
-                            <h5 class="mb-0 me-4">Shipping</h5>
-                            <div class="">
-                                <p class="mb-0">Flat rate: $3.00</p>
-                            </div>
-                        </div>
-                        <p class="mb-0 text-end">Shipping to Ukraine.</p>
-                    </div>
-                    <div class="py-4 mb-4 border-top border-bottom d-flex justify-content-between">
-                        <h5 class="mb-0 ps-4 me-4">Total</h5>
-                        <p class="mb-0 pe-4">$99.00</p>
-                    </div>
-                    <button class="btn border-secondary rounded-pill px-4 py-3 text-primary text-uppercase mb-4 ms-4" type="button">Proceed Checkout</button>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-<!-- Cart Page End -->
-**/
-}
 <div class="container-fluid py-5 mt-5">
-    <div class="container py-5">
-        <div class="row d-flex align-items-center gap-4 rounded-2xl">
-            
-            <!-- Sản phẩm trong giỏ hàng (col-7) -->
-            <div class="col-7">
-                @foreach (var item in Model)
-                {
-                    <!-- Sản phẩm 1 -->
-                    <div class="row mb-4">
-                        <!-- Mỗi sản phẩm trong một row -->
-                        <div class="d-flex align-items-center gap-4 rounded-2xl" style="height: 13rem;">
-                            <div class="d-flex justify-content-between w-100">
-                                <div class="container-fluid p-4 rounded bg-light">
-                                    <div class="position-relative row align-items-center w-100">
-                                        <!-- Cột hình ảnh (4/12) -->
-                                        <div class="col-4 d-flex justify-content-center">
-                                            <img src="@item.Product.LayDiaChiHinh(1)" class="img-fluid rounded-circle" alt="@item.Product.TenSanPham">
-                                        </div>
-                                        <!-- Cột thông tin (8/12) -->
-                                        <div class="col-8 d-flex flex-column justify-content-between">
-                                            <div class="d-flex flex-column" style="gap: 2.5px;">
+    <!--Nếu không có sản phẩm trong giỏ hàng-->
+    @if (Model.ItemList.Any() == false)
+    {
+        <div class="text-center">
+            <h2>Giỏ hàng trống, quay về cửa hàng thôiii</h2>
+            <a href="@Url.Action("ShopIndex","Shop")" 
+                class="btn border border-secondary rounded-pill px-3 text-primary mt-3 py-2">
+                <i class="fa fa-shopping-bag me-2 text-primary"></i>Quay về cửa hàng
+            </a>
+        </div>
+    } else
+    {
+        <!--Phần giỏ hàng và bill tạm-->
+        <div class="container py-5">
+            <div class="row d-flex align-items-start gap-5 rounded-2xl">
+                <!-- Sản phẩm trong giỏ hàng (col-7) -->
+                <!--Các sản phẩm trong giỏ hàng-->
+                <div class="col-lg-7 col-12">
+                    @foreach (var item in Model.ItemList)
+                    {
+                        <div class="row mt-lg-6">
+                            <div class="d-flex align-items-center gap-4 rounded-2xl" style="height: 13rem;">
+                                <div class="d-flex justify-content-between w-100">
+                                    <div class="container-fluid p-4 mt-lg-6 rounded bg-light">
+                                        <div class="position-relative row align-items-center w-100">
+                                            <!-- Nút xóa sản phẩm -->
+                                            <form asp-action="RemoveFromCart" method="post" class="position-absolute" style="top: 10px; right: 10px;">
+                                                <input type="hidden" name="MaSanPham" value="@item.Product.MaSanPham" />
+                                                <button type="submit" class="btn btn-md rounded-circle bg-light border" style="width: auto; height: auto;">
+                                                    <i class="fa fa-times text-danger"></i>
+                                                </button>
+                                            </form>
+                                            <!-- Cột hình ảnh (4/12) -->
+                                            <div class="col-4 d-flex justify-content-center rounded" style="object-fit:contain">
+                                                <img src="@Url.Content(@item.Product.LayDiaChiHinh(1))" class="img-fluid rounded-circle" alt="@item.Product.TenSanPham">
+                                            </div>
+                                            <!-- Cột thông tin (8/12) -->
+                                            <div class="col-8 d-flex flex-column justify-content-between">
+                                                <div class="d-flex flex-column" style="gap: 2.5px;">
 
-                                                <h5 class="fw-bold mb-2">@item.Product.TenSanPham</h5>
+                                                    <h5 class="fw-bold mb-2">@item.Product.TenSanPham</h5>
 
-                                                <p class="mb-0 mb-2">Giá tiền</p>
-                                                <!-- Chọn số lượng sản phẩm -->
-                                                <div class="input-group quantity mb-3" style="width: 100px;">
-                                                    <div class="input-group-btn">
+                                                    @if (item.Product.GiaSauGiam == null)
+                                                    {
+                                                        <p class="mb-0 mt-2">@item.Product.FormatPrice(item.Product.GiaSanPham)</p>
+                                                    }
+                                                    else
+                                                    {
+                                                        <p class="mb-0 mt-2">
+                                                            @item.Product.FormatPrice(item.Product.GiaSauGiam)
+                                                            <span class="fst-italic" style="text-decoration:line-through">  @item.Product.FormatPrice(item.Product.GiaSanPham)</span>
+                                                            <span class="fst-italic">(-@item.Product.GiamGia%)</span>
+                                                        </p>
+                                                    }
+                                                    <!-- Chọn số lượng sản phẩm -->
+                                                    <form action="/Cart/UpdateQuantity" method="post" class="d-flex align-items-center">
+                                                        <!-- Input ẩn chứa mã sản phẩm -->
+                                                        <input type="hidden" name="MaSanPham" value="@item.Product.MaSanPham" />
+
                                                         <!-- Nút giảm số lượng -->
-                                                        <button class="btn btn-sm btn-minus rounded-circle bg-light border" type="button">
+                                                        <button name="action" value="decrease" class="btn btn-sm rounded-circle bg-light border" type="submit">
                                                             <i class="fa fa-minus"></i>
                                                         </button>
-                                                    </div>
-                                                    <!-- Ô nhập số lượng -->
-                                                    <input name="quantity" type="text" class="form-control form-control-sm text-center border-0 bg-light" value="@item.Quantity">
-                                                    <div class="input-group-btn">
+
+                                                        <!-- Ô nhập số lượng -->
+                                                        <input name="quantity" type="text" class="form-control form-control-sm text-center border-0 bg-light mx-2"
+                                                                value="@item.Quantity" readonly style="width: 50px;">
+
                                                         <!-- Nút tăng số lượng -->
-                                                        <button class="btn btn-sm btn-plus rounded-circle bg-light border" type="button">
+                                                        <button name="action" value="increase" class="btn btn-sm rounded-circle bg-light border" type="submit">
                                                             <i class="fa fa-plus"></i>
                                                         </button>
-                                                    </div>
+                                                    </form>
+                                                    <h6 class="mb-2 align-self-end">Tổng tiền: <span class="fw-bold">@item.Product.FormatPrice(item.Total)</span></h6>
                                                 </div>
-                                                <h6 class="mb-2 align-self-end">Tổng tiền: <span class="fw-bold">Số tiền</span></h6>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
+                    }
+                </div>
+                <!-- Bill tạm -->
+                <div class="col-lg-4 col-12">
+                    <div class="d-flex align-items-center rounded-2xl">
+                        <div class="flex-column justify-content-center w-100 p-4 mt-lg-6 rounded bg-light">
+                            <h2 class="mb-2">Thông tin đơn hàng</h2>
+                            <p>
+                                Số lượng sản phẩm
+                                <span class="float-end">@Model.ItemList.Sum(x => x.Quantity)</span>
+                            </p>
+                            <p class="mb-2">
+                                Thành tiền
+                                <span class="float-end">@Model.ItemList.Sum(x => x.Total).ToString("#,0")đ</span>
+                            </p>
+                            <a href="@Url.Action("ShopIndex","Shop")" class="btn border border-secondary rounded-pill px-3 text-primary mb-1"><i class="fa fa-shopping-bag me-2 text-primary"></i>Tiếp tục mua sắm</a>
+                            <a href="@Url.Action("CheckOut")" class="btn border border-secondary rounded-pill px-3 text-primary mb-2"><i class="fa fa-shopping-bag me-2 text-primary"></i>Thanh toán</a>
+                        </div>
                     </div>
-                }
+                </div>
             </div>
-            <!-- Empty Column 2 (col-2) -->
-            <div class="col-2"></div>
-
-            <!-- Empty Column 3 (col-3) -->
-            <div class="col-3"></div>
         </div>
-    </div>
+
+        <!--Phần sản phẩm mua kèm-->
+        <div class="container-fluid py-5">
+            <div class="container">
+                <h2 class="mb-1 text-start"><b>Bạn có thể mua cùng</b></h2>
+                
+                <div class="vesitable">
+                    <div class="owl-carousel vegetable-carousel justify-content-center rounded">
+                        @foreach (var product in Model.BestSellers)
+                        {
+                            <div class="vesitable-item rounded">
+                                <div class="container-fluid p-4 rounded bg-light">
+                                    <div class="row align-items-center">
+                                        <div class="col-6">
+                                            <div style="max-height:100px contain">
+                                                <a href="@Url.Action("ShopDetail", "Shop", new { MaSanPham = product.MaSanPham })"></a>
+                                                <img src="@Url.Content(product.LayDiaChiHinh(1))" class="img-fluid rounded-circle w-100" alt="@product.ShortDesc">
+                                            </div>
+                                        </div>
+                                        <div class="col-6">
+                                            <a href="@Url.Action("ShopDetail", "Shop", new { MaSanPham = product.MaSanPham })" class="h5">@product.TenSanPham</a>
+                                            <!--Đánh giá-->
+                                            <div class="d-flex mb-2">
+                                                @for (int i = 1; i <= product.AverageRating; i++)
+                                                {
+                                                    <i class="fa fa-star text-secondary"></i> <!-- Sao đầy -->
+                                                }
+                                                @for (int i = product.AverageRating + 1; i <= 5; i++)
+                                                {
+                                                    <i class="fa fa-star"></i> <!-- Sao trống -->
+                                                }
+                                            </div>
+                                            <!-- Giá sản phẩm -->
+                                            @if (product.GiaSanPham > product.GiaSauGiam)
+                                            {
+                                                <h5 class="fw-bold mb-3 text-danger">Giảm @product.GiamGia%!</h5>
+                                                <h5 class="fw-bold mb-3"><span class="text-danger">@product.FormatPrice(product.GiaSauGiam)</span>     <span class="text-decoration-line-through">@product.FormatPrice(product.GiaSanPham)</span></h5>
+                                            }
+                                            else
+                                            {
+                                                <h5 class="fw-bold mb-3 text-danger">@product.FormatPrice(product.GiaSauGiam)</h5>
+                                            }
+                                            <!--Thêm vào giỏ hàng-->
+                                            <a href="javascript:void(0);"
+                                               onclick="document.getElementById('addToCartForm_Index3+@product.MaSanPham').submit();"
+                                               class="btn border border-secondary rounded-pill px-3 text-primary">
+                                                <i class="fa fa-shopping-bag me-2 text-primary"></i>Mua
+                                            </a>
+
+                                            <form id="addToCartForm_Index3+@product.MaSanPham" action="@Url.Action("AddToCart", "Cart")" method="post" style="display:none;">
+                                                <input type="hidden" name="MaSanPham" value="@product.MaSanPham" />
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+    
+        <!--Phần sản phẩm đang Sale-->
+        <div class="container-fluid py-5">
+            <div class="container">
+                <h2 class="mb-1 text-start"><b>Sản phẩm đang giảm giá</b></h2>
+
+                <div class="vesitable">
+                    <div class="owl-carousel vegetable-carousel justify-content-center rounded">
+                        @foreach (var product in Model.OnSale)
+                        {
+                            <div class="border border-primary rounded position-relative vesitable-item">
+                                <div class="vesitable-img">
+                                    <a href="@Url.Action("ShopDetail", "Shop", new { MaSanPham = product.MaSanPham })">
+                                        <img src="@Url.Content(product.LayDiaChiHinh(1))" class="img-fluid w-100 rounded-top" style="max-height:305px; object-fit: contain" alt="@product.ShortDesc">
+                                </div>
+                                <div class="text-white bg-primary px-3 py-1 rounded position-absolute" style="top: 10px; right: 10px;">@product.MaLoaiNavigation.TenLoai</div>
+                                <div class="p-4 pb-0 rounded-bottom">
+                                    <a href="@Url.Action("ShopDetail", "Shop", new { MaSanPham = product.MaSanPham })" class="text-dark">
+                                        @product.TenSanPham
+                                    </a>
+                                    <p>@product.ShortDesc</p>
+                                    <div class="d-flex justify-content-between align-items-end flex-lg-wrap">
+                                        <!--FormatPrice chuyển từ số sang định dạng tiền tệ, hàm này viết thêm trong Model Sanpham-->
+                                        <!-- Giá sản phẩm -->
+                                        <h5 class="fw-bold me-2">@product.FormatPrice(product.GiaSauGiam)</h5>
+                                        @if (product.GiaSanPham > product.GiaSauGiam)
+                                        {
+                                            <h5 class="text-danger">
+                                                <span class="text-decoration-line-through">@product.FormatPrice(product.GiaSanPham)</span>
+                                                (-@product.GiamGia%)
+                                            </h5>
+                                        }
+                                    </div>
+                                    <a href="javascript:void(0);"
+                                       style="margin-bottom:1em; padding-top:1em; padding-bottom:1em"
+                                       onclick="document.getElementById('addToCartForm_ShopDetail').submit();"
+                                       class="btn border border-secondary rounded-pill px-3 text-primary">
+                                        <i class="fa fa-shopping-bag me-2 text-primary"></i>Thêm vào giỏ hàng
+                                    </a>
+
+                                    <form id="addToCartForm_ShopDetail" action="@Url.Action("AddToCart", "Cart")" method="post" style="display:none;">
+                                        <input type="hidden" name="MaSanPham" value="@product.MaSanPham" />
+                                    </form>
+                                </div>
+                            </div>
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
 </div>
 
