@@ -10,6 +10,16 @@
         <div class="col-lg-3">
             <div class="row g-4">
                 <div class="col-lg-12">
+                    <!-- Tìm kiếm sản phẩm -->
+                    <div class="mb-3">
+                        <h4>Tìm kiếm</h4>
+                        <div class="input-group">
+                            <input type="text" class="form-control" placeholder="Nhập từ khóa tìm kiếm" aria-label="Nhập từ khóa tìm kiếm" aria-describedby="button-addon2" id="searchInput">
+                            <button class="btn btn-outline-secondary" type="button" id="searchButton">Tìm kiếm</button>
+                        </div>
+                    </div>
+                    <!--KẾT THÚC PHẦN TÌM KIẾM SẢN PHẨM-->
+
                     <!--PHẦN DANH MỤC CÁC SẢN PHẨM CỦA CỬA HÀNG-->
                     <div class="mb-3">
                         <h4>Danh mục</h4>
@@ -25,15 +35,15 @@
                             <!--Các danh mục sản phẩm-->
                             @foreach (LoaiSanPham loai in Model.Categories)
                             {
-                                <li>
-                                    <div class="d-flex justify-content-between fruite-name" style="margin:1.5em">
-                                        <a asp-action="ShopIndex"
-                                           asp-route-Category="@loai.MaLoai">
-                                            <i class="fas fa-apple-alt me-2"></i>@loai.TenLoai
-                                        </a>
-                                        <span>(@loai.SanPhams.Count)</span>
-                                    </div>
-                                </li>
+                                    <li>
+                                        <div class="d-flex justify-content-between fruite-name" style="margin:1.5em">
+                                            <a asp-action="ShopIndex"
+                                               asp-route-Category="@loai.MaLoai">
+                                                <i class="fas fa-apple-alt me-2"></i>@loai.TenLoai
+                                            </a>
+                                            <span>(@loai.SanPhams.Count)</span>
+                                        </div>
+                                    </li>
                             }
                         </ul>
 
@@ -41,59 +51,58 @@
                     <!--KẾT THÚC PHẦN DANH SÁCH DANH MỤC SẢN PHẨM-->
                 </div>
 
-
+                <!-- Sản phẩm nổi bật / Sản phẩm BestSeller -->
                 <div class="col-lg-12">
-                    <!-- Sản phẩm nổi bật / Sản phẩm BestSeller -->
                     <h4 class="mb-3">Sản phẩm nổi bật</h4>
 
                     @if (Model.BestSellers != null && Model.BestSellers.Any())
                     {
                         foreach (var product in Model.BestSellers)
                         {
-                            <div class="d-flex align-items-center justify-content-start mb-3">
-                                <!-- Hình ảnh sản phẩm -->
-                                <div class="rounded me-4" style="width: 100px; height: 100px;">
-                                    <a href="@Url.Action("ShopDetail", "Shop", new { MaSanPham = product.MaSanPham })">
-                                        <img src="@Url.Content(product.LayDiaChiHinh(1))" class="img-fluid rounded" style="max-height:100px; object-fit: contain" alt="@product.ShortDesc">
-                                    </a>
-                                </div>
+                                    <div class="d-flex align-items-center justify-content-start mb-3">
+                                        <!-- Hình ảnh sản phẩm -->
+                                        <div class="rounded me-4" style="width: 100px; height: 100px;">
+                                            <a href="@Url.Action("ShopDetail", "Shop", new { MaSanPham = product.MaSanPham })">
+                                                <img src="@Url.Content(product.LayDiaChiHinh(1))" class="img-fluid rounded" style="max-height:100px; object-fit: contain" alt="@product.ShortDesc">
+                                            </a>
+                                        </div>
 
-                                <div>
-                                    <!-- Tên sản phẩm -->
-                                    <h6 class="mb-2">
-                                        <a href="@Url.Action("ShopDetail", "Shop", new { MaSanPham = product.MaSanPham })" class="text-dark">
+                                        <div>
+                                            <!-- Tên sản phẩm -->
+                                            <h6 class="mb-2">
+                                                <a href="@Url.Action("ShopDetail", "Shop", new { MaSanPham = product.MaSanPham })" class="text-dark">
                                             @product.TenSanPham
-                                        </a>
-                                    </h6>
+                                                </a>
+                                            </h6>
 
-                                    <!-- Đánh giá sản phẩm -->
-                                    <div class="d-flex mb-2">
+                                            <!-- Đánh giá sản phẩm -->
+                                            <div class="d-flex mb-2">
                                         @for (int i = 1; i <= product.AverageRating; i++)
                                         {
-                                            <i class="fa fa-star text-secondary"></i> <!-- Sao đầy -->
+                                                        <i class="fa fa-star text-secondary"></i> <!-- Sao đầy -->
                                         }
                                         @for (int i = product.AverageRating + 1; i <= 5; i++)
                                         {
-                                            <i class="fa fa-star"></i> <!-- Sao trống -->
+                                                        <i class="fa fa-star"></i> <!-- Sao trống -->
                                         }
-                                    </div>
+                                            </div>
 
-                                    <!-- Giá sản phẩm -->
-                                    <div class="d-flex mb-2">
-                                        <h5 class="fw-bold me-2">@product.FormatPrice(product.GiaSauGiam)</h5>
+                                            <!-- Giá sản phẩm -->
+                                            <div class="d-flex mb-2">
+                                                <h5 class="fw-bold me-2">@product.FormatPrice(product.GiaSauGiam)</h5>
                                         @if (product.GiaSanPham > product.GiaSauGiam)
                                         {
-                                            <h5 class="text-danger text-decoration-line-through">@product.FormatPrice(product.GiaSanPham)</h5>
+                                                        <h5 class="text-danger text-decoration-line-through">@product.FormatPrice(product.GiaSanPham)</h5>
                                         }
+                                            </div>
+                                        </div>
                                     </div>
-                                </div>
-                            </div>
                         }
 
                     }
                     else
                     {
-                        <p>Không có sản phẩm nổi bật nào.</p>
+                            <p>Không có sản phẩm nổi bật nào.</p>
                     }
                 </div>
 
@@ -117,9 +126,9 @@
 
         <!-- Bài Blog -->
         <div class="col-lg-8">
-            <div class="row">
+            <div class="row" id="blogList">
                 <!-- Bài Blog 1 -->
-                <div class="col-lg-6 mb-4">
+                <div class="col-lg-6 mb-4 blog-item">
                     <div class="card border-0 shadow-sm">
                         <img src="~/img/blog/trang trại organic.png" class="card-img-top" alt="Blog 1: Từ Nỗi Lo Của Mẹ Đến Ước Mơ Xanh Của Những Người Trẻ">
                         <div class="card-body">
@@ -134,7 +143,7 @@
                 </div>
 
                 <!-- Bài Blog 2 -->
-                <div class="col-lg-6 mb-4">
+                <div class="col-lg-6 mb-4 blog-item">
                     <div class="card border-0 shadow-sm">
                         <img src="~/img/blog/nền văn minh.png" class="card-img-top" alt="Blog 2:  Top 5 Thực Phẩm Hữu Cơ Cho Người Ăn Kiêng Và Ăn Chay">
                         <div class="card-body">
@@ -149,7 +158,7 @@
                 </div>
 
                 <!-- Bài Blog3 -->
-                <div class="col-lg-6 mb-4">
+                <div class="col-lg-6 mb-4 blog-item">
                     <div class="card border-0 shadow-sm">
                         <img src="~/img/blog/zero waste.png" class="card-img-top" alt="Bài blog 3: Sống Xanh Hơn Chỉ Với 5 Phút Mỗi Ngày: Hướng Dẫn Chuyên Sâu Về Lối Sống Bền Vững">
                         <div class="card-body">
@@ -177,3 +186,18 @@
     </div>
 </div>
 
+<script>
+    document.getElementById('searchButton').addEventListener('click', function() {
+        const searchTerm = document.getElementById('searchInput').value.toLowerCase();
+        const blogItems = document.querySelectorAll('.blog-item');
+
+        blogItems.forEach(function(item) {
+            const title = item.querySelector('.card-title').textContent.toLowerCase();
+            if (title.includes(searchTerm)) {
+                item.style.display = 'block';
+            } else {
+                item.style.display = 'none';
+            }
+        });
+    });
+</script>
