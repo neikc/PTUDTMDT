@@ -16,7 +16,13 @@ namespace PTUDTMDT.Controllers
 
         public IActionResult BlogIndex()
         {
-            return View();
+            var viewModel = new BlogDetailViewModel
+            {
+                BestSellers = GetBestSellers(5),
+                Categories = GetCategories()
+            };
+
+            return View(viewModel);
         }
 
         public IActionResult BlogDetail()
