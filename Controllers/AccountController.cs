@@ -109,11 +109,12 @@ namespace PTUDTMDT.Controllers
                             var claims = new List<Claim>
                             {
                                 // Lưu tên người dùng vào claim
-                                new Claim(ClaimTypes.Name, taikhoan.TenTaiKhoan),
+                                new Claim(ClaimTypes.Name, taikhoan.MaTaiKhoan),
 
                                 // Lưu vai trò của người dùng (admin, user, ...) vào claim
                                 new Claim(ClaimTypes.Role, taikhoan.VaiTro),
                                 new Claim("avatar", (taikhoan.MaKhachHangNavigation?.Hinh) ?? "avatar.jpg"),
+                                new Claim("userName", taikhoan.TenTaiKhoan),
                             };
 
                             // Tạo một danh tính người dùng (identity) dựa trên danh sách claims và dùng cách xác thực bằng cookie
@@ -125,12 +126,12 @@ namespace PTUDTMDT.Controllers
                             // Đăng nhập người dùng bằng cách lưu thông tin vào cookie
                             await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme,claimsPrincipal);
 
+                            // Chuyển hướng đến trang mà người dùng muốn truy cập sau khi đăng nhập
                             if (!string.IsNullOrEmpty(ReturnURL) && Url.IsLocalUrl(ReturnURL))
                             {
                                 return Redirect(ReturnURL);
                             }
                             return RedirectToAction("Index", "Home");
-
                         }
                     }    
                 }    
