@@ -51,7 +51,7 @@ namespace PTUDTMDT.Controllers
             HttpContext.Session.SetObject(CartSessionKey, cart);
 
             TempData["Message"] = "Đã thêm vào giỏ hàng";
-            return RedirectToAction("Cart", "Cart"); // fallback nếu không có returnUrl
+            return RedirectToAction("Cart"); // fallback nếu không có returnUrl
         }
     }
 }

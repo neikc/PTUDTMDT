@@ -1,8 +1,12 @@
-﻿
-@{
+﻿@{
     ViewData["Title"] = "Giỏ Hàng";
 }
+@model IEnumerable<PTUDTMDT.ViewModels.CartViewModel.CartItemViewModel>
 
+@{
+        /**
+
+    
 <!-- Cart Page Start -->
 <div class="container-fluid py-5">
     <div class="container py-5">
@@ -10,124 +14,73 @@
             <table class="table">
                 <thead>
                     <tr>
-                        <th scope="col">Products</th>
-                        <th scope="col">Name</th>
-                        <th scope="col">Price</th>
-                        <th scope="col">Quantity</th>
-                        <th scope="col">Total</th>
-                        <th scope="col">Handle</th>
+                        <!--Cột hình-->
+                        <th scope="col"></th>
+                        <th scope="col">Tên Sản phẩm</th>
+                        <th scope="col">Đơn giá</th>
+                        <th scope="col">Số lượng</th>
+                        <th scope="col">Thành tiền</th>
+                        <!--Cột nút xóa sản phẩm ra khỏi giỏ hàng-->
+                        <th scope="col"></th>
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <th scope="row">
-                            <div class="d-flex align-items-center">
-                                <img src="~/img/vegetable-item-3.png" class="img-fluid me-5 rounded-circle" style="width: 80px; height: 80px;" alt="">
-                            </div>
-                        </th>
-                        <td>
-                            <p class="mb-0 mt-4">Big Banana</p>
-                        </td>
-                        <td>
-                            <p class="mb-0 mt-4">2.99 $</p>
-                        </td>
-                        <td>
-                            <div class="input-group quantity mt-4" style="width: 100px;">
-                                <div class="input-group-btn">
-                                    <button class="btn btn-sm btn-minus rounded-circle bg-light border">
-                                        <i class="fa fa-minus"></i>
-                                    </button>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <!--Cột hình-->
+                            <th scope="row">
+                                <div class="d-flex align-items-center">
+                                    <img src="@Url.Content(item.Product.LayDiaChiHinh(1))" class="img-fluid me-5 rounded-circle" style="width: 80px; height: 80px;" alt="@item.Product.ShortDesc">
                                 </div>
-                                <input type="text" class="form-control form-control-sm text-center border-0" value="1">
-                                <div class="input-group-btn">
-                                    <button class="btn btn-sm btn-plus rounded-circle bg-light border">
-                                        <i class="fa fa-plus"></i>
-                                    </button>
+                            </th>
+                            <!--Cột tên sản phẩm-->
+                            <td>
+                                <p class="mb-0 mt-4">@item.Product.TenSanPham</p>
+                            </td>
+                            <!--Cột giá tiền-->
+                            <td>
+                                @if (item.Product.GiaSauGiam == null) {
+                                    <p class="mb-0 mt-4">@item.Product.FormatPrice(item.Product.GiaSanPham)</p>
+                                }
+                                else {
+                                    <p class="mb-0 mt-4">
+                                        @item.Product.FormatPrice(item.Product.GiaSauGiam)
+                                        <span class="fst-italic" style="text-decoration:line-through">  @item.Product.FormatPrice(item.Product.GiaSanPham)</span>
+                                        <span class="fst-italic">(-@item.Product.GiamGia)%</span>
+                                        </p>
+                                }
+                            </td>
+                            <!--Cột điều chỉnh số lượng-->
+                            <td>
+                                <div class="input-group quantity mt-4" style="width: 100px;">
+                                    <div class="input-group-btn">
+                                        <button class="btn btn-sm btn-minus rounded-circle bg-light border">
+                                            <i class="fa fa-minus"></i>
+                                        </button>
+                                    </div>
+                                    <input type="text" class="form-control form-control-sm text-center border-0" value="@item.Quantity">
+                                    <div class="input-group-btn">
+                                        <button class="btn btn-sm btn-plus rounded-circle bg-light border">
+                                            <i class="fa fa-plus"></i>
+                                        </button>
+                                    </div>
                                 </div>
-                            </div>
-                        </td>
-                        <td>
-                            <p class="mb-0 mt-4">2.99 $</p>
-                        </td>
-                        <td>
-                            <button class="btn btn-md rounded-circle bg-light border mt-4">
-                                <i class="fa fa-times text-danger"></i>
-                            </button>
-                        </td>
+                            </td>
+                            <!--Cột thành tiền-->
+                            <td>
+                                <p class="mb-0 mt-4">@item.Total</p>
+                            </td>
+                            <!--Nút xóa sản phẩm ra khỏi giỏ hàng-->
+                            <td>
+                                <button class="btn btn-md rounded-circle bg-light border mt-4">
+                                    <i class="fa fa-times text-danger"></i>
+                                </button>
+                            </td>
 
-                    </tr>
-                    <tr>
-                        <th scope="row">
-                            <div class="d-flex align-items-center">
-                                <img src="~/img/vegetable-item-5.jpg" class="img-fluid me-5 rounded-circle" style="width: 80px; height: 80px;" alt="" alt="">
-                            </div>
-                        </th>
-                        <td>
-                            <p class="mb-0 mt-4">Potatoes</p>
-                        </td>
-                        <td>
-                            <p class="mb-0 mt-4">2.99 $</p>
-                        </td>
-                        <td>
-                            <div class="input-group quantity mt-4" style="width: 100px;">
-                                <div class="input-group-btn">
-                                    <button class="btn btn-sm btn-minus rounded-circle bg-light border">
-                                        <i class="fa fa-minus"></i>
-                                    </button>
-                                </div>
-                                <input type="text" class="form-control form-control-sm text-center border-0" value="1">
-                                <div class="input-group-btn">
-                                    <button class="btn btn-sm btn-plus rounded-circle bg-light border">
-                                        <i class="fa fa-plus"></i>
-                                    </button>
-                                </div>
-                            </div>
-                        </td>
-                        <td>
-                            <p class="mb-0 mt-4">2.99 $</p>
-                        </td>
-                        <td>
-                            <button class="btn btn-md rounded-circle bg-light border mt-4">
-                                <i class="fa fa-times text-danger"></i>
-                            </button>
-                        </td>
-                    </tr>
-                    <tr>
-                        <th scope="row">
-                            <div class="d-flex align-items-center">
-                                <img src="~/img/vegetable-item-2.jpg" class="img-fluid me-5 rounded-circle" style="width: 80px; height: 80px;" alt="" alt="">
-                            </div>
-                        </th>
-                        <td>
-                            <p class="mb-0 mt-4">Awesome Brocoli</p>
-                        </td>
-                        <td>
-                            <p class="mb-0 mt-4">2.99 $</p>
-                        </td>
-                        <td>
-                            <div class="input-group quantity mt-4" style="width: 100px;">
-                                <div class="input-group-btn">
-                                    <button class="btn btn-sm btn-minus rounded-circle bg-light border">
-                                        <i class="fa fa-minus"></i>
-                                    </button>
-                                </div>
-                                <input type="text" class="form-control form-control-sm text-center border-0" value="1">
-                                <div class="input-group-btn">
-                                    <button class="btn btn-sm btn-plus rounded-circle bg-light border">
-                                        <i class="fa fa-plus"></i>
-                                    </button>
-                                </div>
-                            </div>
-                        </td>
-                        <td>
-                            <p class="mb-0 mt-4">2.99 $</p>
-                        </td>
-                        <td>
-                            <button class="btn btn-md rounded-circle bg-light border mt-4">
-                                <i class="fa fa-times text-danger"></i>
-                            </button>
-                        </td>
-                    </tr>
+                        </tr>
+                    }
+                    
                 </tbody>
             </table>
         </div>
@@ -164,4 +117,67 @@
     </div>
 </div>
 <!-- Cart Page End -->
+**/
+}
+<div class="container-fluid py-5 mt-5">
+    <div class="container py-5">
+        <div class="row d-flex align-items-center gap-4 rounded-2xl">
+            
+            <!-- Sản phẩm trong giỏ hàng (col-7) -->
+            <div class="col-7">
+                @foreach (var item in Model)
+                {
+                    <!-- Sản phẩm 1 -->
+                    <div class="row mb-4">
+                        <!-- Mỗi sản phẩm trong một row -->
+                        <div class="d-flex align-items-center gap-4 rounded-2xl" style="height: 13rem;">
+                            <div class="d-flex justify-content-between w-100">
+                                <div class="container-fluid p-4 rounded bg-light">
+                                    <div class="position-relative row align-items-center w-100">
+                                        <!-- Cột hình ảnh (4/12) -->
+                                        <div class="col-4 d-flex justify-content-center">
+                                            <img src="@item.Product.LayDiaChiHinh(1)" class="img-fluid rounded-circle" alt="@item.Product.TenSanPham">
+                                        </div>
+                                        <!-- Cột thông tin (8/12) -->
+                                        <div class="col-8 d-flex flex-column justify-content-between">
+                                            <div class="d-flex flex-column" style="gap: 2.5px;">
+
+                                                <h5 class="fw-bold mb-2">@item.Product.TenSanPham</h5>
+
+                                                <p class="mb-0 mb-2">Giá tiền</p>
+                                                <!-- Chọn số lượng sản phẩm -->
+                                                <div class="input-group quantity mb-3" style="width: 100px;">
+                                                    <div class="input-group-btn">
+                                                        <!-- Nút giảm số lượng -->
+                                                        <button class="btn btn-sm btn-minus rounded-circle bg-light border" type="button">
+                                                            <i class="fa fa-minus"></i>
+                                                        </button>
+                                                    </div>
+                                                    <!-- Ô nhập số lượng -->
+                                                    <input name="quantity" type="text" class="form-control form-control-sm text-center border-0 bg-light" value="@item.Quantity">
+                                                    <div class="input-group-btn">
+                                                        <!-- Nút tăng số lượng -->
+                                                        <button class="btn btn-sm btn-plus rounded-circle bg-light border" type="button">
+                                                            <i class="fa fa-plus"></i>
+                                                        </button>
+                                                    </div>
+                                                </div>
+                                                <h6 class="mb-2 align-self-end">Tổng tiền: <span class="fw-bold">Số tiền</span></h6>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                }
+            </div>
+            <!-- Empty Column 2 (col-2) -->
+            <div class="col-2"></div>
+
+            <!-- Empty Column 3 (col-3) -->
+            <div class="col-3"></div>
+        </div>
+    </div>
+</div>
 

@@ -98,12 +98,11 @@
                                                     }
                                                 </div>
                                                 <a href="javascript:void(0);"
-                                                   onclick="document.getElementById('addToCartForm_ShopIndex').submit();"
+                                                   onclick="document.getElementById('addToCartForm_ShopIndex+@product.MaSanPham').submit();"
                                                    class="btn border border-secondary rounded-pill px-3 text-primary">
                                                     <i class="fa fa-shopping-bag me-2 text-primary"></i>Thêm vào giỏ hàng
                                                 </a>
-
-                                                <form id="addToCartForm_ShopIndex" action="@Url.Action("AddToCart", "Cart")" method="post" style="display:none;">
+                                                <form id="addToCartForm_ShopIndex+@product.MaSanPham" action="@Url.Action("AddToCart", "Cart")" method="post" style="display:none;">
                                                     <input type="hidden" name="MaSanPham" value="@product.MaSanPham" />
                                                 </form>
                                             </div>
