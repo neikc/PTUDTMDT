@@ -24,7 +24,6 @@
                 <div class="col-lg-7 col-12 shadow rounded py-4 px-4">
                     <!--Thông tin khách hàng-->
                     <form asp-action="CheckOut" asp-controller="Cart" method="post" class="w-100" id="multiPageForm">
-
                         <!-- Bước 1 -->
                         <div class="form-step" id="step1" style="display: block;">
                             <h2 class="d-flex justify-content-center md-3">Thông tin khách hàng</h2>
@@ -197,53 +196,46 @@
                             </form>
 
                             <!--Phần danh sách các voucher của khách hàng-->
-                            <div class="container py-1">
-                                
-                                <p class="text-primary">Voucher của bạn</p>
+                            <h4 class="mt-2 mb-2">Áp dụng voucher</h4>
+                            <div class="container fruite">
                                 @if (Model.VoucherList.Count()==0)
                                 {
                                     <p>Bạn chưa có voucher nào</p>
                                 }
                                 else
                                 {
-                                    <div class="owl-carousel testimonial-carousel">
-                                        @foreach (var item in Model.VoucherList)
-                                        {
-                                            <div class="testimonial-item img-border-radius bg-light rounded p-1"
-                                                 onclick="applyVoucher('@item.MaGiamGia')"
-                                                 style="cursor: pointer">
-                                                <div>
-                                                    <p class="mb-2">@item.TenMa</p>
-                                                    <p class="mb-2">@item.MaGiamGia</p>
-                                                    <p class="mb-2">@(item.GiaTri * 100)%</p>
-                                                    @if (@item.NgayKetThuc != null)
-                                                    {
-                                                        <p class="mb-2">Hết hạn vào: @item.NgayKetThuc</p>
-                                                    }
-                                                    else
-                                                    {
-                                                        <p>Vô thời hạn</p>
-                                                    }
-                                                </div>
+                                    @foreach (var item in Model.VoucherList)
+                                    {
+                                        <div class="p-4 mt-auto border-top-0 rounded fruite-item"
+                                            onclick="applyVoucher('@item.MaGiamGia')"
+                                            style="background-color: white; width:100%">
+                                            <div>
+                                                <p class="mb-2">
+                                                    @item.TenMa
+                                                    <span class="text-warning">
+                                                            (-@(item.GiaTri * 100)%)
+                                                    </span>
+                                                </p>
+                                                <p class="mb-2"><strong>Mã: @item.MaGiamGia</strong></p>
                                             </div>
+                                        </div>
 
-                                            <!-- Thêm form ẩn -->
-                                            <form id="voucherForm" asp-action="ApplyVoucher" method="post">
-                                                <input type="hidden" id="MaGiamGia" name="MaGiamGia" />
-                                            </form>
+                                        <!-- Thêm form ẩn -->
+                                        <form id="voucherListForm_@item.MaGiamGia" asp-action="ApplyVoucher" method="post">
+                                            <input type="hidden" id="MaGiamGiaListForm_@item.MaGiamGia" name="MaGiamGia" />
+                                        </form>
 
-                                            <!-- Thêm script -->
-                                            <script>
-                                                function applyVoucher(maGiamGia) {
-                                                    document.getElementById('MaGiamGia').value = maGiamGia;
-                                                    document.getElementById('voucherForm').submit();
-                                                }
-                                            </script>
-                                        }
-                                    </div>
+                                        <!-- Thêm script -->
+                                        <script>
+                                            function applyVoucher(maGiamGia) 
+                                            {
+                                                document.getElementById('MaGiamGiaListForm_@item.MaGiamGia').value = maGiamGia;
+                                                document.getElementById('voucherListForm_@item.MaGiamGia').submit();
+                                            }
+                                        </script>
+                                    }
                                 }
                             </div>
-
                         </div>
                     </div>
                 </div>
