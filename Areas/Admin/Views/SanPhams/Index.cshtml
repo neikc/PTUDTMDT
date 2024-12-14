@@ -1,0 +1,126 @@
+﻿@model IEnumerable<PTUDTMDT.Models.SanPham>
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.TenSanPham)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.GiaSanPham)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.GiamGia)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.GiaSauGiam)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ShortDesc)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.BestSellers)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.TinhTrang)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.SltonKho)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.HomeFlag)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.MoTa)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Hinh1)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Hinh2)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.NgaySanXuat)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.HanSuDung)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Alias)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.MaLoaiNavigation)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.TenSanPham)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.GiaSanPham)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.GiamGia)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.GiaSauGiam)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ShortDesc)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.BestSellers)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TinhTrang)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.SltonKho)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.HomeFlag)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.MoTa)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Hinh1)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Hinh2)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.NgaySanXuat)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.HanSuDung)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Alias)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.MaLoaiNavigation.MaLoai)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.MaSanPham">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.MaSanPham">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.MaSanPham">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

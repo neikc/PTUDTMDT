@@ -87,6 +87,7 @@ namespace PTUDTMDT.Controllers
             {
                 var taikhoan = _context.TaiKhoans
                     .FirstOrDefault(tk => tk.TenTaiKhoan == model.TenTaiKhoan && tk.MatKhau == model.MatKhau);
+                
                 if (taikhoan == null)
                 {
                     ModelState.AddModelError("", "Sai thông tin đăng nhập");
