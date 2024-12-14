@@ -149,7 +149,7 @@
                         });
                     </script>
                 </div>
-                <!-- Bill tạm -->
+                <!-- Phần thanh bên thể hiện thông tin và áp dụng mã giảm giá -->
                 <div class="col-lg-4 col-12">
                     <div class="d-flex align-items-center rounded-2xl">
                         <div class="flex-column justify-content-center w-100 p-4 mt-lg-6 rounded bg-light">
@@ -159,11 +159,91 @@
                                 <span class="float-end">@Model.ItemList.Sum(x => x.Quantity)</span>
                             </p>
                             <p class="mb-2">
-                                Thành tiền
+                                Tạm tính
                                 <span class="float-end">@Model.ItemList.Sum(x => x.Total).ToString("#,0")đ</span>
                             </p>
-                            <a href="@Url.Action("ShopIndex","Shop")" class="btn border border-secondary rounded-pill px-3 text-primary mb-1"><i class="fa fa-shopping-bag me-2 text-primary"></i>Tiếp tục mua sắm</a>
-                            <a href="@Url.Action("CheckOut")" class="btn border border-secondary rounded-pill px-3 text-primary mb-2"><i class="fa fa-shopping-bag me-2 text-primary"></i>Thanh toán</a>
+                            <p class="mb-2">
+                                Phí vận chuyển
+                                <span class="float-end">0đ</span>
+                            </p>
+                            <p class="mb-2">
+                                <b>Thành tiền</b>
+                                <span class="float-end">
+                                    @(Model.TongTienSauGiam.HasValue && Model.TongTienSauGiam.Value > 0
+                                        ? Model.TongTienSauGiam.Value.ToString("#,0")
+                                        : Model.ItemList.Sum(x => x.Total).ToString("#,0"))
+                                    đ
+                                </span>
+                            </p>
+
+                            @if (!string.IsNullOrEmpty(Model.MaGiamGia))
+                            {
+                                <div>
+                                    <p>Mã giảm giá đang áp dụng: @Model.MaGiamGia</p>
+                                    <form asp-action="RemoveVoucher" method="post">
+                                        <button type="submit" class="btn btn-danger">Hủy mã giảm giá</button>
+                                    </form>
+                                </div>
+                            }
+
+                            <!--Phần form áp dụng mã giảm giá-->
+                            <form asp-action="ApplyVoucher" method="post" class="mb-4 mt-3" id="voucherform">
+                                <div class="form-group">
+                                    <div class="input-group">
+                                        <input type="text" id="MaGiamGia" name="MaGiamGia" class="form-control" placeholder="Nhập mã giảm giá" required>
+                                        <button type="submit" class="btn btn-primary">Áp dụng</button>
+                                    </div>
+                                </div>
+                            </form>
+
+                            <!--Phần danh sách các voucher của khách hàng-->
+                            <div class="container py-1">
+                                
+                                <p class="text-primary">Voucher của bạn</p>
+                                @if (Model.VoucherList.Count()==0)
+                                {
+                                    <p>Bạn chưa có voucher nào</p>
+                                }
+                                else
+                                {
+                                    <div class="owl-carousel testimonial-carousel">
+                                        @foreach (var item in Model.VoucherList)
+                                        {
+                                            <div class="testimonial-item img-border-radius bg-light rounded p-1"
+                                                 onclick="applyVoucher('@item.MaGiamGia')"
+                                                 style="cursor: pointer">
+                                                <div>
+                                                    <p class="mb-2">@item.TenMa</p>
+                                                    <p class="mb-2">@item.MaGiamGia</p>
+                                                    <p class="mb-2">@(item.GiaTri * 100)%</p>
+                                                    @if (@item.NgayKetThuc != null)
+                                                    {
+                                                        <p class="mb-2">Hết hạn vào: @item.NgayKetThuc</p>
+                                                    }
+                                                    else
+                                                    {
+                                                        <p>Vô thời hạn</p>
+                                                    }
+                                                </div>
+                                            </div>
+
+                                            <!-- Thêm form ẩn -->
+                                            <form id="voucherForm" asp-action="ApplyVoucher" method="post">
+                                                <input type="hidden" id="MaGiamGia" name="MaGiamGia" />
+                                            </form>
+
+                                            <!-- Thêm script -->
+                                            <script>
+                                                function applyVoucher(maGiamGia) {
+                                                    document.getElementById('MaGiamGia').value = maGiamGia;
+                                                    document.getElementById('voucherForm').submit();
+                                                }
+                                            </script>
+                                        }
+                                    </div>
+                                }
+                            </div>
+
                         </div>
                     </div>
                 </div>

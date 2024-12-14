@@ -31,5 +31,9 @@ namespace PTUDTMDT.ViewModels.CartViewModel
 
         // Phương thức thanh toán
         public string? MaPttt { get; set; }
+
+        // Dành cho phần áp dụng mã giảm giá
+        public string? MaGiamGia { get; set; }
+        public double? TongTienSauGiam { get; set; } // Tính tổng tiền sau khi giảm
     }
 }
