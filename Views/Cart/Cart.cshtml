@@ -25,7 +25,7 @@
                     @foreach (var item in Model.ItemList)
                     {
                         <div class="row mt-lg-6">
-                            <div class="d-flex align-items-center gap-4 rounded-2xl" style="height: 13rem;">
+                            <div class="d-flex align-items-center gap-4 rounded-2xl">
                                 <div class="d-flex justify-content-between w-100">
                                     <div class="container-fluid p-4 mt-lg-6 rounded bg-light">
                                         <div class="position-relative row align-items-center w-100">
@@ -37,8 +37,8 @@
                                                 </button>
                                             </form>
                                             <!-- Cột hình ảnh (4/12) -->
-                                            <div class="col-4 d-flex justify-content-center rounded" style="object-fit:contain">
-                                                <img src="@Url.Content(@item.Product.LayDiaChiHinh(1))" class="img-fluid rounded-circle" alt="@item.Product.TenSanPham">
+                                            <div class="col-4 d-flex justify-content-center rounded" style="object-fit:contain; max-height:200px; max-width:200px">
+                                                <img src="@Url.Content(@item.Product.LayDiaChiHinh(1))" class="img-fluid rounded-circle" style="object-fit:contain" alt="@item.Product.TenSanPham">
                                             </div>
                                             <!-- Cột thông tin (8/12) -->
                                             <div class="col-8 d-flex flex-column justify-content-between">
@@ -180,7 +180,7 @@
                             <div class="border border-primary rounded position-relative vesitable-item">
                                 <div class="vesitable-img">
                                     <a href="@Url.Action("ShopDetail", "Shop", new { MaSanPham = product.MaSanPham })">
-                                        <img src="@Url.Content(product.LayDiaChiHinh(1))" class="img-fluid w-100 rounded-top" style="max-height:305px; object-fit: contain" alt="@product.ShortDesc">
+                                        <img src="@Url.Content(product.LayDiaChiHinh(1))" class="img-fluid w-100 rounded-top" style="max-height:200px; object-fit: contain" alt="@product.ShortDesc">
                                 </div>
                                 <div class="text-white bg-primary px-3 py-1 rounded position-absolute" style="top: 10px; right: 10px;">@product.MaLoaiNavigation.TenLoai</div>
                                 <div class="p-4 pb-0 rounded-bottom">

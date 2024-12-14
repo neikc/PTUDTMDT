@@ -107,111 +107,117 @@ namespace PTUDTMDT.Controllers
 
 
         [Authorize]
+        [HttpGet]
         public IActionResult CheckOut()
         {
-            var cart = new List<CartItemViewModel>();
             var MaTaiKhoan = User.Identity.Name;
 
-            // Lấy giỏ hàng từ session
-            var sessionCart = HttpContext.Session.GetObject<List<CartItemViewModel>>(CartSessionKey) ?? new List<CartItemViewModel>();
+            var user = _context.TaiKhoans
+                .Include(t => t.MaKhachHangNavigation)
+                .ThenInclude(kh => kh.MaDiaChiNavigation)
+                .FirstOrDefault(t => t.MaTaiKhoan == MaTaiKhoan);
 
-            // Lấy đơn hàng có trạng thái "Cart" để làm giỏ hàng từ DB
+            // Lấy đơn hàng có trạng thái "Cart" từ DB
             var logincart = _context.DonHangs
                 .Include(d => d.ChiTietDonHangs)
                 .ThenInclude(c => c.MaSanPhamNavigation)
                 .FirstOrDefault(d => d.MaTaiKhoan == MaTaiKhoan && d.TrangThai == "Cart");
 
-            // Kiểm tra nếu có giỏ hàng trong DB
-            if (logincart != null)
+            // Tạo giỏ hàng từ DB
+            var cart = logincart?.ChiTietDonHangs.Select(c => new CartItemViewModel
             {
-                cart = logincart.ChiTietDonHangs.Select(c => new CartItemViewModel
-                {
-                    Product = c.MaSanPhamNavigation,
-                    Quantity = c.SoLuong ?? 0
-                }).ToList();
-            }
+                Product = c.MaSanPhamNavigation,
+                Quantity = c.SoLuong ?? 0
+            }).ToList() ?? new List<CartItemViewModel>();
 
-            // Gộp giỏ hàng từ session vào giỏ hàng trong DB nếu người dùng đã đăng nhập
-            if (sessionCart.Any())
-            {
-                // Nếu đã có giỏ hàng trong DB, ta gộp lại
-                if (logincart != null)
-                {
-                    foreach (var sessionItem in sessionCart)
-                    {
-                        var dbItem = logincart.ChiTietDonHangs
-                            .FirstOrDefault(c => c.MaSanPham == sessionItem.Product.MaSanPham);
-
-                        if (dbItem != null)
-                        {
-                            // Cập nhật số lượng trong DB
-                            dbItem.SoLuong += sessionItem.Quantity;
-                            dbItem.TongTienSp = dbItem.SoLuong * dbItem.MaSanPhamNavigation.GiaSauGiam;
-                        }
-                        else
-                        {
-                            // Thêm mới sản phẩm vào giỏ hàng trong DB
-                            _context.ChiTietDonHangs.Add(new ChiTietDonHang
-                            {
-                                MaCtdh = Guid.NewGuid().ToString(),
-                                MaDonHang = logincart.MaDonHang,
-                                MaSanPham = sessionItem.Product.MaSanPham,
-                                SoLuong = sessionItem.Quantity,
-                                GiaSanPham = sessionItem.Product.GiaSauGiam,
-                                TongTienSp = sessionItem.Quantity * sessionItem.Product.GiaSauGiam
-                            });
-                        }
-                    }
-
-                    _context.SaveChanges();
-                }
-                else
-                {
-                    // Nếu giỏ hàng trong DB chưa tồn tại, tạo mới một DonHang và ChiTietDonHang
-                    var newDonHang = new DonHang
-                    {
-                        MaDonHang = Guid.NewGuid().ToString(),
-                        MaTaiKhoan = MaTaiKhoan,
-                        TrangThai = "Cart",
-                        NgayLenDon = DateTime.Now,
-                        TongTien = sessionCart.Sum(item => item.Quantity * item.Product.GiaSauGiam)
-                    };
-
-                    _context.DonHangs.Add(newDonHang);
-                    _context.SaveChanges(); // Lưu DonHang vào DB
-
-                    // Thêm các sản phẩm trong session vào ChiTietDonHang
-                    foreach (var sessionItem in sessionCart)
-                    {
-                        _context.ChiTietDonHangs.Add(new ChiTietDonHang
-                        {
-                            MaDonHang = newDonHang.MaDonHang,
-                            MaSanPham = sessionItem.Product.MaSanPham,
-                            SoLuong = sessionItem.Quantity,
-                            GiaSanPham = sessionItem.Product.GiaSauGiam,
-                            TongTienSp = sessionItem.Quantity * sessionItem.Product.GiaSauGiam
-                        });
-                    }
-
-                    _context.SaveChanges(); // Lưu ChiTietDonHang vào DB
-                }
-
-                // Xóa giỏ hàng trong session sau khi đã gộp vào DB
-                HttpContext.Session.Clear();
-            }
-
-            // Tạo ViewModel và trả về view
+            // Tạo ViewModel để hiển thị thông tin trong view
             var ViewModel = new CheckOutViewModel
             {
                 ItemList = cart,
                 OnSale = GetOnSale(10),
-                User = _context.TaiKhoans.Find(User.Identity.Name),
                 VoucherList = GetVoucherList(User.Identity.Name),
-                BestSellers = GetBestSellers(10)
-            };
+                BestSellers = GetBestSellers(10),
 
+                HoTen = user.MaKhachHangNavigation.HoTen,
+                Email = user.Email,
+                SoDienThoai = user.MaKhachHangNavigation.SoDienThoai,
+                DiaChi = user.MaKhachHangNavigation.MaDiaChiNavigation.TenDiaChi
+            };
             return View(ViewModel);
         }
+
+        [Authorize]
+        [HttpPost]
+        public IActionResult CheckOut(CheckOutViewModel model)
+        {
+            if (!ModelState.IsValid)
+            {
+                // Gửi lại thông tin view nếu form không hợp lệ
+                model.OnSale = GetOnSale(10);
+                model.VoucherList = GetVoucherList(User.Identity.Name);
+                model.BestSellers = GetBestSellers(10);
+                return View(model);
+            }
+
+            // Lấy tài khoản người dùng
+            var MaTaiKhoan = User.Identity.Name;
+
+            // Lấy đơn hàng "Cart", tức là lấy giỏ hàng ra từ CSDL
+            var cartDonHang = _context.DonHangs
+                .Include(d => d.ChiTietDonHangs)
+                .ThenInclude(c => c.MaSanPhamNavigation)
+                .FirstOrDefault(d => d.MaTaiKhoan == MaTaiKhoan && d.TrangThai == "Cart");
+
+            if (cartDonHang == null || !cartDonHang.ChiTietDonHangs.Any())
+            {
+                ModelState.AddModelError("", "Giỏ hàng của bạn đang trống hoặc không tồn tại.");
+                return View(model);
+            }
+
+            // Cập nhật thông tin đơn hàng với dữ liệu từ form
+            #region Cập nhật dữ liệu từ form vào CSDL
+            // Kiểm tra nếu phương thức giao hàng là Delivery
+            if (model.MaGiaoHang == "Delivery")
+            {
+                // Tạo MaGiaoHang mới và gán cho đơn hàng
+                cartDonHang.MaGiaoHang = Guid.NewGuid().ToString();
+
+                // Tạo một đối tượng mới cho bảng GiaoHang và thêm vào DB
+                var newGiaoHang = new GiaoHang
+                {
+                    MaGiaoHang = cartDonHang.MaGiaoHang,
+                    // Các thuộc tính khác có thể để trống (empty)
+                };
+                _context.GiaoHangs.Add(newGiaoHang);
+            }
+            else
+            {
+                // Nếu không phải Delivery, gán giá trị Pickup
+                cartDonHang.MaGiaoHang = "Pickup";
+            }
+            cartDonHang.MaPttt = model.MaPttt;
+            cartDonHang.DiaChi = model.DiaChi;
+            cartDonHang.GhiChu = model.GhiChu;
+            cartDonHang.TrangThai = "Đang xử lý"; // Đổi trạng thái thành "Pending"
+            cartDonHang.TtthanhToan = false;   // Chưa thanh toán
+            cartDonHang.NgayLenDon = DateTime.Now;
+            cartDonHang.TongTien = cartDonHang.ChiTietDonHangs.Sum(c => c.SoLuong * c.GiaSanPham); // Tính tổng tiền
+
+            // Lưu thay đổi
+            _context.DonHangs.Update(cartDonHang);
+            _context.SaveChanges();
+            #endregion
+
+            // Chuyển hướng tới trang xác nhận
+            TempData["SuccessMessage"] = "Đơn hàng của bạn đã được xử lý thành công!";
+            return RedirectToAction("OrderConfirmation", new { maDonHang = cartDonHang.MaDonHang });
+        }
+
+        public IActionResult OrderConfirmation()
+        {
+            return View();
+        }
+
 
         [HttpPost]
         public IActionResult AddToCart(string MaSanPham, int quantity = 1)
@@ -396,7 +402,7 @@ namespace PTUDTMDT.Controllers
         {
             return _context.GiamGia
              .Where(g => g.MaGiamGia.StartsWith(MaTaiKhoan + "voucher"))
-             .ToList();
+             .ToList() ?? new List<GiamGium>();
         }
         #endregion
     }
