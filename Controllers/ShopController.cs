@@ -124,7 +124,6 @@ namespace PTUDTMDT.Controllers
                 .ToList();
         }
 
-
         private IQueryable<SanPham> BuildBaseQuery(ShopFilterModel filter)
         {
             if (string.IsNullOrEmpty(filter.SearchTerm))

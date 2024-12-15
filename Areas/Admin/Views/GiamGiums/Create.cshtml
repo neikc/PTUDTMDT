@@ -1,0 +1,70 @@
+﻿@model PTUDTMDT.Models.GiamGium
+
+@{
+    ViewData["Title"] = "Create";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<div class="container-fluid py-5 mt-5">
+    <div class="row">
+        <div class="col-md-8">
+            <h1>Tạo Mã Giảm Giá</h1>
+            <hr />
+            <form asp-action="Create">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+                <div class="form-group mt-2">
+                    <label asp-for="MaGiamGia" class="control-label">Mã Giảm Giá</label>
+                    <input asp-for="MaGiamGia" placeholder="Nhập mã giảm giá" class="form-control" />
+                    <span asp-validation-for="MaGiamGia" class="text-danger"></span>
+                </div>
+
+                <div class="form-group mt-2">
+                    <label asp-for="TenMa" class="control-label">Tên Mã</label>
+                    <input asp-for="TenMa" placeholder="Nhập tên mã giảm giá" class="form-control" />
+                    <span asp-validation-for="TenMa" class="text-danger"></span>
+                </div>
+
+                <div class="form-group mt-2">
+                    <label asp-for="GiaTri" class="control-label">Giá Trị</label>
+                    <input asp-for="GiaTri" placeholder="Nhập giá trị giảm giá" class="form-control" />
+                    <span asp-validation-for="GiaTri" class="text-danger"></span>
+                </div>
+
+                <div class="form-group mt-2">
+                    <label asp-for="NgayBatDau" class="control-label">Ngày Bắt Đầu</label>
+                    <input asp-for="NgayBatDau" placeholder="Nhập ngày bắt đầu (yyyy-MM-dd)" class="form-control" />
+                    <span asp-validation-for="NgayBatDau" class="text-danger"></span>
+                </div>
+
+                <div class="form-group mt-2">
+                    <label asp-for="NgayKetThuc" class="control-label">Ngày Kết Thúc</label>
+                    <input asp-for="NgayKetThuc" placeholder="Nhập ngày kết thúc (yyyy-MM-dd)" class="form-control" />
+                    <span asp-validation-for="NgayKetThuc" class="text-danger"></span>
+                </div>
+
+                <div class="form-group mt-2">
+                    <label asp-for="SoLuong" class="control-label">Số Lượng</label>
+                    <input asp-for="SoLuong" placeholder="Nhập số lượng mã giảm giá" class="form-control" />
+                    <span asp-validation-for="SoLuong" class="text-danger"></span>
+                </div>
+
+                <div class="form-group mt-2">
+                    <label asp-for="TrangThai" class="control-label">Trạng Thái</label>
+                    <input asp-for="TrangThai" placeholder="Nhập trạng thái (true/false)" class="form-control" />
+                    <span asp-validation-for="TrangThai" class="text-danger"></span>
+                </div>
+
+                <div class="form-group mt-2">
+                    <input type="submit" value="Tạo Mới" class="btn border border-secondary rounded-pill px-3 text-primary" />
+                </div>
+            </form>
+            <hr />
+            <div>
+                <a asp-action="Index" class="btn border border-secondary rounded-pill px-3 text-primary">
+                    <i class="fa fa-arrow-left me-2 text-primary"></i> Quay lại danh sách
+                </a>
+            </div>
+        </div>
+    </div>
+</div>

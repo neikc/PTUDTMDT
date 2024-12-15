@@ -1,0 +1,17 @@
+﻿
+@{
+    ViewData["Title"] = "AccessDenied";
+    Layout = "~/Views/Shared/_LayoutAccount.cshtml";
+}
+
+<div class="container-fluid py-5 mt-5">
+    <div class="text-center">
+        <h2>Bạn không có quyền truy cập vào trang này hoặc trang không tồn tại</h2>
+        <h2>Vui lòng liên hệ quản trị viên để biết thêm chi tiết</h2>
+        <a href="@Url.Action("Index","Home")"
+           class="btn border border-secondary rounded-pill px-3 text-primary mt-3 py-2">
+            <i class="fa fa-shopping-bag me-2 text-primary"></i>Quay về trang chủ
+        </a>
+    </div>
+</div>
+

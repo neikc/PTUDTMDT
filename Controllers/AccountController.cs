@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using PTUDTMDT.Models;
 using PTUDTMDT.ViewModels.AccountViewModel;
 using System;
@@ -87,6 +88,7 @@ namespace PTUDTMDT.Controllers
             {
                 var taikhoan = _context.TaiKhoans
                     .FirstOrDefault(tk => tk.TenTaiKhoan == model.TenTaiKhoan && tk.MatKhau == model.MatKhau);
+                
                 if (taikhoan == null)
                 {
                     ModelState.AddModelError("", "Sai thông tin đăng nhập");
@@ -143,9 +145,66 @@ namespace PTUDTMDT.Controllers
 
         #region Profile
         [Authorize]
+        [HttpGet]
         public IActionResult Profile()
         {
-            return View();
+            var MaTaiKhoan = User.Identity.Name;
+            var khachhang = _context.TaiKhoans
+                .Include(kh => kh.MaKhachHangNavigation)
+                .FirstOrDefault(kh => kh.MaTaiKhoan == MaTaiKhoan);
+
+            var ThongTin = new RegisterViewModel
+            {
+                MatKhau = khachhang.MatKhau,
+                TenTaiKhoan = khachhang.TenTaiKhoan,
+                HoTen = khachhang.MaKhachHangNavigation.HoTen,
+                GioiTinh = khachhang.MaKhachHangNavigation.GioiTinh,
+                SoDienThoai = khachhang.MaKhachHangNavigation.SoDienThoai,
+                Email = khachhang.MaKhachHangNavigation.Email,
+                NgaySinh = khachhang.MaKhachHangNavigation.NgaySinh,
+                QuanHuyen = khachhang.MaKhachHangNavigation.QuanHuyen,
+                PhuongXa = khachhang.MaKhachHangNavigation.PhuongXa,
+                Hinh = khachhang.MaKhachHangNavigation.Hinh
+            };
+
+            var viewModel = new ProfileViewModel
+            {
+                ThongTin = ThongTin,
+                DonHangDangXuLy = _context.DonHangs.Where(dh => dh.MaTaiKhoanNavigation.MaKhachHang == khachhang.MaKhachHang && dh.TrangThai == "Đang xử lý").ToList(),
+                DonHangDaXuLy = _context.DonHangs.Where(dh => dh.MaTaiKhoanNavigation.MaKhachHang == khachhang.MaKhachHang && dh.TrangThai == "Đã xử lý").ToList(),
+                DonHangHoanTat = _context.DonHangs.Where(dh => dh.MaTaiKhoanNavigation.MaKhachHang == khachhang.MaKhachHang && dh.TrangThai == "Đã xong").ToList()
+            };
+            return View(viewModel);
+        }
+
+        [Authorize]
+        [HttpPost]
+        public IActionResult Profile(ProfileViewModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                var MaTaiKhoan = User.Identity.Name;
+                var taikhoan = _context.TaiKhoans
+                    .Include(kh => kh.MaKhachHangNavigation)
+                    .FirstOrDefault(kh => kh.MaTaiKhoan == MaTaiKhoan);
+
+                taikhoan.MatKhau = model.ThongTin.MatKhau;
+                taikhoan.MaKhachHangNavigation.HoTen = model.ThongTin.HoTen;
+                taikhoan.MaKhachHangNavigation.GioiTinh = model.ThongTin.GioiTinh;
+                taikhoan.MaKhachHangNavigation.SoDienThoai = model.ThongTin.SoDienThoai;
+                taikhoan.MaKhachHangNavigation.Email = model.ThongTin.Email;
+                taikhoan.MaKhachHangNavigation.NgaySinh = model.ThongTin.NgaySinh;
+                taikhoan.MaKhachHangNavigation.QuanHuyen = model.ThongTin.QuanHuyen;
+                taikhoan.MaKhachHangNavigation.PhuongXa = model.ThongTin.PhuongXa;
+                taikhoan.MaKhachHangNavigation.Hinh = model.ThongTin.Hinh;
+
+                _context.SaveChanges();
+                return RedirectToAction("Profile", "Account");
+
+            } else
+            {
+                return View("Profile", model);
+            }
         }
         #endregion
 

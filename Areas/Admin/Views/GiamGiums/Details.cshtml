@@ -1,0 +1,68 @@
+﻿@model PTUDTMDT.Models.GiamGium
+
+@{
+    ViewData["Title"] = "Details";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<div class="container-fluid py-5 mt-5">
+    <div>
+        <h1>Chi tiết mã giảm giá</h1>
+        <h4>@Model.MaGiamGia - @Model.TenMa</h4>
+    </div>
+    <hr />
+    <div>
+        <dl class="row">
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.TenMa)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.TenMa)
+            </dd>
+
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.GiaTri)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.GiaTri)
+            </dd>
+
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.NgayBatDau)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.NgayBatDau)
+            </dd>
+
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.NgayKetThuc)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.NgayKetThuc)
+            </dd>
+
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.SoLuong)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.SoLuong)
+            </dd>
+
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.TrangThai)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.TrangThai)
+            </dd>
+        </dl>
+    </div>
+
+    <div class="mt-2">
+        <a asp-action="Edit" asp-route-id="@Model?.MaGiamGia" class="btn border border-secondary rounded-pill px-3 text-primary">
+            <i class="fa fa-edit me-2 text-primary"></i> Chỉnh sửa
+        </a>
+        <a asp-action="Index" class="btn border border-secondary rounded-pill px-3 text-primary">
+            <i class="fa fa-arrow-left me-2 text-primary"></i> Danh sách Mã giảm giá
+        </a>
+    </div>
+</div>

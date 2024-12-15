@@ -1,0 +1,56 @@
+﻿@model PTUDTMDT.Models.LoaiSanPham
+
+@{
+    ViewData["Title"] = "Edit";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<div class="container-fluid py-5 mt-5">
+    <div>
+        <h1>Chỉnh sửa thông tin</h1>
+        <h4>@Model.MaLoai - @Model.TenLoai</h4>
+    </div>
+    <hr />
+    <div class="row">
+        <div class="col-md-4">
+            <form asp-action="Edit">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <input type="hidden" asp-for="MaLoai" />
+
+                <div class="form-group mt-2">
+                    <label asp-for="TenLoai" class="control-label">Tên loại sản phẩm</label>
+                    <input asp-for="TenLoai" placeholder="Nhập tên loại sản phẩm" class="form-control" />
+                    <span asp-validation-for="TenLoai" class="text-danger"></span>
+                </div>
+
+                <div class="form-group mt-2">
+                    <label asp-for="MoTa" class="control-label">Mô tả</label>
+                    <input asp-for="MoTa" placeholder="Nhập mô tả loại sản phẩm" class="form-control" />
+                    <span asp-validation-for="MoTa" class="text-danger"></span>
+                </div>
+
+                <div class="form-group mt-2">
+                    <label asp-for="Hinh" class="control-label">Hình ảnh</label>
+                    <input asp-for="Hinh" placeholder="Nhập URL hình ảnh" class="form-control" />
+                    <span asp-validation-for="Hinh" class="text-danger"></span>
+                </div>
+
+                <div class="form-group mt-2">
+                    <label asp-for="Alias" class="control-label">Alias</label>
+                    <input asp-for="Alias" placeholder="Nhập bí danh loại sản phẩm" class="form-control" />
+                    <span asp-validation-for="Alias" class="text-danger"></span>
+                </div>
+
+                <div class="form-group mt-2">
+                    <input type="submit" value="Lưu" class="btn border border-secondary rounded-pill px-3 text-primary" />
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div class="mt-2">
+        <a asp-action="Index" class="btn border border-secondary rounded-pill px-3 text-primary">
+            <i class="fa fa-arrow-left me-2 text-primary"></i> Danh sách Loại sản phẩm
+        </a>
+    </div>
+</div>

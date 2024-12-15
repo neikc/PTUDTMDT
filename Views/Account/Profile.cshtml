@@ -2,7 +2,238 @@
 @{
     ViewData["Title"] = "Profile";
 }
+@model PTUDTMDT.ViewModels.AccountViewModel.ProfileViewModel
 
-<h1>Profile</h1>
-<a asp-action="LogOut">Logout</a>
+<div class="container mt-7" style="margin-top:7em; margin-bottom:7em">
+    <div class="row justify-content-center">
+        <div class="col-lg-8">
+            <div class="card shadow p-4">
+                <h2 class="text-center mb-4">Thông tin khách hàng</h2>
+                <form asp-action="Register" method="post" enctype="multipart/form-data">
+                    <div class="row">
+                        <div class="col-lg-6 col-12">
+                            <!-- Tên tài khoản -->
+                            <div class="mb-3">
+                                <label for="TenTaiKhoan" class="form-label">Tên tài khoản:</label>
+                                <input type="text" id="TenTaiKhoan" asp-for="ThongTin.TenTaiKhoan" class="form-control"
+                                       required placeholder="@Model.ThongTin.TenTaiKhoan"
+                                value="@Model.ThongTin.TenTaiKhoan">
+                                <span asp-validation-for="ThongTin.TenTaiKhoan" class="text-danger"></span>
+                            </div>
+
+                            <!-- Họ tên -->
+                            <div class="mb-3">
+                                <label for="HoTen" class="form-label">Họ tên:</label>
+                                <input type="text" id="HoTen" asp-for="ThongTin.HoTen" class="form-control"
+                                       required placeholder="@Model.ThongTin.HoTen"
+                                value="@Model.ThongTin.HoTen">
+                                <span asp-validation-for="ThongTin.HoTen" class="text-danger"></span>
+                            </div>
+
+                            <!-- Ngày sinh -->
+                            <div class="mb-3">
+                                <label for="NgaySinh" class="form-label">Ngày sinh:</label>
+                                <input type="date" id="NgaySinh" asp-for="ThongTin.NgaySinh" class="form-control"
+                                       value="@Model.ThongTin.NgaySinh?.ToString("yyyy-MM-dd")">
+                                <span asp-validation-for="ThongTin.NgaySinh" class="text-danger"></span>
+                            </div>
+
+                        </div>
+
+                        <div class="col-lg-6 col-12">
+                            <!-- Mật khẩu -->
+                            <div class="mb-3">
+                                <label for="MatKhau" class="form-label">Mật khẩu:</label>
+                                <input type="password" id="MatKhau" asp-for="ThongTin.MatKhau" class="form-control"
+                                       required placeholder="Mật khẩu ở đây">
+                                <span asp-validation-for="ThongTin.MatKhau" class="text-danger"></span>
+                            </div>
+
+                            <!-- Giới tính -->
+                            <div class="mb-3">
+                                <label class="form-label">Giới tính:</label>
+                                <div class="d-flex">
+                                    @if (Model.ThongTin.GioiTinh == true)
+                                    {
+                                        <div class="form-check me-3">
+                                            <input type="radio" id="GioiTinhNam" asp-for="ThongTin.GioiTinh" class="form-check-input" value="true">
+                                            <label for="GioiTinhNam" class="form-check-label">Nam</label>
+                                        </div>
+                                        <div class="form-check">
+                                            <input type="radio" id="GioiTinhNu" asp-for="ThongTin.GioiTinh" class="form-check-input" value="false">
+                                            <label for="GioiTinhNu" class="form-check-label">Nữ</label>
+                                        </div>
+                                    }
+                                    else
+                                    {
+                                        <div class="form-check me-3">
+                                            <input type="radio" id="GioiTinhNam" asp-for="ThongTin.GioiTinh" class="form-check-input" value="false">
+                                            <label for="GioiTinhNam" class="form-check-label">Nam</label>
+                                        </div>
+                                        <div class="form-check">
+                                            <input type="radio" id="GioiTinhNu" asp-for="ThongTin.GioiTinh" class="form-check-input" value="true">
+                                            <label for="GioiTinhNu" class="form-check-label">Nữ</label>
+                                        </div>
+                                    }
+
+                                </div>
+                                <span asp-validation-for="ThongTin.GioiTinh" class="text-danger"></span>
+                            </div>
+
+                            <!-- Số điện thoại -->
+                            <div class="mb-3">
+                                <label for="SoDienThoai" class="form-label">Số điện thoại:</label>
+                                <input type="tel" id="SoDienThoai" asp-for="ThongTin.SoDienThoai" class="form-control"
+                                       placeholder="@Model.ThongTin.SoDienThoai"
+                                value="@Model.ThongTin.SoDienThoai">
+                                <span asp-validation-for="ThongTin.SoDienThoai" class="text-danger"></span>
+                            </div>
+
+
+                        </div>
+                    </div>
+                    
+                    <!-- Email -->
+                    <div class="mb-3 row">
+                        <label for="Email" class="form-label">Email:</label>
+                        <input type="email" id="Email" asp-for="ThongTin.Email" class="form-control"
+                               placeholder="@Model.ThongTin.Email"
+                        value="@Model.ThongTin.Email">
+                        <span asp-validation-for="ThongTin.Email" class="text-danger"></span>
+                    </div>
+                    
+                    <div class="row">
+                        <div class="col-lg-6 col-12">
+                            <!-- Quận - Huyện -->
+                            <div class="mb-3">
+                                <label for="QuanHuyen" class="form-label">Quận - Huyện:</label>
+                                <input type="text" id="QuanHuyen" asp-for="ThongTin.QuanHuyen" class="form-control"
+                                       placeholder="@Model.ThongTin.QuanHuyen"
+                                value="@Model.ThongTin.QuanHuyen">
+                                <span asp-validation-for="ThongTin.QuanHuyen" class="text-danger"></span>
+                            </div>
+                        </div>
+                        <div class="col-lg-6 col-12">
+                            <!-- Phường - Xã -->
+                            <div class="mb-3">
+                                <label for="PhuongXa" class="form-label">Phường - Xã:</label>
+                                <input type="text" id="PhuongXa" asp-for="ThongTin.PhuongXa" class="form-control"
+                                       placeholder="@Model.ThongTin.PhuongXa"
+                                value="@Model.ThongTin.PhuongXa">
+                                <span asp-validation-for="ThongTin.PhuongXa" class="text-danger"></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="d-flex justify-content-end mb-2 mt-1">
+                        <!-- Nút Lưu thay đổi -->
+                        <div class="d-grid mx-2">
+                            <button type="submit" class="btn btn-primary">Lưu thay đổi</button>
+                        </div>
+
+                        <!--Nút đăng xuất-->
+                        <div class="d-grid mx-2">
+                            <a asp-action="LogOut" class="btn btn-danger">Đăng xuất</a>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <!-- Tabs cho mô tả và đánh giá sản phẩm -->
+    <div class="row justify-content-between mt-4">
+        <div class="col-lg-10 justify-content-between">
+        <nav>
+            <h2>Đơn hàng của bạn:  </h2>
+            <div class="nav nav-tabs mb-3">
+                <!-- Tab đơn hàng đang xử lý -->
+                <button class="nav-link active border-white border-bottom-0" type="button" role="tab"
+                        id="nav-about-tab" data-bs-toggle="tab" data-bs-target="#nav-about"
+                        aria-controls="nav-about" aria-selected="true">
+                    Đang xử lý
+                </button>
+                <!-- Tab đơn hàng đã xử lý-->
+                <button class="nav-link border-white border-bottom-0" type="button" role="tab"
+                        id="nav-mission-tab" data-bs-toggle="tab" data-bs-target="#nav-mission"
+                        aria-controls="nav-mission" aria-selected="false">
+                    Đã xử lý
+                </button>
+                <!-- Tab đơn hàng đã hoàn tất -->
+                <button class="nav-link border-white border-bottom-0" type="button" role="tab"
+                        id="nav-mission-tab" data-bs-toggle="tab" data-bs-target="#nav-mission"
+                        aria-controls="nav-mission" aria-selected="false">
+                    Đã xử lý
+                </button>
+            </div>
+        </nav>
+        <div class="tab-content mb-5">
+            <!-- Nội dung đơn hàng đang xử lý -->
+            <div class="tab-pane active" id="nav-about" role="tabpanel" aria-labelledby="nav-about-tab">
+                @foreach (var item in Model.DonHangDangXuLy)
+                {
+                    <div class="p-4 mt-auto border-top-0 rounded fruite-item"
+                         style="background-color: white; width:100%">
+                        <div>
+                            <p class="mb-2">
+                                Mã đơn: @item.MaDonHang
+                            </p>
+                            @if (item.MaGiamGia!=null) {
+                                <p class="mb-2"><strong>Mã: @item.MaGiamGia</strong></p>}
+                            <p class="mb-2">
+                                Tổng tiền: @item.TongTien
+                            </p>
+                        </div>
+                    </div>
+                    
+                }
+            </div>
+            <!-- Nội dung đơn hàng đã xử lý -->
+            <div class="tab-pane" id="nav-mission" role="tabpanel" aria-labelledby="nav-mission-tab">
+                @foreach (var item in Model.DonHangDaXuLy)
+                {
+                    <div class="p-4 mt-auto border-top-0 rounded fruite-item"
+                         style="background-color: white; width:100%">
+                        <div>
+                            <p class="mb-2">
+                                Mã đơn: @item.MaDonHang
+                            </p>
+                            @if (item.MaGiamGia != null)
+                            {
+                                <p class="mb-2"><strong>Mã: @item.MaGiamGia</strong></p>
+                            }
+                            <p class="mb-2">
+                                Tổng tiền: @item.TongTien
+                            </p>
+                        </div>
+                    </div>
+                    
+                }
+            </div>
+            <!-- Nội dung đơn hàng đã hoàn tất -->
+            <div class="tab-pane" id="nav-mission" role="tabpanel" aria-labelledby="nav-mission-tab">
+                @foreach (var item in Model.DonHangHoanTat)
+                {
+                    <div class="p-4 mt-auto border-top-0 rounded fruite-item"
+                         style="background-color: white; width:100%">
+                        <div>
+                            <p class="mb-2">
+                                Mã đơn: @item.MaDonHang
+                            </p>
+                            @if (item.MaGiamGia != null)
+                            {
+                                <p class="mb-2"><strong>Mã: @item.MaGiamGia</strong></p>
+                            }
+                            <p class="mb-2">
+                                Tổng tiền: @item.TongTien
+                            </p>
+                        </div>
+                    </div>
+                    
+                }
+            </div>
+           
+        </div>
+    </div>
+    </div>
+</div>
+
 

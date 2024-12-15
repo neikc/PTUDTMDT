@@ -1,0 +1,75 @@
+﻿@{
+    ViewData["Title"] = "Wish List";
+}
+@model IEnumerable<PTUDTMDT.Models.SanPham>
+
+<div class="container-fluid py-5 mt-5">
+    <!--Nếu không có sản phẩm trong wishlist-->
+    @if (Model.Any() == false)
+    {
+        <div class="text-center">
+            <h2>Bạn chưa có sản phẩm yêu thích</h2>
+            <a href="@Url.Action("ShopIndex","Shop")"
+               class="btn border border-secondary rounded-pill px-3 text-primary mt-3 py-2">
+                <i class="fa fa-shopping-bag me-2 text-primary"></i>Tìm mau thôi!
+            </a>
+        </div>
+    }
+    else
+    {
+        <!--Phần wishlist-->
+        <div class="container py-5">
+            <div class="row d-flex align-items-start gap-5 rounded-2xl">
+                <!-- Sản phẩm trong giỏ hàng (col-7) -->
+                <!--Các sản phẩm trong giỏ hàng-->
+                <div class="col-lg-12 col-12">
+                    @foreach (var item in Model)
+                    {
+                        <div class="row mt-lg-6">
+                            <div class="d-flex align-items-center gap-4 rounded-2xl">
+                                <div class="d-flex justify-content-between w-100">
+                                    <div class="container-fluid p-4 mt-lg-6 rounded bg-light">
+                                        <div class="position-relative row align-items-center w-100">
+                                            <!-- Nút xóa sản phẩm -->
+                                            <form asp-action="WL_RemoveFromWL" method="post" class="position-absolute" style="top: 10px; right: 10px;">
+                                                <input type="hidden" name="MaSanPham" value="@item.MaSanPham" />
+                                                <button type="submit" class="btn btn-md rounded-circle bg-light border" style="width: auto; height: auto;">
+                                                    <i class="fa fa-times text-danger"></i>
+                                                </button>
+                                            </form>
+                                            <!-- Cột hình ảnh (4/12) -->
+                                            <div class="col-4 d-flex justify-content-center rounded" style="object-fit:contain; max-height:200px; max-width:200px">
+                                                <img src="@Url.Content(@item.LayDiaChiHinh(1))" class="img-fluid rounded-circle" style="object-fit:contain" alt="@item.TenSanPham">
+                                            </div>
+                                            <!-- Cột thông tin (8/12) -->
+                                            <div class="col-8 d-flex flex-column justify-content-between">
+                                                <div class="d-flex flex-column" style="gap: 2.5px;">
+
+                                                    <h5 class="fw-bold mb-2">@item.TenSanPham</h5>
+
+                                                    @if (item.GiaSauGiam == null)
+                                                    {
+                                                        <p class="mb-0 mt-2">@item.FormatPrice(item.GiaSanPham)</p>
+                                                    }
+                                                    else
+                                                    {
+                                                        <p class="mb-0 mt-2">
+                                                            @item.FormatPrice(item.GiaSauGiam)
+                                                            <span class="fst-italic" style="text-decoration:line-through">  @item.FormatPrice(item.GiaSanPham)</span>
+                                                            <span class="fst-italic">(-@item.GiamGia%)</span>
+                                                        </p>
+                                                    }
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+    }
+</div>
+
