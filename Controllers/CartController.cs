@@ -221,6 +221,88 @@ namespace PTUDTMDT.Controllers
             return View();
         }
 
+        public IActionResult Wishlist()
+        {
+            List<SanPham> wishlist;
+
+            if (User.Identity.IsAuthenticated)
+            {
+                var MaTaiKhoan = User.Identity.Name;
+
+                // Lấy Wishlist từ DonHang với trạng thái "Wish"
+                var loginWishlist = _context.DonHangs
+                    .Include(d => d.ChiTietDonHangs)
+                    .ThenInclude(c => c.MaSanPhamNavigation)
+                    .FirstOrDefault(d => d.MaTaiKhoan == MaTaiKhoan && d.TrangThai == "Wish");
+
+                if (loginWishlist != null)
+                {
+                    // Lấy danh sách sản phẩm từ Wishlist DB
+                    wishlist = loginWishlist.ChiTietDonHangs
+                        .Select(c => c.MaSanPhamNavigation)
+                        .ToList();
+                }
+                else
+                {
+                    // Nếu không có Wishlist, khởi tạo rỗng
+                    wishlist = new List<SanPham>();
+                }
+
+                // Lấy Wishlist từ Session
+                var sessionWishlist = HttpContext.Session.GetObject<List<string>>("Wishlist") ?? new List<string>();
+
+                // Gộp Wishlist từ Session vào Wishlist DB nếu có sản phẩm trong Session
+                if (sessionWishlist.Any())
+                {
+                    foreach (var sessionProductId in sessionWishlist)
+                    {
+                        // Kiểm tra xem sản phẩm đã có trong Wishlist DB hay chưa
+                        var dbItem = loginWishlist?.ChiTietDonHangs
+                            .FirstOrDefault(c => c.MaSanPham == sessionProductId);
+
+                        if (dbItem == null)
+                        {
+                            // Nếu chưa có, thêm sản phẩm mới vào Wishlist DB
+                            _context.ChiTietDonHangs.Add(new ChiTietDonHang
+                            {
+                                MaCtdh = Guid.NewGuid().ToString(),
+                                MaDonHang = loginWishlist.MaDonHang,
+                                MaSanPham = sessionProductId,
+                                SoLuong = 1, // Mặc định là 1
+                                GiaSanPham = _context.SanPhams.Find(sessionProductId).GiaSauGiam,
+                                TongTienSp = _context.SanPhams.Find(sessionProductId).GiaSauGiam,
+                                NgayTaoDon = DateTime.Now
+                            });
+
+                            // Thêm vào danh sách Wishlist
+                            wishlist.Add(_context.SanPhams.Find(sessionProductId));
+                        }
+                    }
+
+                    // Lưu thay đổi vào cơ sở dữ liệu
+                    _context.SaveChanges();
+
+                    // Xóa Wishlist trong Session sau khi đã gộp vào DB
+                    HttpContext.Session.Remove("Wishlist");
+                }
+            }
+            else
+            {
+                // Nếu người dùng chưa đăng nhập, lấy Wishlist từ Session
+                var sessionWishlist = HttpContext.Session.GetObject<List<string>>("Wishlist") ?? new List<string>();
+                wishlist = sessionWishlist
+                    .Select(id => _context.SanPhams.Find(id))
+                    .Where(sp => sp != null)
+                    .ToList();
+            }
+
+            // Truyền dữ liệu qua View
+            return View(wishlist);
+        }
+
+
+        #region Voucher
+
         [HttpPost]
         public IActionResult ApplyVoucher(string MaGiamGia)
         {
@@ -307,6 +389,7 @@ namespace PTUDTMDT.Controllers
 
             return RedirectToAction("CheckOut");
         }
+        #endregion
 
         #region CURD Sản phầm giỏ hàng
 
@@ -499,6 +582,118 @@ namespace PTUDTMDT.Controllers
             return RedirectToAction("Cart");
         }
         #endregion
+
+        #region CRUD Sản phẩm yêu thích
+        [HttpPost]
+        public IActionResult WL_AddToWL(string MaSanPham)
+        {
+            var product = _context.SanPhams.Find(MaSanPham); // Tìm sản phẩm
+            if (product == null)
+                return Json(new { success = false, message = "Sản phẩm không tồn tại" });
+
+            // Kiểm tra nếu người dùng đã đăng nhập
+            if (User.Identity.IsAuthenticated)
+            {
+                var MaTaiKhoan = User.Identity.Name;
+
+                // Lấy đơn hàng có trạng thái "Wish" của người dùng
+                var wishlist = _context.DonHangs.FirstOrDefault(d => d.MaTaiKhoan == MaTaiKhoan && d.TrangThai == "Wish");
+
+                if (wishlist == null)
+                {
+                    // Nếu chưa có Wishlist, khởi tạo mới
+                    wishlist = new DonHang
+                    {
+                        MaDonHang = Guid.NewGuid().ToString(),
+                        MaTaiKhoan = MaTaiKhoan,
+                        TrangThai = "Wish", // Trạng thái là "Wish" cho danh sách này
+                        NgayLenDon = DateTime.Now
+                    };
+                    _context.DonHangs.Add(wishlist);
+                    _context.SaveChanges(); // Lưu Wishlist vào DB
+                }
+
+                // Kiểm tra sản phẩm trong chi tiết Wishlist
+                var wishlistItem = _context.ChiTietDonHangs
+                    .FirstOrDefault(c => c.MaDonHang == wishlist.MaDonHang && c.MaSanPham == MaSanPham);
+
+                if (wishlistItem == null)
+                {
+                    // Nếu sản phẩm chưa có trong Wishlist, thêm mới
+                    _context.ChiTietDonHangs.Add(new ChiTietDonHang
+                    {
+                        MaCtdh = Guid.NewGuid().ToString(),
+                        MaDonHang = wishlist.MaDonHang,
+                        MaSanPham = MaSanPham,
+                        SoLuong = 1, // Mặc định là 1
+                        GiaSanPham = product.GiaSauGiam,
+                        TongTienSp = product.GiaSauGiam,
+                        NgayTaoDon = DateTime.Now
+                    });
+
+                    _context.SaveChanges(); // Lưu thay đổi vào cơ sở dữ liệu
+                }
+            }
+            else
+            {
+                // Nếu người dùng chưa đăng nhập, lưu vào Session
+                var wishlist = HttpContext.Session.GetObject<List<string>>("Wishlist") ?? new List<string>();
+
+                if (!wishlist.Contains(MaSanPham))
+                {
+                    wishlist.Add(MaSanPham); // Thêm sản phẩm vào Wishlist trong Session
+                    HttpContext.Session.SetObject("Wishlist", wishlist);
+                }
+            }
+
+            TempData["Message"] = "Đã thêm vào Wishlist";
+            return RedirectToAction("Wishlist"); // Quay lại trang Wishlist
+        }
+
+        [HttpPost]
+        public IActionResult WL_RemoveFromWL(string MaSanPham)
+        {
+            if (User.Identity.IsAuthenticated)
+            {
+                var MaTaiKhoan = User.Identity.Name;
+
+                // Lấy đơn hàng có trạng thái "Wish" của người dùng
+                var wishlist = _context.DonHangs
+                    .Include(d => d.ChiTietDonHangs)
+                    .FirstOrDefault(d => d.MaTaiKhoan == MaTaiKhoan && d.TrangThai == "Wish");
+
+                if (wishlist != null)
+                {
+                    // Tìm sản phẩm trong chi tiết Wishlist
+                    var wishlistItem = wishlist.ChiTietDonHangs.FirstOrDefault(x => x.MaSanPham == MaSanPham);
+                    if (wishlistItem != null)
+                    {
+                        // Xóa sản phẩm khỏi Wishlist trong DB
+                        _context.ChiTietDonHangs.Remove(wishlistItem);
+                        _context.SaveChanges(); // Lưu thay đổi vào cơ sở dữ liệu
+                    }
+                }
+            }
+            else
+            {
+                // Nếu người dùng chưa đăng nhập, lấy Wishlist từ Session
+                var wishlist = HttpContext.Session.GetObject<List<string>>("Wishlist") ?? new List<string>();
+
+                // Xóa sản phẩm khỏi Wishlist trong Session
+                if (wishlist.Contains(MaSanPham))
+                {
+                    wishlist.Remove(MaSanPham);
+
+                    // Lưu Wishlist mới vào Session
+                    HttpContext.Session.SetObject("Wishlist", wishlist);
+                }
+            }
+
+            // Điều hướng lại trang Wishlist
+            return RedirectToAction("Wishlist");
+        }
+        #endregion
+
 
         #region Supporting Methods
         private IEnumerable<SanPham> GetOnSale(int count)

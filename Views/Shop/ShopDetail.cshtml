@@ -13,10 +13,18 @@
                 <div class="row g-4">
                     <!-- Hình ảnh sản phẩm -->
                     <div class="col-lg-6">
-                        <div class="border rounded">
+                        <div class="border rounded position-relative">
                             <a href="#">
                                 <img src="@Url.Content(Model.Product.LayDiaChiHinh(1))" class="img-fluid rounded" alt="Image">
                             </a>
+
+                            <!-- Nút thêm sản phẩm vào yêu thích (thay thành hình trái tim) -->
+                            <form asp-action="WL_AddToWL" asp-controller="Cart" method="post" class="position-absolute" style="top: 10px; right: 10px;">
+                                <input type="hidden" name="MaSanPham" value="@Model.Product.MaSanPham" />
+                                <button type="submit" class="btn btn-md rounded-circle bg-light border" style="width: auto; height: auto;">
+                                    <i class="fa fa-heart text-danger"></i>
+                                </button>
+                            </form>
                         </div>
                     </div>
                     <!-- Thông tin sản phẩm -->
