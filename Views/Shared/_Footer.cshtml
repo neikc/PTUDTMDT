@@ -36,8 +36,8 @@
                 <div class="d-flex flex-column text-start footer-item">
                     <h4 class="text-light mb-3">Bài viết về Organic</h4>
                     <a class="btn-link" href="@Url.Action("BlogDetail","Blog")">1. Từ nỗi lo của mẹ đến ước...</a>
-                    <a class="btn-link" href="@Url.Action("BlogDetail1","Blog")">2.Top 5 thực phẩm hữu c...</a>
-                    <a class="btn-link" href="@Url.Action("BlogDetail2","Blog")">3.Sống xanh hơn với chỉ 5ph...</a>
+                    <a class="btn-link" href="@Url.Action("BlogDetail1","Blog")">2. Top 5 thực phẩm hữu c...</a>
+                    <a class="btn-link" href="@Url.Action("BlogDetail2","Blog")">3. Sống xanh hơn với chỉ 5ph...</a>
                 </div>
                 <div class="footer-item">
                     <a href="@Url.Action("BlogIndex","Blog")" class="btn border-secondary py-2 px-4 rounded-pill text-primary">Đọc thêm tại đây</a>
@@ -48,20 +48,20 @@
                 <div class="d-flex flex-column text-start footer-item">
                     <h4 class="text-light mb-3">Thông tin cửa hàng</h4>
                     <a class="btn-link" href="@Url.Action("Contact","Contact")">Liên hệ</a>
-                    <a class="btn-link" href="">Chính sách quyền riêng tư</a>
-                    <a class="btn-link" href="">Chính sách sử dụng</a>
-                    <a class="btn-link" href="">Chính sách hoàn hàng</a>
+                    <a class="btn-link" href="@Url.Action("Privacy", "Home")">Chính sách quyền riêng tư</a>
+                    <a class="btn-link" href="@Url.Action("TermsOfUse", "Home")">Chính sách sử dụng</a>
+                    <a class="btn-link" href="@Url.Action("Refunds", "Home")">Chính sách hoàn hàng</a>
                 </div>
             </div>
             <!--Cột thứ ba: tài khoản-->
             <div class="col-lg-3 col-md-6">
                 <div class="d-flex flex-column text-start footer-item">
                     <h4 class="text-light mb-3">Tài khoản</h4>
-                    <a class="btn-link" href="">Tài khoản của tôi</a>
-                    <a class="btn-link" href="">Cửa hàng</a>
-                    <a class="btn-link" href="">Giỏ hàng</a>
-                    <a class="btn-link" href="">Whishlist</a>
-                    <a class="btn-link" href="">Lịch sử đặt hàng</a>
+                    <a class="btn-link" href="@Url.Action("Profile","Account")">Tài khoản của tôi</a>
+                    <a class="btn-link" href="@Url.Action("ShopIndex","Shop")">Cửa hàng</a>
+                    <a class="btn-link" href="@Url.Action("Cart","Cart")">Giỏ hàng</a>
+                    <a class="btn-link" href="@Url.Action("Wishlist","Cart")">Wishlist</a>
+                    <a class="btn-link" href="@Url.Action("Profile","Account")">Lịch sử đặt hàng</a>
                 </div>
             </div>
             <!--Cột thứ tư: Thông tin liên hệ-->
