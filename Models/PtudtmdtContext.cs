@@ -43,10 +43,16 @@ public partial class PtudtmdtContext : DbContext
 
     public virtual DbSet<TuKhoa> TuKhoas { get; set; }
 
+    private string AzureConnectionstring = "Server=tcp:ptudtmdtdbserver.database.windows.net,1433;Initial Catalog=PTUDTMDT;Persist Security Info=False;User ID=ptudtmdtadmin;Password=PTUDTMDT@admin;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30";
+    private string LocalConnectionstring = "Data Source=CKEN56;Initial Catalog=ptudtmdt;Integrated Security=True;Connect Timeout=30;Encrypt=True;Trust Server Certificate=True;Application Intent=ReadWrite;Multi Subnet Failover=False";
+
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        //Thay đổi Conection String để thay đổi CSDL sang máy bạn
+        //Thay đổi Conection String để thay đổi DB máy bạn
+        //Connection String của Sever trên Azure: Server=tcp:ptudtmdtdbserver.database.windows.net,1433;Initial Catalog=PTUDTMDT;Persist Security Info=False;User ID=ptudtmdtadmin;Password=PTUDTMDT@admin;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30
+        //Connection String của Sever trên Local: Data Source=CKEN56;Initial Catalog=ptudtmdt;Integrated Security=True;Connect Timeout=30;Encrypt=True;Trust Server Certificate=True;Application Intent=ReadWrite;Multi Subnet Failover=False
+
 #warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see https://go.microsoft.com/fwlink/?LinkId=723263.
-        => optionsBuilder.UseSqlServer("Data Source=CKEN56;Initial Catalog=ptudtmdt;Integrated Security=True;Connect Timeout=30;Encrypt=True;Trust Server Certificate=True;Application Intent=ReadWrite;Multi Subnet Failover=False");
+        => optionsBuilder.UseSqlServer(LocalConnectionstring);
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
