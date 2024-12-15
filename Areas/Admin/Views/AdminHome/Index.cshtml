@@ -4,5 +4,31 @@
     Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
 }
 
-<h1>Index</h1>
+@model PTUDTMDT.Areas.Admin.ViewModels.ReportViewModel
 
+<h2>Dashboard Reports</h2>
+
+<div>
+    <h3>Total Orders</h3>
+    <p>@Model.TotalOrders</p>
+</div>
+
+<div>
+    <h3>Total Revenue</h3>
+    <p>@Model.TotalRevenue.ToString("C")</p>
+</div>
+
+<div>
+    <h3>Total Products Added</h3>
+    <p>@Model.TotalProductsAdded</p>
+</div>
+
+<div>
+    <h3>Total Products Sold</h3>
+    <p>@Model.TotalProductsSold</p>
+</div>
+
+<div>
+    <h3>New Users This Month</h3>
+    <p>@Model.NewUsersThisMonth</p>
+</div>

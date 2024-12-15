@@ -5,50 +5,41 @@
     Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
 }
 
-<h1>Index</h1>
+<div class="container-fluid py-5 mt-5">
+    <div>
+        <h1>Quản lý Loại Sản phẩm</h1>
+        <p>
+            <a asp-action="Create" class="btn border border-secondary rounded-pill px-3 text-primary">
+                <i class="fa fa-plus-circle me-2 text-primary mt-2"></i> Thêm mới loại sản phẩm
+            </a>
+        </p>
+    </div>
 
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.TenLoai)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.MoTa)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Hinh)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Alias)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.TenLoai)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.MoTa)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Hinh)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Alias)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.MaLoai">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.MaLoai">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.MaLoai">Delete</a>
-            </td>
-        </tr>
-}
-    </tbody>
-</table>
+    <table class="table table-striped table-bordered table-hover table-sm">
+        <thead class="thead-dark">
+            <tr>
+                <th>Hành động</th>
+                <th>@Html.DisplayNameFor(model => model.TenLoai)</th>
+                <th>@Html.DisplayNameFor(model => model.MoTa)</th>
+                <th>@Html.DisplayNameFor(model => model.Hinh)</th>
+                <th>@Html.DisplayNameFor(model => model.Alias)</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        <a class="btn btn-sm btn-outline-warning my-1" asp-action="Edit" asp-route-id="@item.MaLoai">Chỉnh sửa</a>
+                        <a class="btn btn-sm btn-outline-info mb-1" asp-action="Details" asp-route-id="@item.MaLoai">Chi tiết</a>
+                        <a class="btn btn-sm btn-outline-danger mb-1" asp-action="Delete" asp-route-id="@item.MaLoai">Xóa</a>
+                    </td>
+                    <td>@Html.DisplayFor(modelItem => item.TenLoai)</td>
+                    <td>@Html.DisplayFor(modelItem => item.MoTa)</td>
+                    <td>@Html.DisplayFor(modelItem => item.Hinh)</td>
+                    <td>@Html.DisplayFor(modelItem => item.Alias)</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

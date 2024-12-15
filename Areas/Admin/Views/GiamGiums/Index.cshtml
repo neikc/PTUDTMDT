@@ -5,62 +5,46 @@
     Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
 }
 
-<h1>Index</h1>
+<div class="container-fluid py-5 mt-5">
+    <div>
+        <h1>Quản lý Giảm Giá</h1>
+        <p>
+            <a asp-action="Create" class="btn border border-secondary rounded-pill px-3 text-primary">
+                <i class="fa fa-plus-circle me-2 text-primary mt-2"></i> Thêm mới giảm giá
+            </a>
+        </p>
+    </div>
 
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.TenMa)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.GiaTri)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.NgayBatDau)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.NgayKetThuc)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.SoLuong)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.TrangThai)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.TenMa)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.GiaTri)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.NgayBatDau)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.NgayKetThuc)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.SoLuong)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.TrangThai)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.MaGiamGia">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.MaGiamGia">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.MaGiamGia">Delete</a>
-            </td>
-        </tr>
-}
-    </tbody>
-</table>
+    <table class="table table-striped table-bordered table-hover table-sm">
+        <thead class="thead-dark">
+            <tr>
+                <th>Hành động</th>
+                <th>@Html.DisplayNameFor(model => model.TenMa)</th>
+                <th>@Html.DisplayNameFor(model => model.GiaTri)</th>
+                <th>@Html.DisplayNameFor(model => model.NgayBatDau)</th>
+                <th>@Html.DisplayNameFor(model => model.NgayKetThuc)</th>
+                <th>@Html.DisplayNameFor(model => model.SoLuong)</th>
+                <th>@Html.DisplayNameFor(model => model.TrangThai)</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        <a class="btn btn-sm btn-outline-warning my-1" asp-action="Edit" asp-route-id="@item.MaGiamGia">Chỉnh sửa</a>
+                        <a class="btn btn-sm btn-outline-info mb-1" asp-action="Details" asp-route-id="@item.MaGiamGia">Chi tiết</a>
+                        <a class="btn btn-sm btn-outline-danger mb-1" asp-action="Delete" asp-route-id="@item.MaGiamGia">Xóa</a>
+                    </td>
+                    <td>@Html.DisplayFor(modelItem => item.TenMa)</td>
+                    <td>@Html.DisplayFor(modelItem => item.GiaTri)</td>
+                    <td>@Html.DisplayFor(modelItem => item.NgayBatDau)</td>
+                    <td>@Html.DisplayFor(modelItem => item.NgayKetThuc)</td>
+                    <td>@Html.DisplayFor(modelItem => item.SoLuong)</td>
+                    <td>@Html.DisplayFor(modelItem => item.TrangThai)</td>
+                    
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

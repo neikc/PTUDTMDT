@@ -5,47 +5,54 @@
     Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
 }
 
-<h1>Create</h1>
+<div class="container-fluid py-5 mt-5">
+    <div class="row">
+        <div class="col-md-8">
+            <h1>Tạo Loại Sản Phẩm</h1>
+            <hr />
+            <form asp-action="Create">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
 
-<h4>LoaiSanPham</h4>
-<hr />
-<div class="row">
-    <div class="col-md-4">
-        <form asp-action="Create">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group">
-                <label asp-for="MaLoai" class="control-label"></label>
-                <input asp-for="MaLoai" class="form-control" />
-                <span asp-validation-for="MaLoai" class="text-danger"></span>
+                <div class="form-group mt-2">
+                    <label asp-for="MaLoai" class="control-label">Mã Loại</label>
+                    <input asp-for="MaLoai" placeholder="Nhập mã loại sản phẩm" class="form-control" />
+                    <span asp-validation-for="MaLoai" class="text-danger"></span>
+                </div>
+
+                <div class="form-group mt-2">
+                    <label asp-for="TenLoai" class="control-label">Tên Loại</label>
+                    <input asp-for="TenLoai" placeholder="Nhập tên loại sản phẩm" class="form-control" />
+                    <span asp-validation-for="TenLoai" class="text-danger"></span>
+                </div>
+
+                <div class="form-group mt-2">
+                    <label asp-for="MoTa" class="control-label">Mô Tả</label>
+                    <input asp-for="MoTa" placeholder="Nhập mô tả loại sản phẩm" class="form-control" />
+                    <span asp-validation-for="MoTa" class="text-danger"></span>
+                </div>
+
+                <div class="form-group mt-2">
+                    <label asp-for="Hinh" class="control-label">Hình Ảnh</label>
+                    <input asp-for="Hinh" placeholder="Nhập URL hình ảnh" class="form-control" />
+                    <span asp-validation-for="Hinh" class="text-danger"></span>
+                </div>
+
+                <div class="form-group mt-2">
+                    <label asp-for="Alias" class="control-label">Alias</label>
+                    <input asp-for="Alias" placeholder="Nhập tên alias (URL friendly)" class="form-control" />
+                    <span asp-validation-for="Alias" class="text-danger"></span>
+                </div>
+
+                <div class="form-group mt-2">
+                    <input type="submit" value="Tạo Mới" class="btn border border-secondary rounded-pill px-3 text-primary" />
+                </div>
+            </form>
+            <hr />
+            <div>
+                <a asp-action="Index" class="btn border border-secondary rounded-pill px-3 text-primary">
+                    <i class="fa fa-arrow-left me-2 text-primary"></i> Quay lại danh sách
+                </a>
             </div>
-            <div class="form-group">
-                <label asp-for="TenLoai" class="control-label"></label>
-                <input asp-for="TenLoai" class="form-control" />
-                <span asp-validation-for="TenLoai" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="MoTa" class="control-label"></label>
-                <input asp-for="MoTa" class="form-control" />
-                <span asp-validation-for="MoTa" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Hinh" class="control-label"></label>
-                <input asp-for="Hinh" class="form-control" />
-                <span asp-validation-for="Hinh" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Alias" class="control-label"></label>
-                <input asp-for="Alias" class="form-control" />
-                <span asp-validation-for="Alias" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
-            </div>
-        </form>
+        </div>
     </div>
 </div>
-
-<div>
-    <a asp-action="Index">Back to List</a>
-</div>
-

@@ -45,7 +45,7 @@
         <div class="container px-0">
             <nav class="navbar navbar-light bg-white navbar-expand-xl">
                 <!--Button đến trang chủ-->
-                <a href="/Admin" class="navbar-brand"><h1 class="text-primary display-6">Simple Green - Admin</h1></a>
+                <a asp-action="Index" asp-controller="AdminHome" class="navbar-brand"><h1 class="text-primary display-6">Simple Green - Admin</h1></a>
                 <button class="navbar-toggler py-2 px-3" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
                     <span class="fa fa-bars text-primary"></span>
                 </button>
@@ -53,37 +53,13 @@
                     <div class="navbar-nav mx-auto">
 
                         <!--Sản phẩm-->
-                        <div class="nav-item dropdown">
-                            <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Sản phẩm</a>
-                            <div class="dropdown-menu m-0 bg-secondary rounded-0">
-                                <a href="Admin/Product/Create" class="dropdown-item">Thêm sản phẩm</a>
-                                <a href="Admin/Product/Delete" class="dropdown-item">Xóa sản phẩm</a>
-                                <a href="Admin/Product/Edit" class="dropdown-item">Sửa sản phẩm</a>
-                                <a href="Admin/Product/Index" class="dropdown-item">Danh sách sản phẩm</a>
-                            </div>
-                        </div>
+                        <a asp-action="Index" asp-controller="SanPhams" class="nav-item nav-link active">Quản lý Sản phẩm</a>
 
                         <!--Danh mục sản phẩm-->
-                        <div class="nav-item dropdown">
-                            <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Danh mục Sản phẩm</a>
-                            <div class="dropdown-menu m-0 bg-secondary rounded-0">
-                                <a href="Admin/Category/Create" class="dropdown-item">Thêm danh mục</a>
-                                <a href="Admin/Category/Delete" class="dropdown-item">Xóa danh mục</a>
-                                <a href="Admin/Category/Edit" class="dropdown-item">Sửa danh mục</a>
-                                <a href="Admin/Category/Index" class="dropdown-item">Danh sách danh mục</a>
-                            </div>
-                        </div>
+                        <a asp-action="Index" asp-controller="LoaiSanPhams" class="nav-item nav-link active">Quản lý Danh mục</a>
                         
                         <!--Mã giảm giá-->
-                        <div class="nav-item dropdown">
-                            <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Mã giảm giá</a>
-                            <div class="dropdown-menu m-0 bg-secondary rounded-0">
-                                <a href="Admin/Voucher/Create" class="dropdown-item">Thêm danh mục</a>
-                                <a href="Admin/Voucher/Delete" class="dropdown-item">Xóa danh mục</a>
-                                <a href="Admin/Voucher/Edit" class="dropdown-item">Sửa danh mục</a>
-                                <a href="Admin/Voucher/Index" class="dropdown-item">Danh sách danh mục</a>
-                            </div>
-                        </div>
+                        <a asp-action="Index" asp-controller="GiamGiums" class="nav-item nav-link active">Quản lý Giảm giá</a>
 
                     </div>
 

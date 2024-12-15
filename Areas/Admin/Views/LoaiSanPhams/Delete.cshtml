@@ -5,42 +5,49 @@
     Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
 }
 
-<h1>Delete</h1>
-
-<h3>Are you sure you want to delete this?</h3>
-<div>
-    <h4>LoaiSanPham</h4>
+<div class="container-fluid py-5 mt-5">
+    <div>
+        <h1>Xóa loại sản phẩm @Model.TenLoai</h1>
+        <h3 class="alert-warning">Bạn có chắc chắn muốn xóa loại sản phẩm này?</h3>
+    </div>
     <hr />
-    <dl class="row">
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.TenLoai)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.TenLoai)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.MoTa)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.MoTa)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Hinh)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Hinh)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Alias)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Alias)
-        </dd>
-    </dl>
-    
-    <form asp-action="Delete">
-        <input type="hidden" asp-for="MaLoai" />
-        <input type="submit" value="Delete" class="btn btn-danger" /> |
-        <a asp-action="Index">Back to List</a>
-    </form>
+    <div>
+        <dl class="row">
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.TenLoai)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.TenLoai)
+            </dd>
+
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.MoTa)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.MoTa)
+            </dd>
+
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.Hinh)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.Hinh)
+            </dd>
+
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.Alias)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.Alias)
+            </dd>
+        </dl>
+
+        <form asp-action="Delete">
+            <input type="hidden" asp-for="MaLoai" />
+            <input type="submit" value="Delete" class="btn border border-danger rounded-pill px-3 text-danger" />
+            <a asp-action="Index" class="btn border border-secondary rounded-pill px-3 text-primary">
+                <i class="fa fa-arrow-left me-2 text-primary"></i> Danh sách Loại sản phẩm
+            </a>
+        </form>
+    </div>
 </div>
