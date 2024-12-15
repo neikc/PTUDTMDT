@@ -7,22 +7,22 @@
                 <!--Cột đầu tiên: Tên thương hiệu và slogan-->
                 <div class="col-lg-3">
                     <a href="#">
-                        <h1 class="text-primary mb-0">Fruitables</h1>
-                        <p class="text-secondary mb-0">Sản phẩm tươi mới</p>
+                        <h1 class="text-primary mb-0">Simple Green</h1>
+                        <p class="text-secondary mb-0">Nâng niu sức khỏe Việt</p>
                     </a>
                 </div>
                 <!--Cột thứ hai: Form đăng ký emmail-->
                 <div class="col-lg-6">
                     <div class="position-relative mx-auto">
-                        <input class="form-control border-0 w-100 py-3 px-4 rounded-pill" type="number" placeholder="Email của bạn">
-                        <button type="submit" class="btn btn-primary border-0 border-secondary py-3 px-4 position-absolute rounded-pill text-white" style="top: 0; right: 0;">Đăng ký ngay</button>
+                        <input class="form-control border-0 w-100 py-3 px-4 rounded-pill" type="number" placeholder="Nhập Email">
+                        <button type="submit" class="btn btn-primary border-0 border-secondary py-3 px-4 position-absolute rounded-pill text-white" style="top: 0; right: 0;">Đăng ký Mail Letter ngay!</button>
                     </div>
                 </div>
                 <!--Cột thứ ba: Các liên kết mạng xã hội-->
                 <div class="col-lg-3">
                     <div class="d-flex justify-content-end pt-3">
                         <a class="btn  btn-outline-secondary me-2 btn-md-square rounded-circle" href=""><i class="fab fa-twitter"></i></a>
-                        <a class="btn btn-outline-secondary me-2 btn-md-square rounded-circle" href=""><i class="fab fa-facebook-f"></i></a>
+                        <a class="btn btn-outline-secondary me-2 btn-md-square rounded-circle" href="https://www.facebook.com/profile.php?id=61567545086276"><i class="fab fa-facebook-f"></i></a>
                         <a class="btn btn-outline-secondary me-2 btn-md-square rounded-circle" href=""><i class="fab fa-youtube"></i></a>
                         <a class="btn btn-outline-secondary btn-md-square rounded-circle" href=""><i class="fab fa-linkedin-in"></i></a>
                     </div>
@@ -31,26 +31,26 @@
         </div>
         <!--Phần nội dung Footer-->
         <div class="row g-5">
-            <!--Cột đầu tiên: Lý do khách hàng lựa chọn chúng tôi-->
+            <!--Cột đầu tiên: Bài viết về Organic-->
             <div class="col-lg-3 col-md-6">
+                <div class="d-flex flex-column text-start footer-item">
+                    <h4 class="text-light mb-3">Bài viết về Organic</h4>
+                    <a class="btn-link" href="@Url.Action("BlogDetail","Blog")">1. Từ nỗi lo của mẹ đến ước...</a>
+                    <a class="btn-link" href="@Url.Action("BlogDetail1","Blog")">2.Top 5 thực phẩm hữu c...</a>
+                    <a class="btn-link" href="@Url.Action("BlogDetail2","Blog")">3.Sống xanh hơn với chỉ 5ph...</a>
+                </div>
                 <div class="footer-item">
-                    <h4 class="text-light mb-3">Lý do khách hàng lựa chọn chúng tôi</h4>
-                    <p class="mb-4">
-                        typesetting, vẫn giữ nguyên hình thức qua nhiều năm. Nó trở nên phổ biến vào những năm 1960 với phần mềm Aldus PageMaker bao gồm Lorem Ipsum.
-                    </p>
-                    <a href="" class="btn border-secondary py-2 px-4 rounded-pill text-primary">Đọc thêm</a>
+                    <a href="@Url.Action("BlogIndex","Blog")" class="btn border-secondary py-2 px-4 rounded-pill text-primary">Đọc thêm tại đây</a>
                 </div>
             </div>
             <!--Cột thứ hai: Thông tin cửa hàng-->
             <div class="col-lg-3 col-md-6">
                 <div class="d-flex flex-column text-start footer-item">
                     <h4 class="text-light mb-3">Thông tin cửa hàng</h4>
-                    <a class="btn-link" href="">Về chúng tôi</a>
-                    <a class="btn-link" href="">Liên hệ</a>
-                    <a class="btn-link" href="">Chính sách bảo mật</a>
-                    <a class="btn-link" href="">Điều khoản và điều kiện</a>
-                    <a class="btn-link" href="">Chính sách hoàn trả</a>
-                    <a class="btn-link" href="">FAQs & Hỗ trợ</a>
+                    <a class="btn-link" href="@Url.Action("Contact","Contact")">Liên hệ</a>
+                    <a class="btn-link" href="">Chính sách quyền riêng tư</a>
+                    <a class="btn-link" href="">Chính sách sử dụng</a>
+                    <a class="btn-link" href="">Chính sách hoàn hàng</a>
                 </div>
             </div>
             <!--Cột thứ ba: tài khoản-->
@@ -58,26 +58,17 @@
                 <div class="d-flex flex-column text-start footer-item">
                     <h4 class="text-light mb-3">Tài khoản</h4>
                     <a class="btn-link" href="">Tài khoản của tôi</a>
-                    <a class="btn-link" href="">Trang chi tiết cửa hàng</a>
+                    <a class="btn-link" href="">Cửa hàng</a>
                     <a class="btn-link" href="">Giỏ hàng</a>
-                    <a class="btn-link" href="">Danh sách yêu thích</a>
+                    <a class="btn-link" href="">Whishlist</a>
                     <a class="btn-link" href="">Lịch sử đặt hàng</a>
-                    <a class="btn-link" href="">Đơn hàng quốc tế</a>
                 </div>
             </div>
             <!--Cột thứ tư: Thông tin liên hệ-->
             <div class="col-lg-3 col-md-6">
                 <div class="footer-item">
                     <h4 class="text-light mb-3">Liên hệ</h4>
-                    <p>Địa chỉ: 279 Nguyễn Tri Phương, Hồ Chí Minh</p>
-                    <p>Email: Simplegreen@gmail.com</p>
-                    <p>Phone: +0123 4567 8910</p>
-                    <p>Các phương thức thanh toán</p>
-                    <!--Ảnh các phương thức thanh toán-->
-                    <img src="~/img/payment.png" class="img-fluid" alt="">
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
+                    <p>Địa chỉ: 279 Nguyễn Tri Phương,Phường 5, Quận 10, Hồ Chí Minh</p>
+                    <p>Email: simple.green@gmail.com</p>
+                    <p>Phone: +84 123 456 789</p>
 <!--KẾT THÚC PHẦN FOOTER-->
