@@ -95,7 +95,7 @@ namespace PTUDTMDT.Controllers
         [Authorize]
         public IActionResult AddReview(string MaSanPham, int SaoDanhGia, string LoiDanhGia)
         {
-            var userId = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+            var userId = User.Identity.Name;
             if (userId == null)
             {
                 return RedirectToAction("Login", "Account");
@@ -103,6 +103,7 @@ namespace PTUDTMDT.Controllers
 
             var review = new DanhGiaSanPham
             {
+                MaDanhGia = Guid.NewGuid().ToString(),
                 MaSanPham = MaSanPham,
                 MaTaiKhoan = userId,
                 SaoDanhGia = SaoDanhGia,

@@ -269,7 +269,7 @@
                         {
                             foreach (var product in Model.BestSellers)
                             {
-                                <div class="d-flex align-items-center justify-content-start mb-3">
+                                <div class="d-flex align-items-center justify-content-start mb-2 bg-light py-2 px-2 rounded">
                                     <!-- Hình ảnh sản phẩm -->
                                     <div class="rounded me-4" style="width: 100px; height: 100px;">
                                         <a href="@Url.Action("ShopDetail", "Shop", new { MaSanPham = product.MaSanPham })">
@@ -305,6 +305,13 @@
                                                 <h5 class="text-danger text-decoration-line-through">@product.FormatPrice(product.GiaSanPham)</h5>
                                             }
                                         </div>
+
+                                        <!--Thêm vào giỏ hàng-->
+                                        <a href="javascript:void(0);"
+                                           onclick="document.getElementById('addToCartForm_Index3+@product.MaSanPham').submit();"
+                                           class="btn border border-secondary rounded-pill px-3 text-primary">
+                                            <i class="fa fa-shopping-bag me-2 text-primary"></i>Mua ngay
+                                        </a>
                                     </div>
                                 </div>
                             }
@@ -348,7 +355,7 @@
                         </div>
                         <div class="text-white bg-primary px-3 py-1 rounded position-absolute" style="top: 10px; right: 10px;">@product.MaLoaiNavigation.TenLoai</div>
                         <div class="p-4 pb-0 rounded-bottom">
-                            <a href="@Url.Action("ShopDetail", "Shop", new { MaSanPham = product.MaSanPham })" class="text-dark">
+                            <a href="@Url.Action("ShopDetail", "Shop", new { MaSanPham = product.MaSanPham })" class="text-dark h5">
                                 @product.TenSanPham
                             </a>
                             <p>@product.ShortDesc</p>

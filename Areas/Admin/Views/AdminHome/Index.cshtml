@@ -6,29 +6,35 @@
 
 @model PTUDTMDT.Areas.Admin.ViewModels.ReportViewModel
 
-<h2>Dashboard Reports</h2>
+<div class="container mt-7" style="margin-top:7em; margin-bottom:7em">
+    <div class="row justify-content-center">
+        <div class="col-lg-10">
+            <h2>Báo cáo</h2>
 
-<div>
-    <h3>Total Orders</h3>
-    <p>@Model.TotalOrders</p>
-</div>
+            <div class="mt-2">
+                <h3>Tổng số đơn hàng</h3>
+                <p>@Model.TotalOrders</p>
+            </div>
 
-<div>
-    <h3>Total Revenue</h3>
-    <p>@Model.TotalRevenue.ToString("C")</p>
-</div>
+            <div class="mt-2">
+                <h3>Tổng doanh thu</h3>
+                <p>@Model.TotalRevenue.ToString("C")</p>
+            </div>
 
-<div>
-    <h3>Total Products Added</h3>
-    <p>@Model.TotalProductsAdded</p>
-</div>
+            <div class="mt-2">
+                <h3>Tổng Số sản phẩm đã thêm</h3>
+                <p>@Model.TotalProductsAdded</p>
+            </div>
 
-<div>
-    <h3>Total Products Sold</h3>
-    <p>@Model.TotalProductsSold</p>
-</div>
+            <div class="mt-2">
+                <h3>Tổng số sản phẩm đã bán</h3>
+                <p>@Model.TotalProductsSold</p>
+            </div>
 
-<div>
-    <h3>New Users This Month</h3>
-    <p>@Model.NewUsersThisMonth</p>
+            <div class="mt-2">
+                <h3>Số sản phẩm mới</h3>
+                <p>@Model.NewUsersThisMonth</p>
+            </div>
+        </div>
+    </div>
 </div>
