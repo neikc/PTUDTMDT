@@ -36,18 +36,21 @@ namespace PTUDTMDT.Controllers
                 // Tạo đối tượng TaiKhoan
                 var taikhoan = new TaiKhoan
                 {
+                    MaTaiKhoan = Guid.NewGuid().ToString(),  // Tạo mã tài khoản ngẫu nhiên
                     TenTaiKhoan = model.TenTaiKhoan,
                     MatKhau = model.MatKhau,  // Lưu mật khẩu đã mã hóa
                     SoDienThoai = model.SoDienThoai,
                     Email = model.Email,
                     TinhTrangTk = true,  // Tài khoản mới sẽ được kích hoạt
                     NgayTaoTk = DateTime.Now,
-                    // Các thuộc tính khác như VaiTro, LanCuoiTruyCap có thể được thêm vào nếu cần
+                    VaiTro = "User",  // Mặc định là User
+                    LanCuoiTruyCap = DateTime.Now // Mặc định là lúc tạo tài khoản
                 };
 
                 // Tạo đối tượng KhachHang
                 var khachhang = new KhachHang
                 {
+                    MaKhachHang = Guid.NewGuid().ToString(),  // Tạo mã khách hàng ngẫu nhiên
                     HoTen = model.HoTen,
                     SoDienThoai = model.SoDienThoai,
                     GioiTinh = model.GioiTinh,
@@ -55,8 +58,11 @@ namespace PTUDTMDT.Controllers
                     NgaySinh = model.NgaySinh,  // Đảm bảo sử dụng kiểu DateOnly
                     QuanHuyen = model.QuanHuyen,
                     PhuongXa = model.PhuongXa,
-                    HieuLuc = true  // Nếu bạn muốn khách hàng luôn hợp lệ khi đăng ký
+                    HieuLuc = true,  // Nếu bạn muốn khách hàng luôn hợp lệ khi đăng ký
+                    Hinh = ""  // Mặc định không có hình đại diện
                 };
+
+                taikhoan.MaKhachHang = khachhang.MaKhachHang;
 
                 // Lưu vào cơ sở dữ liệu
                 _context.TaiKhoans.Add(taikhoan);  // Thêm tài khoản vào bảng TaiKhoan

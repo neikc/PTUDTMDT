@@ -198,7 +198,8 @@ namespace PTUDTMDT.Controllers
                 // Nếu không phải Delivery, gán giá trị Pickup
                 cartDonHang.MaGiaoHang = "Pickup";
             }
-            cartDonHang.MaPttt = model.MaPttt;
+            //cartDonHang.MaDonHang = Guid.NewGuid().ToString();
+            cartDonHang.MaPttt = "4";
             cartDonHang.DiaChi = model.DiaChi;
             cartDonHang.GhiChu = model.GhiChu;
             cartDonHang.TrangThai = "Đang xử lý"; // Đổi trạng thái thành "Pending"
@@ -213,7 +214,7 @@ namespace PTUDTMDT.Controllers
 
             // Chuyển hướng tới trang xác nhận
             TempData["SuccessMessage"] = "Đơn hàng của bạn đã được xử lý thành công!";
-            return RedirectToAction("OrderConfirmation", new { maDonHang = cartDonHang.MaDonHang });
+            return RedirectToAction("OrderConfirmation");
         }
 
         public IActionResult OrderConfirmation()

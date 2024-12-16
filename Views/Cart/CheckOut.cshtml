@@ -6,7 +6,7 @@
 
 <div class="container-fluid py-5 mt-5">
     <!--Nếu không có sản phẩm nào-->
-    @if (Model.ItemList.Any() == false)
+    @if (Model.ItemList != null && Model.ItemList.Any() == false)
     {
         <div class="text-center">
             <h2>Không có sản phẩm nào để thanh toán, quay về cửa hàng thôiii</h2>
