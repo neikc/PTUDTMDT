@@ -1,6 +1,166 @@
 ﻿@{
     ViewData["Title"] = "Privacy Policy";
 }
-<h1>@ViewData["Title"]</h1>
+@model PTUDTMDT.ViewModels.HomeViewModel.IndexViewModel
 
-<p>Use this page to detail your site's privacy policy.</p>
+<div class="container-fluid page-header" style="background-image: url('~/img/Product/fruite-item-5.jpg'); background-size: cover; background-position: center;">
+    <h1 class="text-center text-black display-6">CHÍNH SÁCH BẢO MẬT VÀ QUYỀN RIÊNG TƯ </h1>
+    <ul class="text-center">
+        <li>By Simple Green Team, updated on 2024 </li>
+    </ul>
+</div>
+
+<div class="container mt-5">
+    <div class="row">
+        <!--THANH SIDEBAR-->
+        <div class="col-lg-3">
+            <div class="row g-4">
+                <div class="col-lg-12">
+                    <!--PHẦN DANH MỤC CÁC SẢN PHẨM CỦA CỬA HÀNG-->
+                    <div class="mb-3">
+                        <h4>Danh mục</h4>
+                        <!--Toàn bộ sản phẩm-->
+                        <ul class="list-unstyled fruite-categorie">
+                            <li>
+                                <div class="d-flex justify-content-between fruite-name" style="margin:1.5em">
+                                    <a asp-action="ShopIndex">
+                                        <i class="fas fa-apple-alt me-2"></i>Tất cả sản phẩm
+                                    </a>
+                                </div>
+                            </li>
+                            <!--Các danh mục sản phẩm-->
+                            @foreach (LoaiSanPham loai in Model.Categories)
+                            {
+                                <li>
+                                    <div class="d-flex justify-content-between fruite-name" style="margin:1.5em">
+                                        <a asp-action="ShopIndex"
+                                           asp-route-Category="@loai.MaLoai">
+                                            <i class="fas fa-apple-alt me-2"></i>@loai.TenLoai
+                                        </a>
+                                        <span>(@loai.SanPhams.Count)</span>
+                                    </div>
+                                </li>
+                            }
+                        </ul>
+
+                    </div>
+                    <!--KẾT THÚC PHẦN DANH SÁCH DANH MỤC SẢN PHẨM-->
+                </div>
+
+
+                <div class="col-lg-12">
+                    <!-- Sản phẩm nổi bật / Sản phẩm BestSeller -->
+                    <h4 class="mb-3">Sản phẩm nổi bật</h4>
+
+                    @if (Model.BestSellers != null && Model.BestSellers.Any())
+                    {
+                        foreach (var product in Model.BestSellers)
+                        {
+                            <div class="d-flex align-items-center justify-content-start mb-3">
+                                <!-- Hình ảnh sản phẩm -->
+                                <div class="rounded me-4" style="width: 100px; height: 100px;">
+                                    <a href="@Url.Action("ShopDetail", "Shop", new { MaSanPham = product.MaSanPham })">
+                                        <img src="@Url.Content(product.LayDiaChiHinh(1))" class="img-fluid rounded" style="max-height:100px; object-fit: contain" alt="@product.ShortDesc">
+                                    </a>
+                                </div>
+
+                                <div>
+                                    <!-- Tên sản phẩm -->
+                                    <h6 class="mb-2">
+                                        <a href="@Url.Action("ShopDetail", "Shop", new { MaSanPham = product.MaSanPham })" class="text-dark">
+                                            @product.TenSanPham
+                                        </a>
+                                    </h6>
+
+                                    <!-- Đánh giá sản phẩm -->
+                                    <div class="d-flex mb-2">
+                                        @for (int i = 1; i <= product.AverageRating; i++)
+                                        {
+                                            <i class="fa fa-star text-secondary"></i> <!-- Sao đầy -->
+                                        }
+                                        @for (int i = product.AverageRating + 1; i <= 5; i++)
+                                        {
+                                            <i class="fa fa-star"></i> <!-- Sao trống -->
+                                        }
+                                    </div>
+
+                                    <!-- Giá sản phẩm -->
+                                    <div class="d-flex mb-2">
+                                        <h5 class="fw-bold me-2">@product.FormatPrice(product.GiaSauGiam)</h5>
+                                        @if (product.GiaSanPham > product.GiaSauGiam)
+                                        {
+                                            <h5 class="text-danger text-decoration-line-through">@product.FormatPrice(product.GiaSanPham)</h5>
+                                        }
+                                    </div>
+                                </div>
+                            </div>
+                        }
+
+                    }
+                    else
+                    {
+                        <p>Không có sản phẩm nổi bật nào.</p>
+                    }
+                </div>
+
+
+                <!--PHẦN BANNER PHỤ-->
+                <div class="col-lg-12">
+                    <div class="position-relative">
+                        <img src="~/img/banner-fruits.jpg" class="img-fluid w-100 rounded" alt="">
+                        <div class="position-absolute" style="top: 50%; right: 10px; transform: translateY(-50%);">
+                            <h3 class="text-secondary fw-bold">Fresh <br> Fruits <br> Banner</h3>
+                        </div>
+                    </div>
+                </div>
+                <!--KẾT THÚC PHẦN BANNER PHỤ-->
+
+            </div>
+        </div>
+        <!--KẾT THÚC THANH SIDEBAR-->
+        <div class="col-lg-1"></div>
+        <!-- Nội dung bài Blog -->
+        <div class="col-lg-8 col-md-7 order-md-1 order-1">
+            <div class="blog__details__text">
+                <div class="col-12">
+                    <!-- Nội dung bài viết -->
+                    <h3> Điều 1: Giới thiệu </h3>
+                    <p>
+                        1.1. Chào mừng bạn đến với Simple Green được vận hành bởi Hộ Kinh doanh Nguyễn Tú Việt (gọi riêng và gọi chung là, “Simple Green”, “Simple Green” “chúng tôi”, hay “của chúng tôi”). Simple Green nghiêm túc thực hiện trách nhiệm của mình theo pháp luật và các quy định hiện hành về bảo mật thông tin (“Luật riêng tư”) và cam kết tôn trọng quyền riêng tư và sự quan tâm của tất cả Người Sử Dụng đối với trang website. “Người sử dụng” là những cá nhân đăng ký một tài khoản với chúng tôi để sử dụng dịch vụ hoặc không đăng ký mà có sử dụng dịch vụ. Chúng tôi nhận biết tầm quan trọng của dữ liệu cá nhân mà bạn đã tin tưởng giao cho chúng tôi và tin rằng chúng tôi có trách nhiệm quản lý, bảo vệ và xử lý dữ liệu cá nhân của bạn một cách thích hợp. Chính sách bảo mật này ("Chính sách bảo mật" hay "Chính sách") được thiết kế để giúp bạn hiểu được cách thức chúng tôi thu thập, sử dụng, tiết lộ và/hoặc xử lý dữ liệu cá nhân mà bạn đã cung cấp cho chúng tôi và/hoặc lưu giữ về bạn, cho dù là hiện nay hoặc trong tương lai, cũng như để giúp bạn đưa ra quyết định sáng suốt trước khi cung cấp cho chúng tôi bất kỳ dữ liệu cá nhân nào của bạn.
+                    </p>
+                    <p>
+                        1.2 "Dữ Liệu Cá Nhân" hay "dữ liệu cá nhân" có nghĩa là dữ liệu, dù đúng hay không, về một cá nhân mà thông qua đó có thể được xác định được danh tính, hoặc từ dữ liệu đó và thông tin khác mà một tổ chức có hoặc có khả năng tiếp cận. Các ví dụ thường gặp về dữ liệu cá nhân có thể gồm có tên, số chứng minh nhân dân và thông tin liên hệ.
+                    </p>
+                    <p>
+                        1.3 Bằng việc sử dụng Các Dịch Vụ, đăng ký một tài khoản với chúng tôi, truy cập Nền tảng hay tiếp cận Các Dịch Vụ, bạn xác nhận và đồng ý rằng bạn chấp nhận các phương pháp, yêu cầu, và/hoặc chính sách được mô tả trong Chính sách bảo mật này, và theo đây bạn đồng ý cho phép chúng tôi thu thập, sử dụng, tiết lộ và/hoặc xử lý dữ liệu cá nhân của bạn như mô tả trong đây. NẾU BẠN KHÔNG ĐỒNG Ý CHO PHÉP XỬ LÝ DỮ LIỆU CÁ NH N CỦA BẠN NHƯ MÔ TẢ TRONG CHÍNH SÁCH NÀY, VUI LÒNG KHÔNG SỬ DỤNG CÁC DỊCH VỤ CỦA CHÚNG TÔI HAY TRUY CẬP NỀN TẢNG HOẶC TRANG WEB CỦA CHÚNG TÔI. Nếu chúng tôi thay đổi Chính sách bảo mật của mình, chúng tôi sẽ thông báo cho bạn thông qua việc đăng tải những thay đổi đó hoặc Chính sách bảo mật sửa đổi trên Nền tảng của chúng tôi. Chúng tôi bảo lưu quyền chỉnh sửa Chính sách bảo mật này vào bất cứ thời điểm nào. Trong phạm vi tối đa cho phép theo luật hiện hành, việc bạn tiếp tục sử dụng Các Dịch vụ hoặc Nền tảng, bao gồm cả việc đặt bất kỳ đơn đặt hàng nào, sẽ đồng nghĩa với việc bạn chấp nhận với những thay đổi, chỉnh sửa được thực hiện đối với Chính sách bảo mật này.
+                    </p>
+                    <h3> Điều 2: Khi nào  Simple Green sẽ thu thập dữ liệu cá nhân? </h3>
+                    <p> 2.1. Chúng tôi sẽ/có thể thu thập dữ liệu cá nhân về bạn: </p>
+                    <ul>
+                        <li> Khi bạn đăng ký và/hoặc đặt hàng trên trang web của chúng tôi, hoặc mở một tài khoản với chúng tôi; </li>
+                        <li> Khi bạn gửi bất kỳ biểu mẫu nào, bao gồm, nhưng không giới hạn, đơn đăng ký hoặc các mẫu đơn khác liên quan đến bất kỳ sản phẩm của chúng tôi, bằng hình thức trực tuyến hay dưới hình thức khác; </li>
+                        <li> Khi bạn ký kết bất kỳ thỏa thuận nào hoặc cung cấp các tài liệu hoặc thông tin khác liên quan đến tương tác giữa bạn với chúng tôi, hoặc khi bạn sử dụng các sản phẩm của chúng tôi; </li>
+                        <li> Khi bạn tương tác với chúng tôi, chẳng hạn như thông qua các cuộc gọi điện thoại (có thể được ghi âm lại), gặp gỡ trực tiếp, các nền ứng dụng truyền thông xã hội và email; bao gồm cả khi bạn tương tác với các đại lý chăm sóc khách hàng của chúng tôi; </li>
+                    </ul>
+                    <h3> Điều 3: Simple Green sẽ thu thập những dữ liệu gì? </h3>
+                    <p> 3.1. Dữ liệu cá nhân mà Simple Green có thể thu thập bao gồm: </p>
+                    <ul>
+                        <li> Họ tên </li>
+                        <li> Địa chỉ email </li>
+                        <li> Địa chỉ thanh toán và/hoặc giao nhận hàng </li>
+                        <li> Tài khoản ngân hàng và thông tin thanh toán </li>
+                        <li> Số điện thoại </li>
+                        <li> Thông tin được gửi bởi hoặc liên quan đến (các) thiết bị được sử dụng để truy cập vào Các Dịch vụ hoặc Nền tảng của chúng tôi. </li>
+                    </ul>
+                    <p> 3.2. Bạn đồng ý không cung cấp cho chúng tôi bất cứ thông tin nào không chính xác hoặc gây hiểu nhầm và bạn đồng ý sẽ thông báo cho chúng tôi về bất cứ thông tin nào không chính xác hoặc khi có sự thay đổi thông tin. Chúng tôi bảo lưu quyền tự quyết định khi yêu cầu các tài liệu cần thiết khác để xác minh thông tin được bạn cung cấp. </p>
+                    <h3> Điều 4: Thu thập các dữ liệu khác </h3>
+                    <p> 4.1. Như với hầu hết các trang web và các ứng dụng di động khác, thông tin được gửi từ thiết bị của bạn có thể chứa dữ liệu về bạn, được một máy chủ web ghi lại khi bạn sử dụng Nền tảng của chúng tôi. Thông tin này bao gồm địa chỉ IP, hệ điều hành của máy tính/thiết bị di động, loại trình duyệt, loại thiết bị di động, các đặc điểm của thiết bị di động, mã định danh thiết bị thống nhất (UDID) hoặc mã định danh thiết bị di động (MEID) của thiết bị di động của bạn, địa chỉ tham chiếu của Trang Web (nếu có), các trang mà bạn đã truy cập đến trên trang web hoặc ứng dụng di động của chúng tôi và thời gian truy cập và đôi khi là "cookie" (có thể vô hiệu hóa bằng cách sử dụng tùy chọn trình duyệt của bạn) để giúp trang web ghi nhớ lần truy cập cuối cùng của bạn. Nếu bạn đăng nhập, thông tin này được liên kết với tài khoản cá nhân của bạn. Thông tin này cũng được đưa vào các số liệu thống kê ẩn danh để giúp chúng tôi hiểu được khách truy cập sử dụng Trang Web của chúng tôi như thế nào. </p>
+                    <p> 4.2. Các ứng dụng di động của chúng tôi có thể thu thập thông tin chính xác về địa chỉ của thiết bị di động của bạn sử dụng các công nghệ như GPS, Wi-Fi,…. Chúng tôi thu thập, sử dụng, công bố và/hoặc xử lý các thông tin này cho một hoặc nhiều mục đích bao gồm các dịch vụ được cung cấp dựa trên vị trí mà bạn yêu cầu hoặc chuyển các nội dung có liên quan đến bạn dựa trên vị trí của bạn hoặc cho phép bạn chia sẻ vị trí của bạn cho các Người sử dụng khác như là một phần của các Dịch vụ được cung cấp bởi các ứng dụng di động của chúng tôi. Đối với phần lớn các thiết bị di động, bạn có thể rút lại sự cho phép để chúng tôi được thu thập các thông tin này dựa trên vị trí của bạn thông qua các cài đặt trên thiết bị. Nếu bạn có câu hỏi nào về cách thức vô hiệu hóa các dịch vụ vị trí trên thiết bị di động của bạn, vui lòng liên hệ với các nhà cung cấp dịch vụ thiết bị di động hoặc nhà sản xuất thiết bị của bạn. </p>
+                    <h3> Điều 5: Cookies </h3>
+                    <p> 5.1 Chúng tôi dịch vụ được cấp phép đôi khi có thể sử dụng “cookies” hoặc các tính năng khác để cho phép chúng tôi hoặc các bên thứ ba thu thập hoặc chia sẻ thông tin liên quan đến việc bạn sử dụng Các Dịch vụ hoặc Nền tảng của chúng tôi. Các tính năng này giúp chúng tôi cải thiện Nền tảng của mình và Các Dịch Vụ chúng tôi cung cấp, giúp chúng tôi đưa ra các dịch vụ và tính năng mới, và/ hoặc cho phép chúng tôi cũng như các đối tác quảng cáo của chúng tôi có thể giới thiệu các nội dung phù hợp hơn đến với bạn, thông qua việc tiếp thị lại. “Cookies” là các mã định danh được lưu trữ trong máy tính hoặc thiết bị di động của bạn, nơi ghi chép lại dữ liệu về máy tính hoặc thiết bị, Các Dịch vụ hay Nền tảng được sử dụng hoặc ghé thăm khi nào và như thế nào, bao nhiêu người truy cập và các hoạt động khác trên Nền tảng. Chúng tôi có thể liên kết thông tin cookie với dữ liệu cá nhân. Cookie cũng liên kết với thông tin về những sản phẩm bạn chọn mua và trang web bạn đã xem, Thông tin này được sử dụng để theo dõi giỏ hàng của bạn, để truyền nội dung phù hợp với sở thích của bạn, để các đối tác quảng cáo bên thứ ba của chúng tôi có thể đăng quảng cáo trên các trang mạng internet, để tiến hành các phân tích dữ liệu và để quản trị việc sử dụng Các Dịch Vụ. </p>
+                    <p> 5.2 Bạn có thể từ chối sử dụng cookie bằng cách chọn các thiết lập thích hợp trên trình duyệt hoặc thiết bị của bạn. Tuy nhiên, vui lòng lưu ý rằng nếu bạn thực hiện thao tác này bạn có thể không sử dụng được các chức năng đầy đủ của Nền tảng hoặc Các Dịch Vụ của chúng tôi. </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

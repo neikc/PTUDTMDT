@@ -30,16 +30,37 @@ namespace PTUDTMDT.Controllers
 
         public IActionResult TermsOfUse()
         {
-            return View();
+            var viewModel = new IndexViewModel
+            {
+                Products = GetProduct(),
+                BestSellers = GetBestSellers(10),
+                Categories = GetCategories(),
+                Reviews = GetReviews(3)
+            };
+            return View(viewModel);
         }
 
         public IActionResult Refunds()
         {
-            return View();
+            var viewModel = new IndexViewModel
+            {
+                Products = GetProduct(),
+                BestSellers = GetBestSellers(10),
+                Categories = GetCategories(),
+                Reviews = GetReviews(3)
+            };
+            return View(viewModel);
         }
         public IActionResult Privacy()
         {
-            return View();
+            var viewModel = new IndexViewModel
+            {
+                Products = GetProduct(),
+                BestSellers = GetBestSellers(10),
+                Categories = GetCategories(),
+                Reviews = GetReviews(3)
+            };
+            return View(viewModel);
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
